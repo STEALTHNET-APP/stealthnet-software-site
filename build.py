@@ -33,6 +33,7 @@ NAV = [
     ('Эксплуатация', [
         ('troubleshooting.html', 'Если что-то не работает'),
         ('faq.html', 'Вопросы'),
+        ('changelog.html', 'Что нового'),
     ]),
 ]
 
@@ -155,6 +156,83 @@ def landing(body):
         f.write(html)
 
 
+def md_inline(s):
+    """Разметка внутри строки: код, жирный, ссылки."""
+    s = (s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;'))
+    s = re.sub(r'`([^`]+)`', r'<code>\1</code>', s)
+    s = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', s)
+    s = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', s)
+    return s
+
+
+def changelog():
+    """Страница «Что нового» из CHANGELOG.md.
+
+    Файл один, чтобы запись не приходилось дублировать: правится CHANGELOG.md,
+    страница пересобирается отсюда. Разбирается ровно та разметка, которая в
+    нём используется, — заголовки, списки, абзацы и разделитель."""
+    path = os.path.join(ROOT, 'CHANGELOG.md')
+    with open(path, encoding='utf-8') as f:
+        text = f.read()
+    # Комментарии — записки для тех, кто ведёт файл; посетителю они ни к чему.
+    text = re.sub(r'<!--.*?-->', '', text, flags=re.S)
+    lines = text.split('\n')
+
+    out, in_list, seen_h1 = [], False, False
+
+    def close_list():
+        nonlocal in_list
+        if in_list:
+            out.append('</ul>')
+            in_list = False
+
+    i = 0
+    while i < len(lines):
+        line = lines[i].rstrip()
+        # Пункт списка может занимать несколько строк — собираем целиком.
+        if line.startswith('- '):
+            item = line[2:].strip()
+            while i + 1 < len(lines) and lines[i + 1].startswith('  ') \
+                    and lines[i + 1].strip():
+                i += 1
+                item += ' ' + lines[i].strip()
+            if not in_list:
+                out.append('<ul>')
+                in_list = True
+            out.append(f'<li>{md_inline(item)}</li>')
+        elif line.startswith('### '):
+            close_list()
+            out.append(f'<h3>{md_inline(line[4:])}</h3>')
+        elif line.startswith('## '):
+            close_list()
+            title = line[3:].strip()
+            anchor = re.sub(r'[^a-z0-9]+', '-', title.lower()).strip('-') or 'v'
+            out.append(f'<h2 id="{anchor}" class="rel">{md_inline(title)}</h2>')
+        elif line.startswith('# '):
+            close_list()
+            seen_h1 = True          # заголовок страницы ставит doc_page
+        elif line.strip() == '---':
+            close_list()
+            out.append('<hr>')
+        elif line.strip():
+            close_list()
+            para = line.strip()
+            while i + 1 < len(lines) and lines[i + 1].strip() \
+                    and not lines[i + 1].startswith(('#', '- ', '---')):
+                i += 1
+                para += ' ' + lines[i].strip()
+            out.append(f'<p>{md_inline(para)}</p>')
+        i += 1
+    close_list()
+
+    if not seen_h1:
+        raise SystemExit('CHANGELOG.md: нет заголовка первого уровня')
+
+    doc_page('changelog.html', 'Что нового',
+             'Изменения панели STEALTHNET SOFTWARE.',
+             '\n'.join(out), prev=('faq.html', 'Вопросы'))
+
+
 def not_found():
     """Страница для несуществующих адресов.
 
@@ -165,7 +243,8 @@ def not_found():
             + topbar('/', '404')  # ключ, которого нет в меню: подсвечивать нечего
             + '''
 <div class="wrap notfound">
-  <p class="code404">404</p>
+  <!-- Украшение: смысл несёт заголовок ниже, поэтому для чтения с экрана скрыто. -->
+  <p class="code404" aria-hidden="true">404</p>
   <h1>Такой страницы нет</h1>
   <p class="lead">Возможно, адрес набран с опечаткой или раздел переехал.</p>
   <div class="cta">
@@ -188,15 +267,21 @@ def build_search_index():
         for href, label in pages:
             path = os.path.join(ROOT, 'docs', href)
             if not os.path.exists(path):
-                continue
+                raise SystemExit(f'{href} есть в оглавлении, но файла нет')
             html = open(path, encoding='utf-8').read()
             body = html.split('<main class="content">', 1)[-1]
-            for m in re.finditer(r'<h2 id="([^"]+)">(.*?)</h2>(.*?)(?=<h2 |</main>)', body, re.S):
+            # Атрибуты у h2 могут быть любые — иначе страница молча выпадает
+            # из поиска, и заметить это можно только случайно.
+            before = len(items)
+            for m in re.finditer(r'<h2 id="([^"]+)"[^>]*>(.*?)</h2>(.*?)(?=<h2 |</main>)',
+                                 body, re.S):
                 anchor, title, chunk = m.group(1), m.group(2), m.group(3)
                 text = re.sub(r'<[^>]+>', ' ', chunk)
                 text = re.sub(r'\s+', ' ', text).strip()[:400]
                 items.append({'url': f'{href}#{anchor}', 'section': label,
                               'title': re.sub(r'<[^>]+>', '', title), 'text': text})
+            if len(items) == before:
+                print(f'  внимание: {href} не попала в поиск — нет разделов h2')
     with open(os.path.join(ROOT, 'assets', 'search.json'), 'w', encoding='utf-8') as f:
         json.dump(items, f, ensure_ascii=False)
     return len(items)
@@ -204,6 +289,7 @@ def build_search_index():
 
 if __name__ == '__main__':
     content.build(landing, doc_page)
+    changelog()
     not_found()
     n = build_search_index()
     with open(os.path.join(ROOT, 'CNAME'), 'w') as f:

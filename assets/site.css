@@ -167,6 +167,14 @@ footer .right{margin-left:auto;display:flex;gap:18px}
   .top nav .hide-sm{display:none}
 }
 
+/* ── что нового ── */
+.content h2.rel{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);
+  font-size:16px;letter-spacing:-.01em;padding:5px 13px;border-radius:20px;
+  background:var(--accent-dim);color:var(--accent);border:1px solid
+  color-mix(in srgb, var(--accent) 25%, transparent);margin-top:38px}
+.content h2.rel + h3{margin-top:22px}
+.content hr{border:0;border-top:1px solid var(--border);margin:40px 0 22px}
+
 /* ── страница 404 ── */
 .notfound{padding:96px 0 120px;text-align:center}
 .notfound .code404{font-family:var(--font-mono);font-size:64px;line-height:1;

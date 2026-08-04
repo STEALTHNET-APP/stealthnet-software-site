@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Что нового — STEALTHNET SOFTWARE</title>
+<meta name="description" content="Изменения панели STEALTHNET SOFTWARE.">
+<meta property="og:title" content="Что нового — STEALTHNET SOFTWARE">
+<meta property="og:description" content="Изменения панели STEALTHNET SOFTWARE.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%2312233D%22/><text x=%2216%22 y=%2222%22 font-size=%2218%22 font-family=%22sans-serif%22 font-weight=%22700%22 fill=%22white%22 text-anchor=%22middle%22>S</text></svg>">
+<link rel="stylesheet" href="../assets/site.css">
+<script>
+  /* Тему ставим до отрисовки: иначе при тёмной будет вспышка белого. */
+  (function(){try{var t=localStorage.getItem('sns_theme')||'light';
+    document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');
+    document.documentElement.style.colorScheme=t==='dark'?'dark':'light';}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="../index.html"><span class="brand-mark">S</span><span><span class="brand-name">STEALTHNET</span><span class="brand-sub">SOFTWARE</span></span></a>
+    <nav>
+      <a href="../docs/index.html" aria-current="page">Документация</a>
+      <a href="../index.html#features" class="hide-sm">Возможности</a>
+      <a href="https://github.com/STEALTHNET-APP" class="hide-sm">GitHub</a>
+      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Тема"></button>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side">
+    <input class="search" id="docSearch" type="search" placeholder="Поиск по документации" autocomplete="off">
+    <div id="searchHits" hidden></div>
+    <nav id="docNav">
+<h4>Начало</h4>
+<a href="index.html">Быстрый старт</a>
+<a href="nodes.html">Ноды</a>
+<h4>Настройка</h4>
+<a href="protocols.html">Протоколы и профили</a>
+<a href="subscriptions.html">Подписки</a>
+<a href="billing.html">Тарифы и оплата</a>
+<h4>Эксплуатация</h4>
+<a href="troubleshooting.html">Если что-то не работает</a>
+<a href="faq.html">Вопросы</a>
+<a href="changelog.html" aria-current="page">Что нового</a>
+</nav>
+  </aside>
+  <main class="content">
+    <h1>Что нового</h1>
+    <p>Изменения панели STEALTHNET SOFTWARE. Новое сверху.</p>
+<h2 id="0-1-0" class="rel">Готовится — 0.1.0</h2>
+<p>Первый публичный выпуск ещё не состоялся: код откроется вместе с ним. Ниже — то, что уже работает и проверено на живом стенде.</p>
+<h3>Ноды и движок</h3>
+<ul>
+<li>Установка ноды одной командой; агент сам держит связь с панелью, применяет профиль и отдаёт трафик, онлайн и нагрузку.</li>
+<li>Конфигурация проверяется движком <strong>до</strong> применения. Негодный профиль больше не может уронить уже работающую ноду: она останется на прежней конфигурации.</li>
+<li>Нода горит красным, если движок не поднялся, и показывает причину прямо в карточке — не приходится лезть в логи на сервере.</li>
+<li>Гео-базы обновляются сами, раз в неделю, и движок перезапускается только если файлы действительно изменились.</li>
+</ul>
+<h3>Протоколы и профили</h3>
+<ul>
+<li>Протоколы: VLESS, VMess, Trojan, Shadowsocks 2022, Hysteria2.</li>
+<li>Транспорты: TCP, WebSocket, gRPC, XHTTP, HTTPUpgrade, mKCP.</li>
+<li>Шифрование: Reality, TLS, без шифрования за обратным прокси.</li>
+<li>Одиннадцать готовых заготовок профилей: выбрали — создалось — правите под себя. Каждая проверена живым трафиком, а не только по документации.</li>
+<li>Девять готовых кусков маршрутизации, которые вставляются в профиль.</li>
+</ul>
+<h3>Клиенты и подписки</h3>
+<ul>
+<li>Устройства считаются по HWID, число устройств ограничивается тарифом.</li>
+<li>Групповые операции над клиентами: включить, выключить, обнулить трафик, отозвать подписку, удалить — по выбранным или по всему фильтру.</li>
+<li>Состав клиентов доезжает до нод сам, без правки профиля.</li>
+<li>Сервис подписок выносится на отдельный сервер, и адрес берётся при установке — он больше не зашит в код.</li>
+</ul>
+<h3>Деньги</h3>
+<ul>
+<li>Возвраты платежей, полные и частичные, с сохранением истории.</li>
+</ul>
+<h3>Оформление</h3>
+<ul>
+<li>Светлая тема по умолчанию, тёмная — переключателем.</li>
+<li>Английский интерфейс.</li>
+</ul>
+<hr>
+<p>История самого сайта — в <a href="https://github.com/STEALTHNET-APP/stealthnet-software-site/commits/main">коммитах репозитория</a>.</p>
+    <div class="next"><a class="btn" href="faq.html">← Вопросы</a></div>
+  </main>
+</div>
+<footer>
+  <div class="foot-in">
+    <span>STEALTHNET SOFTWARE — панель для продажи VPN. Ставится на свой сервер.</span>
+    <span class="right">
+      <a href="../docs/index.html">Документация</a>
+      <a href="https://github.com/STEALTHNET-APP">GitHub</a>
+    </span>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>
