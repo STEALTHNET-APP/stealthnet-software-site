@@ -58,6 +58,7 @@
 <p>The first public release has not happened yet: the code opens together with it. Below is what already works and has been checked on a live installation.</p>
 <h3>Nodes and the engine</h3>
 <ul>
+<li>The Xray version is set in the panel once and rolls out to the whole fleet: the agent compares its own on every poll, downloads the release, checks the binary runs and reports the right version, and only then replaces the working one. Nodes left behind are shown on the nodes page.</li>
 <li>A "Restart Xray" action in the node menu. The engine used to restart only on its own — on a config or client-list change — so picking up a renewed certificate meant going to the server by hand.</li>
 <li>Changing the profile redraws the node card: inbounds belong to a profile, and the old list was wrong afterwards. On the server the bindings also stayed with the previous profile, leaving the node with no inbounds at all.</li>
 <li>The agent no longer logs about nftables every fifteen seconds: with every plugin off it does not touch nftables at all, and a repeating failure is reported once. The installer now installs nftables up front.</li>
@@ -74,6 +75,8 @@
 </ul>
 <h3>Protocols and profiles</h3>
 <ul>
+<li><strong>Hysteria 2 stopped connecting in up-to-date clients.</strong> In Xray 26.7 it became a transport of its own, while the subscription still sent <code>network: tcp</code> — apps answered "not hysteria transport" and refused to start at all. The transport is now right on both sides, and the panel rejects a profile with the wrong one.</li>
+<li><strong>Reality keys come from the profile only.</strong> They used to be copied onto the host row, so reissuing them in the profile left the two out of step: the server expected one short id, the client sent another, and the location looked broken while the node was perfectly fine. The public key is derived from the private one — there is nothing to copy anywhere.</li>
 <li>Installing a node is one path again: certificate issuance was taken out of the installer. Reality does not need one, and anything over TLS needs a certificate for its own node's domain — a manual step, covered in the nodes section.</li>
 <li>Every profile preset now has a "?" button with step-by-step instructions on what it takes to make it work. The editor has the same button, where the hint is matched against what the config actually contains.</li>
 <li>Protocols: VLESS, VMess, Trojan, Shadowsocks 2022, Hysteria2.</li>
@@ -84,6 +87,7 @@
 </ul>
 <h3>Clients and subscriptions</h3>
 <ul>
+<li>The subscription returns the reason in the format the app asked for. With the device limit reached it used to send a "# reason" line regardless, so an app expecting Xray JSON showed a parse error instead of an explanation. The device-limit wording is now editable like the others.</li>
 <li>Devices are counted by HWID, and the number of them is capped by the plan.</li>
 <li>Bulk actions on clients: enable, disable, reset traffic, revoke the subscription, delete — for the selected rows or for the whole filter.</li>
 <li>Changes to the client list reach the nodes on their own, with no profile edit.</li>

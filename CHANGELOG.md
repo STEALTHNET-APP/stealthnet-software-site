@@ -22,6 +22,10 @@ The first public release has not happened yet: the code opens together with it.
 Below is what already works and has been checked on a live installation.
 
 ### Nodes and the engine
+- The Xray version is set in the panel once and rolls out to the whole fleet:
+  the agent compares its own on every poll, downloads the release, checks the
+  binary runs and reports the right version, and only then replaces the working
+  one. Nodes left behind are shown on the nodes page.
 - A "Restart Xray" action in the node menu. The engine used to restart only on
   its own — on a config or client-list change — so picking up a renewed
   certificate meant going to the server by hand.
@@ -58,6 +62,16 @@ Below is what already works and has been checked on a live installation.
   the files have actually changed.
 
 ### Protocols and profiles
+- **Hysteria 2 stopped connecting in up-to-date clients.** In Xray 26.7 it became
+  a transport of its own, while the subscription still sent `network: tcp` —
+  apps answered "not hysteria transport" and refused to start at all. The
+  transport is now right on both sides, and the panel rejects a profile with
+  the wrong one.
+- **Reality keys come from the profile only.** They used to be copied onto the
+  host row, so reissuing them in the profile left the two out of step: the
+  server expected one short id, the client sent another, and the location
+  looked broken while the node was perfectly fine. The public key is derived
+  from the private one — there is nothing to copy anywhere.
 - Installing a node is one path again: certificate issuance was taken out of the
   installer. Reality does not need one, and anything over TLS needs a certificate
   for its own node's domain — a manual step, covered in the nodes section.
@@ -73,6 +87,10 @@ Below is what already works and has been checked on a live installation.
 - Nine ready-made routing blocks to drop into a profile.
 
 ### Clients and subscriptions
+- The subscription returns the reason in the format the app asked for. With the
+  device limit reached it used to send a "# reason" line regardless, so an app
+  expecting Xray JSON showed a parse error instead of an explanation. The
+  device-limit wording is now editable like the others.
 
 - Devices are counted by HWID, and the number of them is capped by the plan.
 - Bulk actions on clients: enable, disable, reset traffic, revoke the
