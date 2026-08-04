@@ -22,8 +22,11 @@ The first public release has not happened yet: the code opens together with it.
 Below is what already works and has been checked on a live installation.
 
 ### The Telegram bot
+- A "Documents" screen replaces "Help": the offer, the agreement and any links of
+  your own, added as a list in the panel. There used to be two buttons about the
+  same thing side by side: "Help" and "Contact support".
 - The Telegram bot is configured in the panel, under "Telegram bot": greeting, a
-  notice under the menu, help text, support link. The bot picks changes up within
+  notice under the menu, documents, support link. The bot picks changes up within
   half a minute — no restart needed.
 - A separate image per bot screen. Set one shared image and it is used everywhere
   a specific one is missing.
