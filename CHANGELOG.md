@@ -22,10 +22,12 @@ The first public release has not happened yet: the code opens together with it.
 Below is what already works and has been checked on a live installation.
 
 ### The Telegram bot
-- The mini app is a client cabinet inside Telegram: subscription state, traffic
-  left, devices, the plan list and payment. No password: Telegram signs the user
-  data and the panel checks that signature with the bot key. It is shown to
-  people who have not bought anything yet — that is where they pick a plan.
+- The mini app is a client cabinet inside Telegram, split into four screens:
+  the subscription, the plans, invitations and support. No password: Telegram
+  signs the user data and the panel checks that signature with the bot key.
+  Somebody who has not bought anything yet lands on the plans straight away.
+- Support requests and the invitation link live in the cabinet too, not only in
+  the bot — the same conversation and the same link, whichever the client opens.
 - A "Connect" button opens the subscription page inside Telegram: ready links and
   apps for the platform. It appears only with an active subscription.
 - Promo codes in the bot. The button shows the discounted price straight away —
