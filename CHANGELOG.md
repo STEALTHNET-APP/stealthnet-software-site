@@ -22,7 +22,11 @@ The first public release has not happened yet: the code opens together with it.
 Below is what already works and has been checked on a live installation.
 
 ### Nodes and the engine
-
+- The window shown after creating a node was rewritten for somebody with a bare
+  server: the Docker-free path comes first, as numbered steps — log in over SSH,
+  one command, wait. The command is shown in full instead of being cut off.
+- The "Copy" buttons in the node and subscription-service install windows put the
+  name of the tab into the clipboard instead of the command itself.
 - Attaching a node is one command; the agent keeps in touch with the panel by
   itself, applies the profile and reports traffic, who is online and the load.
 - Configurations are validated by the engine **before** they are applied.

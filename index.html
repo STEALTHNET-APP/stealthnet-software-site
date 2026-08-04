@@ -108,7 +108,7 @@ docker compose up -d</code></pre>
   <div class="release">
     <span class="pill">In progress — 0.1.0</span>
     <p>The first public release has not happened yet: the code opens together with it. Below is what already works and has been checked on a live installation.</p>
-    <ul><li>Attaching a node is one command; the agent keeps in touch with the panel by itself, applies the profile and reports traffic, who is online and the load.</li><li>Configurations are validated by the engine <strong>before</strong> they are applied. A bad profile can no longer take down a node that was working: it stays on the configuration it had.</li><li>A node turns red when the engine fails to start, and states the reason on its card — no need to go digging through logs on the server.</li></ul>
+    <ul><li>The window shown after creating a node was rewritten for somebody with a bare server: the Docker-free path comes first, as numbered steps — log in over SSH, one command, wait. The command is shown in full instead of being cut off.</li><li>The "Copy" buttons in the node and subscription-service install windows put the name of the tab into the clipboard instead of the command itself.</li><li>Attaching a node is one command; the agent keeps in touch with the panel by itself, applies the profile and reports traffic, who is online and the load.</li></ul>
     <a class="btn" href="docs/changelog.html#in-progress-0-1-0">The full list of changes</a>
   </div>
 </section>
