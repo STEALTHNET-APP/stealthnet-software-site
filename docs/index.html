@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Быстрый старт — STEALTHNET SOFTWARE</title>
-<meta name="description" content="Установка панели STEALTHNET SOFTWARE, первая нода и первый клиент.">
-<meta property="og:title" content="Быстрый старт — STEALTHNET SOFTWARE">
-<meta property="og:description" content="Установка панели STEALTHNET SOFTWARE, первая нода и первый клиент.">
+<title>Quick start — STEALTHNET SOFTWARE</title>
+<meta name="description" content="Installing the STEALTHNET SOFTWARE panel, the first node and the first client.">
+<meta property="og:title" content="Quick start — STEALTHNET SOFTWARE">
+<meta property="og:description" content="Installing the STEALTHNET SOFTWARE panel, the first node and the first client.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%2312233D%22/><text x=%2216%22 y=%2222%22 font-size=%2218%22 font-family=%22sans-serif%22 font-weight=%22700%22 fill=%22white%22 text-anchor=%22middle%22>S</text></svg>">
-<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="/assets/site.css">
 <script>
   /* Тему ставим до отрисовки: иначе при тёмной будет вспышка белого. */
   (function(){try{var t=localStorage.getItem('sns_theme')||'light';
@@ -22,116 +22,124 @@
   <div class="top-in">
     <a class="brand" href="../index.html"><span class="brand-mark">S</span><span><span class="brand-name">STEALTHNET</span><span class="brand-sub">SOFTWARE</span></span></a>
     <nav>
-      <a href="../docs/index.html" aria-current="page">Документация</a>
-      <a href="../index.html#features" class="hide-sm">Возможности</a>
+      <a href="../docs/index.html" aria-current="page">Documentation</a>
+      <a href="../docs/changelog.html" class="hide-sm">What's new</a>
+      <a href="../index.html#features" class="hide-sm">Features</a>
       <a href="https://github.com/STEALTHNET-APP" class="hide-sm">GitHub</a>
-      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Тема"></button>
+      <a class="lang" href="/ru/docs/index.html" hreflang="ru" lang="ru" title="Русский">RU</a>
+      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Theme"></button>
     </nav>
   </div>
 </header>
 <div class="wrap doc">
   <aside class="side">
-    <input class="search" id="docSearch" type="search" placeholder="Поиск по документации" autocomplete="off">
+    <input class="search" id="docSearch" type="search"
+           placeholder="Search the documentation" autocomplete="off"
+           data-index="search.en.json" data-empty="nothing found">
     <div id="searchHits" hidden></div>
     <nav id="docNav">
-<h4>Начало</h4>
-<a href="index.html" aria-current="page">Быстрый старт</a>
-<a href="nodes.html">Ноды</a>
-<h4>Настройка</h4>
-<a href="protocols.html">Протоколы и профили</a>
-<a href="subscriptions.html">Подписки</a>
-<a href="billing.html">Тарифы и оплата</a>
-<h4>Эксплуатация</h4>
-<a href="troubleshooting.html">Если что-то не работает</a>
-<a href="faq.html">Вопросы</a>
-<a href="changelog.html">Что нового</a>
+<h4>Getting started</h4>
+<a href="index.html" aria-current="page">Quick start</a>
+<a href="nodes.html">Nodes</a>
+<h4>Setup</h4>
+<a href="protocols.html">Protocols and profiles</a>
+<a href="subscriptions.html">Subscriptions</a>
+<a href="billing.html">Plans and payments</a>
+<h4>Running it</h4>
+<a href="troubleshooting.html">When something breaks</a>
+<a href="faq.html">Questions</a>
+<a href="changelog.html">What's new</a>
 </nav>
   </aside>
   <main class="content">
-    <h1>Быстрый старт</h1>
+    <h1>Quick start</h1>
     
-<p class="lead-p">За один проход: поднять панель, создать профиль конфигурации,
-подключить ноду, выдать клиенту подписку и убедиться, что она работает.</p>
+<p class="lead-p">In one pass: bring up the panel, create a configuration profile, attach a
+node, hand a client their subscription and confirm it works.</p>
 
-<h2 id="requirements">Что понадобится</h2>
+<h2 id="requirements">What you need</h2>
 <ul>
-  <li>Сервер с Debian 12 или Ubuntu 22.04+, root-доступ.</li>
-  <li>Домен для панели и отдельный домен для подписок — их A-записи должны указывать на сервер.</li>
-  <li>Токен телеграм-бота, если продажи идут через бота.</li>
+  <li>A server with Debian 12 or Ubuntu 22.04+, and root access.</li>
+  <li>A domain for the panel and a separate domain for subscriptions — both A records
+      pointing at the server.</li>
+  <li>A Telegram bot token, if you sell through a bot.</li>
 </ul>
-<div class="note"><b>Почему подписки на отдельном домене.</b> Если домен панели заблокируют,
-клиенты продолжат обновлять конфиги: сервис подписок работает независимо и умеет жить
-на другом сервере, имея только ключ доступа к API.</div>
+<div class="note"><b>Why subscriptions get their own domain.</b> If the panel's domain is
+blocked, clients keep refreshing their configs: the subscription service runs independently
+and can live on another server with nothing but an API key.</div>
 
-<h2 id="install">Установка</h2>
+<h2 id="install">Installing</h2>
 <pre><code>git clone https://github.com/STEALTHNET-APP/stealthnet-software.git
 cd stealthnet-software
 cp .env.example .env</code></pre>
-<p>В <code>.env</code> заполните адреса панели и подписок, доступ к базе и токен бота.
-Затем:</p>
+<p>Fill in the panel and subscription addresses, database access and the bot token in
+<code>.env</code>. Then:</p>
 <pre><code>docker compose up -d
 docker compose logs -f api</code></pre>
-<p>В логе появится строка с логином и одноразовым паролем первого администратора.
-Смените пароль сразу после входа.</p>
+<p>The log will print the login and a one-time password for the first administrator.
+Change it as soon as you are in.</p>
 
-<h2 id="profile">Профиль конфигурации</h2>
-<p>Профиль — это конфиг Xray, который раздаётся нодам. Один профиль обслуживает
-много нод: клиентов в него вписывает агент на месте.</p>
+<h2 id="profile">Configuration profile</h2>
+<p>A profile is the Xray config handed out to nodes. One profile serves many nodes:
+the agent writes the clients into it locally.</p>
 <ol>
-  <li>Откройте <b>Инфраструктура → Профили конфигураций → Новый профиль</b>.</li>
-  <li>Выберите заготовку. Для начала — <b>VLESS + Reality (TCP)</b>: она не требует
-      ни своего домена, ни сертификата.</li>
-  <li>Откройте редактор и замените поля, написанные заглавными буквами: ключи берутся
-      кнопкой «Ключи Reality» на той же странице.</li>
-  <li>Сохраните. Панель проверит конфиг настоящим движком и не даст сохранить нерабочий.</li>
+  <li>Open <b>Infrastructure → Configuration profiles → New profile</b>.</li>
+  <li>Pick a preset. Start with <b>VLESS + Reality (TCP)</b>: it needs neither a domain
+      of your own nor a certificate.</li>
+  <li>Open the editor and replace the fields written in capitals — the keys come from the
+      “Reality keys” button on the same page.</li>
+  <li>Save. The panel validates the config with the real engine and will not save one
+      that does not run.</li>
 </ol>
-<div class="note warn"><b>Плейсхолдеры вроде <code>ВАШ_ПРИВАТНЫЙ_КЛЮЧ</code> не пройдут проверку
-намеренно.</b> Так о забытом поле становится известно сразу, а не от клиентов через неделю.</div>
+<div class="note warn"><b>Placeholders such as <code>YOUR_PRIVATE_KEY</code> fail validation
+on purpose.</b> That way a forgotten field surfaces immediately, instead of arriving from
+your clients a week later.</div>
 
-<h2 id="node">Первая нода</h2>
-<p>На странице <b>Ноды</b> нажмите «Подключить ноду». Панель выдаст готовую команду —
-выполните её на сервере ноды. Подробности и особые случаи: <a href="nodes.html">Ноды</a>.</p>
-<p>Через 15 секунд нода появится в списке зелёной. Если она красная — панель покажет
-причину прямо в строке.</p>
+<h2 id="node">The first node</h2>
+<p>On the <b>Nodes</b> page press “Attach node”. The panel produces a ready command — run it
+on the node's server. Details and special cases: <a href="nodes.html">Nodes</a>.</p>
+<p>Within 15 seconds the node appears in the list, green. If it is red, the panel states
+the reason right in the row.</p>
 
-<h2 id="squad">Сквад и тариф</h2>
-<p>Сквад — это набор инбаундов, который выдаётся клиенту. Цепочка такая:</p>
-<pre><code>тариф → сквады → инбаунды → ноды</code></pre>
+<h2 id="squad">Squad and plan</h2>
+<p>A squad is the set of inbounds a client is given. The chain runs:</p>
+<pre><code>plan → squads → inbounds → nodes</code></pre>
 <ol>
-  <li><b>Внутренние сквады → Создать сквад</b>, отметьте инбаунды профиля.</li>
-  <li><b>Тарифы → Новый тариф</b>: код, название, срок и цена, лимит трафика и устройств,
-      и сквады, которые получит клиент.</li>
+  <li><b>Internal squads → Create squad</b>, tick the profile's inbounds.</li>
+  <li><b>Plans → New plan</b>: code, name, duration and price, traffic and device limits,
+      and the squads the client receives.</li>
 </ol>
 
-<h2 id="host">Хост</h2>
-<p>Хост — это строка, которую клиент увидит локацией в приложении. Он ссылается на
-инбаунд профиля и добавляет то, что знает только администратор: внешний адрес, порт,
-имя локации.</p>
-<p><b>Хосты → Добавить хост</b>: ремарка (например «🇩🇪 Франкфурт»), адрес и порт ноды,
-инбаунд. Порядок хостов в списке — это порядок локаций у клиента.</p>
+<h2 id="host">Hosts</h2>
+<p>A host is the line a client sees as a location in their app. It points at a profile
+inbound and adds what only the administrator knows: the public address, the port and the
+name of the location.</p>
+<p><b>Hosts → Add host</b>: a remark (say “🇩🇪 Frankfurt”), the node's address and port, and
+the inbound. The order of hosts in the list is the order of locations for the client.</p>
 
-<h2 id="client">Первый клиент</h2>
-<p><b>Клиенты → Создать клиента</b>. Укажите имя и тариф. В карточке, на вкладке
-«Подписка и VPN», будет ссылка — её и отдают клиенту.</p>
-<p>Проверить, что всё сошлось, можно не выходя из панели: откройте ссылку в браузере —
-появится страница с приложениями под каждую платформу и кнопкой «Добавить подписку».</p>
+<h2 id="client">The first client</h2>
+<p><b>Clients → Create client</b>. Give a name and a plan. The card's “Subscription and VPN”
+tab holds the link — that is what you hand over.</p>
+<p>You can check it without leaving the panel: open the link in a browser and you get a page
+with apps for each platform and an “Add subscription” button.</p>
 
-<div class="note"><b>Ничего не отдаётся?</b> Подписка не выдаёт конфиги, если у клиента
-нет активного срока, или ни один инбаунд его сквадов не поднят на живой ноде.
-Обе причины видны в <a href="troubleshooting.html">разборе поломок</a>.</div>
+<div class="note"><b>Nothing comes back?</b> A subscription hands out no configs if the client
+has no active time left, or if not a single inbound from their squads is up on a live node.
+Both causes are covered in <a href="troubleshooting.html">when something breaks</a>.</div>
 
-    <div class="next"><a class="btn primary" href="nodes.html">Ноды →</a></div>
+    <div class="next"><a class="btn primary" href="nodes.html">Nodes →</a></div>
   </main>
 </div>
 <footer>
   <div class="foot-in">
-    <span>STEALTHNET SOFTWARE — панель для продажи VPN. Ставится на свой сервер.</span>
+    <span>STEALTHNET SOFTWARE — a panel for selling VPN. Runs on your own server.</span>
     <span class="right">
-      <a href="../docs/index.html">Документация</a>
+      <a href="../docs/index.html">Documentation</a>
+      <a href="../docs/changelog.html">What's new</a>
       <a href="https://github.com/STEALTHNET-APP">GitHub</a>
     </span>
   </div>
 </footer>
-<script src="../assets/site.js"></script>
+<script src="/assets/site.js"></script>
 </body>
 </html>

@@ -42,9 +42,11 @@
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{background:var(--bg);color:var(--text);font-family:var(--font-ui);
   font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;
-  /* На коротких страницах подвал иначе висит посреди экрана. */
-  min-height:100vh;display:flex;flex-direction:column}
-body > footer{margin-top:auto}
+  min-height:100vh}
+/* Подвал прижат к низу на коротких страницах. Раскладка при этом обычная:
+   при `display:flex` на body секция переставала сжиматься ýже своего
+   содержимого, и одна длинная строка в <pre> утаскивала её за край экрана. */
+body > footer{position:sticky;top:100vh}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 code{font-family:var(--font-mono);font-size:.88em;background:var(--surface-2);
@@ -65,6 +67,10 @@ code{font-family:var(--font-mono);font-size:.88em;background:var(--surface-2);
 .top nav{display:flex;gap:18px;margin-left:auto;align-items:center;font-size:14px}
 .top nav a{color:var(--text-2);font-weight:500}
 .top nav a:hover,.top nav a[aria-current]{color:var(--text);text-decoration:none}
+.lang{display:grid;place-items:center;min-width:34px;height:34px;padding:0 8px;
+  border-radius:9px;border:1px solid var(--border);background:var(--surface);
+  color:var(--text-2);font-size:12px;font-weight:650;letter-spacing:.05em}
+.lang:hover{border-color:var(--border-hi);color:var(--text);text-decoration:none}
 .icon-btn{width:34px;height:34px;border-radius:9px;border:1px solid var(--border);
   background:var(--surface);color:var(--text-2);cursor:pointer;display:grid;place-items:center}
 .icon-btn:hover{border-color:var(--border-hi);color:var(--text)}
@@ -167,7 +173,18 @@ footer .right{margin-left:auto;display:flex;gap:18px}
   .top nav .hide-sm{display:none}
 }
 
-/* ── что нового ── */
+/* ── что нового: блок на витрине ── */
+.release{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:24px 26px;max-width:760px}
+.release .pill{margin-bottom:14px}
+.release > p{color:var(--text-2);margin-bottom:14px}
+.release ul{list-style:none;margin-bottom:20px}
+.release li{position:relative;padding-left:22px;color:var(--text-2);font-size:14px;
+  margin-bottom:8px}
+.release li::before{content:"";position:absolute;left:6px;top:9px;width:5px;height:5px;
+  border-radius:50%;background:var(--accent)}
+
+/* ── что нового: страница ── */
 .content h2.rel{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);
   font-size:16px;letter-spacing:-.01em;padding:5px 13px;border-radius:20px;
   background:var(--accent-dim);color:var(--accent);border:1px solid
@@ -191,7 +208,10 @@ footer .right{margin-left:auto;display:flex;gap:18px}
   .brand-mark{width:28px;height:28px;border-radius:8px;font-size:15px}
   .brand-name{font-size:12.5px;letter-spacing:.07em}
   .brand-sub{font-size:8px;letter-spacing:.14em}
-  .top nav{gap:10px}
+  .top-in{gap:8px}
+  .top nav{gap:7px}
+  .brand-name{font-size:12px;letter-spacing:.04em}
   .icon-btn{width:30px;height:30px}
+  .lang{min-width:30px;height:30px;padding:0 6px;font-size:11px}
   .wrap{padding-left:14px;padding-right:14px}
 }

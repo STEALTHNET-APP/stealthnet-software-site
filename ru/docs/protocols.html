@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Протоколы и профили — STEALTHNET SOFTWARE</title>
+<meta name="description" content="Какие протоколы и транспорты работают, готовые заготовки конфигурации.">
+<meta property="og:title" content="Протоколы и профили — STEALTHNET SOFTWARE">
+<meta property="og:description" content="Какие протоколы и транспорты работают, готовые заготовки конфигурации.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%2312233D%22/><text x=%2216%22 y=%2222%22 font-size=%2218%22 font-family=%22sans-serif%22 font-weight=%22700%22 fill=%22white%22 text-anchor=%22middle%22>S</text></svg>">
+<link rel="stylesheet" href="/assets/site.css">
+<script>
+  /* Тему ставим до отрисовки: иначе при тёмной будет вспышка белого. */
+  (function(){try{var t=localStorage.getItem('sns_theme')||'light';
+    document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');
+    document.documentElement.style.colorScheme=t==='dark'?'dark':'light';}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="../index.html"><span class="brand-mark">S</span><span><span class="brand-name">STEALTHNET</span><span class="brand-sub">SOFTWARE</span></span></a>
+    <nav>
+      <a href="../docs/index.html" aria-current="page">Документация</a>
+      <a href="../docs/changelog.html" class="hide-sm">Что нового</a>
+      <a href="../index.html#features" class="hide-sm">Возможности</a>
+      <a href="https://github.com/STEALTHNET-APP" class="hide-sm">GitHub</a>
+      <a class="lang" href="/docs/protocols.html" hreflang="en" lang="en" title="English">EN</a>
+      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Theme"></button>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side">
+    <input class="search" id="docSearch" type="search"
+           placeholder="Поиск по документации" autocomplete="off"
+           data-index="search.ru.json" data-empty="ничего не нашлось">
+    <div id="searchHits" hidden></div>
+    <nav id="docNav">
+<h4>Начало</h4>
+<a href="index.html">Быстрый старт</a>
+<a href="nodes.html">Ноды</a>
+<h4>Настройка</h4>
+<a href="protocols.html" aria-current="page">Протоколы и профили</a>
+<a href="subscriptions.html">Подписки</a>
+<a href="billing.html">Тарифы и оплата</a>
+<h4>Эксплуатация</h4>
+<a href="troubleshooting.html">Если что-то не работает</a>
+<a href="faq.html">Вопросы</a>
+<a href="changelog.html">Что нового</a>
+</nav>
+  </aside>
+  <main class="content">
+    <h1>Протоколы и профили</h1>
+    
+<p class="lead-p">Профиль — это конфиг Xray, который раздаётся нодам. В панели есть
+одиннадцать готовых заготовок: выбрали, создалось, дальше правите под себя.</p>
+
+<h2 id="works">Что работает</h2>
+<p>Проверено живым трафиком, а не по документации: каждый вариант поднимался на сервере,
+и через него запрашивалась внешняя страница.</p>
+<table>
+  <tr><th>Протоколы</th><td>VLESS, VMess, Trojan, Shadowsocks 2022, Hysteria2</td></tr>
+  <tr><th>Транспорты</th><td>TCP (raw), WebSocket, gRPC, XHTTP, HTTPUpgrade, mKCP</td></tr>
+  <tr><th>Шифрование</th><td>Reality, TLS, без шифрования (за обратным прокси)</td></tr>
+</table>
+
+<h2 id="limits">Чего движок не умеет</h2>
+<p>Это ограничения Xray, а не панели:</p>
+<ul>
+  <li><b>h2 и QUIC</b> удалены из Xray 26 — движок прямо предлагает перейти на XHTTP.</li>
+  <li><b>mKCP</b> есть, но поля <code>header</code> и <code>seed</code> из него убрали;
+      старый синтаксис отвергается.</li>
+  <li><b>TUIC</b> отсутствует.</li>
+  <li><b>WireGuard</b> движок принимает, но это не подписочный протокол: там пары ключей
+      на каждого участника, а не выдача клиентам.</li>
+</ul>
+<p>Панель отклоняет такие конфиги с причиной от самого движка, а не общим «ошибка».</p>
+
+<h2 id="presets">Заготовки</h2>
+<table>
+  <tr><th>Заготовка</th><th>Когда брать</th></tr>
+  <tr><td>VLESS + Reality (TCP)</td><td>Основной вариант. Не нужен ни домен, ни сертификат.</td></tr>
+  <tr><td>VLESS + Reality (gRPC)</td><td>Иногда проходит там, где режут обычный TCP.</td></tr>
+  <tr><td>VLESS + WebSocket</td><td>За обратным прокси или CDN.</td></tr>
+  <tr><td>VLESS + XHTTP</td><td>Живуч там, где веб-сокеты обрывают.</td></tr>
+  <tr><td>VLESS + HTTPUpgrade</td><td>Легче веб-сокета, проходит через большинство прокси.</td></tr>
+  <tr><td>VLESS + mKCP</td><td>Поверх UDP, лучше держится на плохой линии.</td></tr>
+  <tr><td>VMess + WebSocket</td><td>Если у клиентов приложения без поддержки VLESS.</td></tr>
+  <tr><td>Trojan + TLS</td><td>Выглядит обычным HTTPS-сайтом. Нужен домен и сертификат.</td></tr>
+  <tr><td>Shadowsocks 2022</td><td>Без TLS вообще, отдельные ключи у каждого клиента.</td></tr>
+  <tr><td>Hysteria2</td><td>Своё управление перегрузкой, хорошо держит потери пакетов.</td></tr>
+  <tr><td>Reality + WebSocket</td><td>Две точки входа в одном профиле: основная и запасная.</td></tr>
+</table>
+
+<h2 id="hysteria">Hysteria2: две тонкости</h2>
+<div class="note warn">
+  <p><b>В Xray протокол называется <code>hysteria</code>, а не <code>hysteria2</code>.</b>
+  Со вторым написанием движок отвечает <code>unknown config id</code>. Версия указывается
+  отдельно: <code>"version": 2</code>.</p>
+  <p style="margin:8px 0 0"><b>Реализация идёт поверх обычного транспорта, а не поверх QUIC.</b>
+  Поэтому подключаются клиенты на движке Xray, а отдельный QUIC-сервер hysteria к ней
+  не подходит.</p>
+</div>
+<p>Сертификат обязателен — см. <a href="nodes.html#tls">сертификат на ноде</a>.</p>
+
+<h2 id="shadowsocks">Shadowsocks: только 2022</h2>
+<p>У классических методов один пароль на всех, и раздать разным клиентам разные ключи
+невозможно. Поэтому годятся только методы <code>2022-*</code>.</p>
+<p>В настройках инбаунда обязателен <code>password</code> — это серверный ключ. Клиент
+подключается парой «серверный ключ : личный ключ», и без серверной половины движок
+отвечает <code>missing psk</code>. Личный ключ панель выводит из UUID клиента, поэтому
+отзыв подписки отключает доступ и здесь.</p>
+
+<h2 id="routing">Маршрутизация</h2>
+<p>Блокировки и обходы делаются правилами в <code>routing.rules</code>. В редакторе есть
+готовые блоки: блокировка торрентов и рекламы, российские сайты напрямую, заблокированные
+в РФ в туннель, цепочка на вторую ноду, свой DNS.</p>
+<div class="note"><b>Приватные сети перечисляйте списком</b>, а не через
+<code>geoip:private</code>: если файла на ноде не окажется, правило со ссылкой на него
+уронит весь конфиг.</div>
+
+<h2 id="service">Служебный инбаунд</h2>
+<p><code>api-in</code> слушает только петлю и существует ради статистики — через него агент
+читает счётчики. Без него не работают лимиты трафика. В списках выбора локаций он не
+показывается: подключиться к нему нельзя.</p>
+
+    <div class="next"><a class="btn" href="nodes.html">← Ноды</a><a class="btn primary" href="subscriptions.html">Подписки →</a></div>
+  </main>
+</div>
+<footer>
+  <div class="foot-in">
+    <span>STEALTHNET SOFTWARE — панель для продажи VPN. Ставится на свой сервер.</span>
+    <span class="right">
+      <a href="../docs/index.html">Документация</a>
+      <a href="../docs/changelog.html">Что нового</a>
+      <a href="https://github.com/STEALTHNET-APP">GitHub</a>
+    </span>
+  </div>
+</footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>

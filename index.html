@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>STEALTHNET SOFTWARE — панель для продажи VPN</title>
-<meta name="description" content="Открытая панель управления VPN: ноды, подписки, тарифы, приём оплат и телеграм-бот. Ставится на свой сервер.">
-<meta property="og:title" content="STEALTHNET SOFTWARE — панель для продажи VPN">
-<meta property="og:description" content="Открытая панель управления VPN: ноды, подписки, тарифы, приём оплат и телеграм-бот. Ставится на свой сервер.">
+<title>STEALTHNET SOFTWARE — VPN business panel</title>
+<meta name="description" content="Open-source VPN control panel: nodes, subscriptions, plans, payments and a Telegram bot. Runs on your own server.">
+<meta property="og:title" content="STEALTHNET SOFTWARE — VPN business panel">
+<meta property="og:description" content="Open-source VPN control panel: nodes, subscriptions, plans, payments and a Telegram bot. Runs on your own server.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%2312233D%22/><text x=%2216%22 y=%2222%22 font-size=%2218%22 font-family=%22sans-serif%22 font-weight=%22700%22 fill=%22white%22 text-anchor=%22middle%22>S</text></svg>">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="/assets/site.css">
 <script>
   /* Тему ставим до отрисовки: иначе при тёмной будет вспышка белого. */
   (function(){try{var t=localStorage.getItem('sns_theme')||'light';
@@ -22,89 +22,107 @@
   <div class="top-in">
     <a class="brand" href="index.html"><span class="brand-mark">S</span><span><span class="brand-name">STEALTHNET</span><span class="brand-sub">SOFTWARE</span></span></a>
     <nav>
-      <a href="docs/index.html">Документация</a>
-      <a href="index.html#features" class="hide-sm">Возможности</a>
+      <a href="docs/index.html">Documentation</a>
+      <a href="docs/changelog.html" class="hide-sm">What's new</a>
+      <a href="index.html#features" class="hide-sm">Features</a>
       <a href="https://github.com/STEALTHNET-APP" class="hide-sm">GitHub</a>
-      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Тема"></button>
+      <a class="lang" href="/ru/index.html" hreflang="ru" lang="ru" title="Русский">RU</a>
+      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Theme"></button>
     </nav>
   </div>
 </header>
 <div class="wrap hero">
-  <span class="pill">открытый код · ставится на свой сервер</span>
-  <h1>Панель для тех,<br>кто продаёт VPN</h1>
-  <p class="lead">Ноды, подписки, тарифы, приём оплат и телеграм-бот — в одном месте.
-     Ничего не отправляется наружу: панель, база и сервис подписок работают на вашем железе.</p>
+  <span class="pill">open source · runs on your own server</span>
+  <h1>A panel for people<br>who sell VPN</h1>
+  <p class="lead">Nodes, subscriptions, plans, payments and a Telegram bot in one place.
+     Nothing leaves your machines: the panel, the database and the subscription service
+     all run on your own hardware.</p>
   <div class="cta">
     <a class="btn primary" href="docs/index.html">
       <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      Быстрый старт</a>
-    <a class="btn" href="https://github.com/STEALTHNET-APP">Исходный код</a>
+      Quick start</a>
+    <a class="btn" href="https://github.com/STEALTHNET-APP">Source code</a>
   </div>
-  <p class="note">Rust и PostgreSQL. Одна команда для установки, одна для подключения ноды.</p>
+  <p class="note">Rust and PostgreSQL. One command to install, one to attach a node.</p>
 </div>
 
 <section class="wrap" id="features">
-  <h2>Что внутри</h2>
-  <p class="sub">Не список галочек, а то, чем действительно приходится пользоваться каждый день.</p>
+  <h2>What you get</h2>
+  <p class="sub">Not a checklist — the things you actually end up using every day.</p>
   <div class="grid">
-    <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/></svg></span>Ноды</h3>
-      <p>Агент держит связь с панелью, применяет профиль и отдаёт трафик, онлайн и нагрузку.
-         Подключение — одной командой; гео-базы обновляются сами.</p></div>
-    <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg></span>Протоколы</h3>
-      <p>VLESS, VMess, Trojan, Shadowsocks 2022, Hysteria2. Транспорты: Reality, WebSocket,
-         gRPC, XHTTP, HTTPUpgrade, mKCP. Одиннадцать готовых заготовок конфигурации.</p></div>
-    <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></span>Подписки</h3>
-      <p>Xray JSON, Clash, sing-box, base64 — формат выбирается по приложению клиента.
-         Сервис подписок выносится на отдельный домен, чтобы блокировка панели не отрезала людей.</p></div>
-    <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Z"/><path d="M2 11h20"/></svg></span>Оплата</h3>
-      <p>Тарифы с периодами, промокоды, партнёрская программа, автопродление.
-         Платёжные модули подключаются ключами прямо в панели, без правки файлов.</p></div>
-    <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg></span>Телеграм-бот</h3>
-      <p>Продажа и продление в боте, тексты и кнопки редактируются в панели.
-         Рассылки по сегментам с отложенной отправкой.</p></div>
-    <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 17 9 11l4 4 8-8"/><path d="M15 7h6v6"/></svg></span>Учёт</h3>
-      <p>Трафик по клиентам и нодам, лимиты и сброс по расписанию, устройства по HWID,
-         расходы на серверы и прибыль после них.</p></div>
+    <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/></svg></span>Nodes</h3>
+      <p>The agent keeps in touch with the panel, applies the profile and reports traffic,
+         who is online and how loaded the box is. Attaching a node is one command;
+         geo databases keep themselves up to date.</p></div>
+    <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg></span>Protocols</h3>
+      <p>VLESS, VMess, Trojan, Shadowsocks 2022, Hysteria2. Transports: Reality, WebSocket,
+         gRPC, XHTTP, HTTPUpgrade, mKCP. Eleven ready-made configuration presets.</p></div>
+    <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></span>Subscriptions</h3>
+      <p>Xray JSON, Clash, sing-box, base64 — the format follows the client's app.
+         The subscription service moves to its own domain, so blocking the panel
+         does not cut people off.</p></div>
+    <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Z"/><path d="M2 11h20"/></svg></span>Payments</h3>
+      <p>Plans with periods, promo codes, an affiliate programme, auto-renewal.
+         Payment providers are wired up with keys inside the panel, with no file editing.</p></div>
+    <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg></span>Telegram bot</h3>
+      <p>Selling and renewal happen in the bot; its texts and buttons are edited in the
+         panel. Broadcasts by segment, with scheduled sending.</p></div>
+    <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 17 9 11l4 4 8-8"/><path d="M15 7h6v6"/></svg></span>Accounting</h3>
+      <p>Traffic per client and per node, limits and scheduled resets, devices by HWID,
+         what the servers cost you and what is left after them.</p></div>
   </div>
 </section>
 
 <section class="wrap">
-  <h2>Установка</h2>
-  <p class="sub">Нужен сервер с Debian или Ubuntu, домен для панели и домен для подписок.</p>
+  <h2>Installing</h2>
+  <p class="sub">You need a Debian or Ubuntu server, a domain for the panel and a domain
+     for subscriptions.</p>
   <pre><code>git clone https://github.com/STEALTHNET-APP/stealthnet-software.git
 cd stealthnet-software
-cp .env.example .env    # адреса, токен бота, доступ к базе
+cp .env.example .env    # addresses, bot token, database access
 docker compose up -d</code></pre>
-  <p style="color:var(--text-2)">Дальше — <a href="docs/index.html">быстрый старт</a>:
-     первый администратор, профиль конфигурации, первая нода и первый клиент.</p>
+  <p style="color:var(--text-2)">Then head to the <a href="docs/index.html">quick start</a>:
+     first administrator, configuration profile, first node and first client.</p>
 </section>
 
 <section class="wrap">
-  <h2>Честно о границах</h2>
-  <p class="sub">Чтобы вы не узнали об этом после установки.</p>
+  <h2>Honest about the limits</h2>
+  <p class="sub">So you don't find out after installing.</p>
   <div class="grid">
-    <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>Одна валюта</h3>
-      <p>Цены и отчёты ведутся в одной валюте на весь сервис. Несколько сразу означали бы
-         курс, пересчёт и расхождения в отчётности. Исключение — Telegram Stars: у них
-         своя единица и своя цена.</p></div>
-    <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><path d="m4 17 6-6-6-6"/><path d="M12 19h8"/></svg></span>Плагины нод</h3>
-      <p>Каталога расширений нет. Блокировки и обходы делаются правилами маршрутизации
-         в профиле конфигурации — этого хватает для почти всех задач.</p></div>
-    <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/></svg></span>Смена состава клиентов</h3>
-      <p>Движок читает список клиентов при запуске, поэтому покупка или отзыв подписки
-         означает его перезапуск на ноде. Окно — до 15 секунд.</p></div>
+    <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>One currency</h3>
+      <p>Prices and reports use a single currency for the whole service. Several at once
+         would mean exchange rates, conversion and figures that disagree. The one exception
+         is Telegram Stars: they have their own unit and their own price.</p></div>
+    <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><path d="m4 17 6-6-6-6"/><path d="M12 19h8"/></svg></span>No node plugins</h3>
+      <p>There is no extension catalogue. Blocking and bypassing are done with routing
+         rules inside the configuration profile — enough for nearly every case.</p></div>
+    <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/></svg></span>Changing who has access</h3>
+      <p>The engine reads its client list at start-up, so a purchase or a revoked
+         subscription means restarting it on the node. The window is up to 15 seconds.</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>What's new</h2>
+  <p class="sub">Every change to the panel has its own page, newest first.</p>
+  <div class="release">
+    <span class="pill">In progress — 0.1.0</span>
+    <p>The first public release has not happened yet: the code opens together with it. Below is what already works and has been checked on a live installation.</p>
+    <ul><li>Attaching a node is one command; the agent keeps in touch with the panel by itself, applies the profile and reports traffic, who is online and the load.</li><li>Configurations are validated by the engine <strong>before</strong> they are applied. A bad profile can no longer take down a node that was working: it stays on the configuration it had.</li><li>A node turns red when the engine fails to start, and states the reason on its card — no need to go digging through logs on the server.</li></ul>
+    <a class="btn" href="docs/changelog.html#in-progress-0-1-0">The full list of changes</a>
   </div>
 </section>
 
 <footer>
   <div class="foot-in">
-    <span>STEALTHNET SOFTWARE — панель для продажи VPN. Ставится на свой сервер.</span>
+    <span>STEALTHNET SOFTWARE — a panel for selling VPN. Runs on your own server.</span>
     <span class="right">
-      <a href="docs/index.html">Документация</a>
+      <a href="docs/index.html">Documentation</a>
+      <a href="docs/changelog.html">What's new</a>
       <a href="https://github.com/STEALTHNET-APP">GitHub</a>
     </span>
   </div>
 </footer>
-<script src="assets/site.js"></script>
+<script src="/assets/site.js"></script>
 </body>
 </html>

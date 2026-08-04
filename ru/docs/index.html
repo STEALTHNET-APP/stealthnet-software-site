@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Быстрый старт — STEALTHNET SOFTWARE</title>
+<meta name="description" content="Установка панели STEALTHNET SOFTWARE, первая нода и первый клиент.">
+<meta property="og:title" content="Быстрый старт — STEALTHNET SOFTWARE">
+<meta property="og:description" content="Установка панели STEALTHNET SOFTWARE, первая нода и первый клиент.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%2312233D%22/><text x=%2216%22 y=%2222%22 font-size=%2218%22 font-family=%22sans-serif%22 font-weight=%22700%22 fill=%22white%22 text-anchor=%22middle%22>S</text></svg>">
+<link rel="stylesheet" href="/assets/site.css">
+<script>
+  /* Тему ставим до отрисовки: иначе при тёмной будет вспышка белого. */
+  (function(){try{var t=localStorage.getItem('sns_theme')||'light';
+    document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');
+    document.documentElement.style.colorScheme=t==='dark'?'dark':'light';}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="../index.html"><span class="brand-mark">S</span><span><span class="brand-name">STEALTHNET</span><span class="brand-sub">SOFTWARE</span></span></a>
+    <nav>
+      <a href="../docs/index.html" aria-current="page">Документация</a>
+      <a href="../docs/changelog.html" class="hide-sm">Что нового</a>
+      <a href="../index.html#features" class="hide-sm">Возможности</a>
+      <a href="https://github.com/STEALTHNET-APP" class="hide-sm">GitHub</a>
+      <a class="lang" href="/docs/index.html" hreflang="en" lang="en" title="English">EN</a>
+      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Theme"></button>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side">
+    <input class="search" id="docSearch" type="search"
+           placeholder="Поиск по документации" autocomplete="off"
+           data-index="search.ru.json" data-empty="ничего не нашлось">
+    <div id="searchHits" hidden></div>
+    <nav id="docNav">
+<h4>Начало</h4>
+<a href="index.html" aria-current="page">Быстрый старт</a>
+<a href="nodes.html">Ноды</a>
+<h4>Настройка</h4>
+<a href="protocols.html">Протоколы и профили</a>
+<a href="subscriptions.html">Подписки</a>
+<a href="billing.html">Тарифы и оплата</a>
+<h4>Эксплуатация</h4>
+<a href="troubleshooting.html">Если что-то не работает</a>
+<a href="faq.html">Вопросы</a>
+<a href="changelog.html">Что нового</a>
+</nav>
+  </aside>
+  <main class="content">
+    <h1>Быстрый старт</h1>
+    
+<p class="lead-p">За один проход: поднять панель, создать профиль конфигурации,
+подключить ноду, выдать клиенту подписку и убедиться, что она работает.</p>
+
+<h2 id="requirements">Что понадобится</h2>
+<ul>
+  <li>Сервер с Debian 12 или Ubuntu 22.04+, root-доступ.</li>
+  <li>Домен для панели и отдельный домен для подписок — их A-записи должны указывать на сервер.</li>
+  <li>Токен телеграм-бота, если продажи идут через бота.</li>
+</ul>
+<div class="note"><b>Почему подписки на отдельном домене.</b> Если домен панели заблокируют,
+клиенты продолжат обновлять конфиги: сервис подписок работает независимо и умеет жить
+на другом сервере, имея только ключ доступа к API.</div>
+
+<h2 id="install">Установка</h2>
+<pre><code>git clone https://github.com/STEALTHNET-APP/stealthnet-software.git
+cd stealthnet-software
+cp .env.example .env</code></pre>
+<p>В <code>.env</code> заполните адреса панели и подписок, доступ к базе и токен бота.
+Затем:</p>
+<pre><code>docker compose up -d
+docker compose logs -f api</code></pre>
+<p>В логе появится строка с логином и одноразовым паролем первого администратора.
+Смените пароль сразу после входа.</p>
+
+<h2 id="profile">Профиль конфигурации</h2>
+<p>Профиль — это конфиг Xray, который раздаётся нодам. Один профиль обслуживает
+много нод: клиентов в него вписывает агент на месте.</p>
+<ol>
+  <li>Откройте <b>Инфраструктура → Профили конфигураций → Новый профиль</b>.</li>
+  <li>Выберите заготовку. Для начала — <b>VLESS + Reality (TCP)</b>: она не требует
+      ни своего домена, ни сертификата.</li>
+  <li>Откройте редактор и замените поля, написанные заглавными буквами: ключи берутся
+      кнопкой «Ключи Reality» на той же странице.</li>
+  <li>Сохраните. Панель проверит конфиг настоящим движком и не даст сохранить нерабочий.</li>
+</ol>
+<div class="note warn"><b>Плейсхолдеры вроде <code>ВАШ_ПРИВАТНЫЙ_КЛЮЧ</code> не пройдут проверку
+намеренно.</b> Так о забытом поле становится известно сразу, а не от клиентов через неделю.</div>
+
+<h2 id="node">Первая нода</h2>
+<p>На странице <b>Ноды</b> нажмите «Подключить ноду». Панель выдаст готовую команду —
+выполните её на сервере ноды. Подробности и особые случаи: <a href="nodes.html">Ноды</a>.</p>
+<p>Через 15 секунд нода появится в списке зелёной. Если она красная — панель покажет
+причину прямо в строке.</p>
+
+<h2 id="squad">Сквад и тариф</h2>
+<p>Сквад — это набор инбаундов, который выдаётся клиенту. Цепочка такая:</p>
+<pre><code>тариф → сквады → инбаунды → ноды</code></pre>
+<ol>
+  <li><b>Внутренние сквады → Создать сквад</b>, отметьте инбаунды профиля.</li>
+  <li><b>Тарифы → Новый тариф</b>: код, название, срок и цена, лимит трафика и устройств,
+      и сквады, которые получит клиент.</li>
+</ol>
+
+<h2 id="host">Хост</h2>
+<p>Хост — это строка, которую клиент увидит локацией в приложении. Он ссылается на
+инбаунд профиля и добавляет то, что знает только администратор: внешний адрес, порт,
+имя локации.</p>
+<p><b>Хосты → Добавить хост</b>: ремарка (например «🇩🇪 Франкфурт»), адрес и порт ноды,
+инбаунд. Порядок хостов в списке — это порядок локаций у клиента.</p>
+
+<h2 id="client">Первый клиент</h2>
+<p><b>Клиенты → Создать клиента</b>. Укажите имя и тариф. В карточке, на вкладке
+«Подписка и VPN», будет ссылка — её и отдают клиенту.</p>
+<p>Проверить, что всё сошлось, можно не выходя из панели: откройте ссылку в браузере —
+появится страница с приложениями под каждую платформу и кнопкой «Добавить подписку».</p>
+
+<div class="note"><b>Ничего не отдаётся?</b> Подписка не выдаёт конфиги, если у клиента
+нет активного срока, или ни один инбаунд его сквадов не поднят на живой ноде.
+Обе причины видны в <a href="troubleshooting.html">разборе поломок</a>.</div>
+
+    <div class="next"><a class="btn primary" href="nodes.html">Ноды →</a></div>
+  </main>
+</div>
+<footer>
+  <div class="foot-in">
+    <span>STEALTHNET SOFTWARE — панель для продажи VPN. Ставится на свой сервер.</span>
+    <span class="right">
+      <a href="../docs/index.html">Документация</a>
+      <a href="../docs/changelog.html">Что нового</a>
+      <a href="https://github.com/STEALTHNET-APP">GitHub</a>
+    </span>
+  </div>
+</footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>

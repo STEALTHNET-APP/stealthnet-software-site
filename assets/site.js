@@ -54,18 +54,21 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ── поиск по документации ──
-   Индекс собирается из содержимого самих страниц (assets/search.json).
-   Совпадения ищем по заголовкам и первому абзацу раздела: этого хватает,
-   чтобы попасть в нужное место, и не требует ни сервера, ни библиотеки. */
+   Индекс собирается из содержимого самих страниц, свой на каждый язык:
+   имя файла приходит в data-index, чтобы поиск в русской документации не
+   отдавал английские заголовки. Совпадения ищем по заголовкам и первому
+   абзацу раздела: этого хватает, чтобы попасть в нужное место, и не
+   требует ни сервера, ни библиотеки. */
 document.addEventListener('DOMContentLoaded', async () => {
   const input = document.getElementById('docSearch');
   const box = document.getElementById('searchHits');
   const nav = document.getElementById('docNav');
   if (!input || !box) return;
 
+  const nothing = input.dataset.empty || 'nothing found';
   let index = [];
   try {
-    const res = await fetch(new URL('../assets/search.json', document.baseURI));
+    const res = await fetch('/assets/' + (input.dataset.index || 'search.en.json'));
     if (res.ok) index = await res.json();
   } catch (_) { /* поиск не критичен: без него оглавление на месте */ }
 
@@ -93,6 +96,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (nav) nav.hidden = true;
     box.innerHTML = hits.length
       ? hits.map((h) => `<a class="hit" href="${h.it.url}"><b>${h.it.section}</b><br>${h.it.title}</a>`).join('')
-      : '<div class="hit">ничего не нашлось</div>';
+      : `<div class="hit">${nothing}</div>`;
   });
 });

@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ноды — STEALTHNET SOFTWARE</title>
-<meta name="description" content="Подключение ноды, сертификаты, гео-базы и что означают её состояния.">
-<meta property="og:title" content="Ноды — STEALTHNET SOFTWARE">
-<meta property="og:description" content="Подключение ноды, сертификаты, гео-базы и что означают её состояния.">
+<title>Nodes — STEALTHNET SOFTWARE</title>
+<meta name="description" content="Attaching a node, certificates, geo databases and what its states mean.">
+<meta property="og:title" content="Nodes — STEALTHNET SOFTWARE">
+<meta property="og:description" content="Attaching a node, certificates, geo databases and what its states mean.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%2312233D%22/><text x=%2216%22 y=%2222%22 font-size=%2218%22 font-family=%22sans-serif%22 font-weight=%22700%22 fill=%22white%22 text-anchor=%22middle%22>S</text></svg>">
-<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="/assets/site.css">
 <script>
   /* Тему ставим до отрисовки: иначе при тёмной будет вспышка белого. */
   (function(){try{var t=localStorage.getItem('sns_theme')||'light';
@@ -22,101 +22,109 @@
   <div class="top-in">
     <a class="brand" href="../index.html"><span class="brand-mark">S</span><span><span class="brand-name">STEALTHNET</span><span class="brand-sub">SOFTWARE</span></span></a>
     <nav>
-      <a href="../docs/index.html" aria-current="page">Документация</a>
-      <a href="../index.html#features" class="hide-sm">Возможности</a>
+      <a href="../docs/index.html" aria-current="page">Documentation</a>
+      <a href="../docs/changelog.html" class="hide-sm">What's new</a>
+      <a href="../index.html#features" class="hide-sm">Features</a>
       <a href="https://github.com/STEALTHNET-APP" class="hide-sm">GitHub</a>
-      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Тема"></button>
+      <a class="lang" href="/ru/docs/nodes.html" hreflang="ru" lang="ru" title="Русский">RU</a>
+      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Theme"></button>
     </nav>
   </div>
 </header>
 <div class="wrap doc">
   <aside class="side">
-    <input class="search" id="docSearch" type="search" placeholder="Поиск по документации" autocomplete="off">
+    <input class="search" id="docSearch" type="search"
+           placeholder="Search the documentation" autocomplete="off"
+           data-index="search.en.json" data-empty="nothing found">
     <div id="searchHits" hidden></div>
     <nav id="docNav">
-<h4>Начало</h4>
-<a href="index.html">Быстрый старт</a>
-<a href="nodes.html" aria-current="page">Ноды</a>
-<h4>Настройка</h4>
-<a href="protocols.html">Протоколы и профили</a>
-<a href="subscriptions.html">Подписки</a>
-<a href="billing.html">Тарифы и оплата</a>
-<h4>Эксплуатация</h4>
-<a href="troubleshooting.html">Если что-то не работает</a>
-<a href="faq.html">Вопросы</a>
-<a href="changelog.html">Что нового</a>
+<h4>Getting started</h4>
+<a href="index.html">Quick start</a>
+<a href="nodes.html" aria-current="page">Nodes</a>
+<h4>Setup</h4>
+<a href="protocols.html">Protocols and profiles</a>
+<a href="subscriptions.html">Subscriptions</a>
+<a href="billing.html">Plans and payments</a>
+<h4>Running it</h4>
+<a href="troubleshooting.html">When something breaks</a>
+<a href="faq.html">Questions</a>
+<a href="changelog.html">What's new</a>
 </nav>
   </aside>
   <main class="content">
-    <h1>Ноды</h1>
+    <h1>Nodes</h1>
     
-<p class="lead-p">Нода — это сервер с движком Xray и нашим агентом. Агент забирает
-профиль из панели, вписывает в него клиентов и отчитывается трафиком и нагрузкой.</p>
+<p class="lead-p">A node is a server running the Xray engine and our agent. The agent pulls
+the profile from the panel, writes the clients into it and reports traffic and load.</p>
 
-<h2 id="install">Подключение</h2>
-<p>На странице <b>Ноды</b> нажмите «Подключить ноду» — панель соберёт команду с адресом
-и ключом. Она ставит движок, агент и systemd-службу:</p>
-<pre><code>PANEL_URL=https://панель.ваш-домен NODE_SECRET=... bash install-node.sh</code></pre>
-<p>Секрет показывается один раз: в базе хранится только его хэш. Потеряли — перевыпустите
-в меню ноды.</p>
+<h2 id="install">Attaching</h2>
+<p>On the <b>Nodes</b> page press “Attach node” — the panel assembles a command with the
+address and the key. It installs the engine, the agent and a systemd unit:</p>
+<pre><code>PANEL_URL=https://panel.your-domain NODE_SECRET=... bash install-node.sh</code></pre>
+<p>The secret is shown once: only its hash is stored. If you lose it, issue a new one from
+the node's menu.</p>
 
-<h2 id="tls">Сертификат</h2>
-<p>Reality сертификат не нужна — она прикрывается чужим сайтом. А Trojan, Hysteria2
-и всё, что работает поверх TLS, без сертификата не поднимутся вовсе.</p>
-<p>На чистой ноде сертификата взяться неоткуда, поэтому установщик выпускает его сам,
-если задать домен:</p>
-<pre><code>NODE_DOMAIN=de1.ваш-домен PANEL_URL=... NODE_SECRET=... bash install-node.sh</code></pre>
-<p>Домен должен указывать A-записью на эту машину, а порт 80 быть свободен: проверка
-Let's Encrypt ходит именно туда. Сертификат кладётся в <code>/etc/sn-node/tls/</code>,
-продление проверяется ежедневно, и при обновлении движок перезапускается — иначе через
-три месяца он продолжал бы отдавать просроченный.</p>
-<div class="note"><b>В профиле</b> укажите пути к этим файлам в
-<code>streamSettings.tlsSettings.certificates</code>.</div>
+<h2 id="tls">Certificate</h2>
+<p>Reality needs no certificate — it hides behind somebody else's site. Trojan, Hysteria2
+and anything running over TLS will not start without one at all.</p>
+<p>A bare node has no certificate to begin with, so the installer issues one itself when you
+give it a domain:</p>
+<pre><code>NODE_DOMAIN=de1.your-domain PANEL_URL=... NODE_SECRET=... bash install-node.sh</code></pre>
+<p>The domain must have an A record pointing at this machine, and port 80 must be free:
+that is where the Let's Encrypt check goes. The certificate lands in
+<code>/etc/sn-node/tls/</code>, renewal is checked daily, and the engine restarts when it
+changes — otherwise three months later it would still be serving an expired one.</p>
+<div class="note"><b>In the profile</b> point
+<code>streamSettings.tlsSettings.certificates</code> at those files.</div>
 
-<h2 id="geo">Гео-базы</h2>
-<p>Правила вида <code>geoip:ru</code> и <code>geosite:category-ads-all</code> опираются
-на файлы <code>geoip.dat</code> и <code>geosite.dat</code>. Из архива движка они ставятся
-один раз и дальше устаревают, поэтому установщик заводит еженедельное обновление.</p>
-<p>Заодно ставится <code>zapret.dat</code> — список заблокированных в России ресурсов.
-Он нужен, только если в правилах есть <code>zapret:*</code>; без файла движок с таким
-правилом не запустится.</p>
-<p>Обновление подменяет файл, лишь когда он действительно изменился: движок читает базы
-при старте, а лишний перезапуск — это лишний обрыв всех соединений.</p>
+<h2 id="geo">Geo databases</h2>
+<p>Rules like <code>geoip:ru</code> and <code>geosite:category-ads-all</code> rely on the
+<code>geoip.dat</code> and <code>geosite.dat</code> files. The engine's archive installs them
+once and they go stale from there, so the installer sets up a weekly update.</p>
+<p><code>zapret.dat</code> — the list of resources blocked in Russia — is installed alongside.
+You only need it if your rules mention <code>zapret:*</code>; without the file, the engine
+refuses to start with such a rule.</p>
+<p>An update replaces a file only when it has genuinely changed: the engine reads the
+databases at start-up, and a needless restart is a needless drop of every connection.</p>
 
-<h2 id="states">Состояния ноды</h2>
+<h2 id="states">Node states</h2>
 <table>
-  <tr><th>Вид</th><th>Что означает</th></tr>
-  <tr><td>Зелёная</td><td>Агент на связи, движок работает, клиенты обслуживаются.</td></tr>
-  <tr><td>Красная</td><td>Либо агент не выходит на связь, либо <b>движок не запустился</b> —
-      причина написана прямо в строке. Второе бывает при ошибке в конфиге или пропавшем сертификате.</td></tr>
-  <tr><td>Серая</td><td>Выключена администратором. Это не авария: она намеренно не обслуживает клиентов.</td></tr>
+  <tr><th>Look</th><th>What it means</th></tr>
+  <tr><td>Green</td><td>The agent is in touch, the engine runs, clients are served.</td></tr>
+  <tr><td>Red</td><td>Either the agent is out of touch, or <b>the engine failed to start</b> —
+      the reason is written in the row. The latter happens with a bad config or a missing
+      certificate.</td></tr>
+  <tr><td>Grey</td><td>Switched off by an administrator. Not a fault: it is deliberately not
+      serving clients.</td></tr>
 </table>
-<div class="note"><b>Агент на связи ≠ движок работает.</b> Это разные состояния, и панель
-их различает: нода, отвечающая на опрос при лежащем Xray, показывается аварийной,
-а не «в строю».</div>
+<div class="note"><b>The agent being alive is not the same as the engine running.</b> These are
+different states and the panel tells them apart: a node that answers polls while Xray is down
+shows as broken, not as fine.</div>
 
-<h2 id="safety">Защита от битого конфига</h2>
-<p>Перед подменой рабочего конфига агент спрашивает движок, примет ли он новый. Если нет —
-остаётся на прежнем и сообщает причину в панель. Одна опечатка в новом протоколе не
-выключает ноду целиком вместе с работавшими локациями.</p>
+<h2 id="safety">Protection from a broken config</h2>
+<p>Before replacing a working config, the agent asks the engine whether it would accept the
+new one. If not, it stays on the old config and reports the reason to the panel. One typo in
+a new protocol does not take the whole node down along with the locations that worked.</p>
 
-<h2 id="traffic">Трафик и онлайн</h2>
-<p>Счётчики движок ведёт по клиентам и инбаундам, агент забирает их раз в 15 секунд
-и присылает дельту. «В сети» означает «передавал трафик за последнее окно опроса»:
-перечень активных соединений Xray наружу не отдаёт, и это честное приближение.</p>
+<h2 id="traffic">Traffic and who is online</h2>
+<p>The engine counts per client and per inbound; the agent collects the counters every
+15 seconds and sends the delta. “Online” means “passed traffic within the last polling
+window”: Xray does not expose a list of live connections, and this is an honest
+approximation.</p>
 
-    <div class="next"><a class="btn" href="index.html">← Быстрый старт</a><a class="btn primary" href="protocols.html">Протоколы →</a></div>
+    <div class="next"><a class="btn" href="index.html">← Quick start</a><a class="btn primary" href="protocols.html">Protocols →</a></div>
   </main>
 </div>
 <footer>
   <div class="foot-in">
-    <span>STEALTHNET SOFTWARE — панель для продажи VPN. Ставится на свой сервер.</span>
+    <span>STEALTHNET SOFTWARE — a panel for selling VPN. Runs on your own server.</span>
     <span class="right">
-      <a href="../docs/index.html">Документация</a>
+      <a href="../docs/index.html">Documentation</a>
+      <a href="../docs/changelog.html">What's new</a>
       <a href="https://github.com/STEALTHNET-APP">GitHub</a>
     </span>
   </div>
 </footer>
-<script src="../assets/site.js"></script>
+<script src="/assets/site.js"></script>
 </body>
 </html>

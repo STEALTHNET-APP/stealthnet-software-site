@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Тарифы и оплата — STEALTHNET SOFTWARE</title>
-<meta name="description" content="Тарифы, периоды, промокоды, платёжные модули и валюта.">
-<meta property="og:title" content="Тарифы и оплата — STEALTHNET SOFTWARE">
-<meta property="og:description" content="Тарифы, периоды, промокоды, платёжные модули и валюта.">
+<title>Plans and payments — STEALTHNET SOFTWARE</title>
+<meta name="description" content="Plans, periods, promo codes, payment providers and currency.">
+<meta property="og:title" content="Plans and payments — STEALTHNET SOFTWARE">
+<meta property="og:description" content="Plans, periods, promo codes, payment providers and currency.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%2312233D%22/><text x=%2216%22 y=%2222%22 font-size=%2218%22 font-family=%22sans-serif%22 font-weight=%22700%22 fill=%22white%22 text-anchor=%22middle%22>S</text></svg>">
-<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="/assets/site.css">
 <script>
   /* Тему ставим до отрисовки: иначе при тёмной будет вспышка белого. */
   (function(){try{var t=localStorage.getItem('sns_theme')||'light';
@@ -22,97 +22,103 @@
   <div class="top-in">
     <a class="brand" href="../index.html"><span class="brand-mark">S</span><span><span class="brand-name">STEALTHNET</span><span class="brand-sub">SOFTWARE</span></span></a>
     <nav>
-      <a href="../docs/index.html" aria-current="page">Документация</a>
-      <a href="../index.html#features" class="hide-sm">Возможности</a>
+      <a href="../docs/index.html" aria-current="page">Documentation</a>
+      <a href="../docs/changelog.html" class="hide-sm">What's new</a>
+      <a href="../index.html#features" class="hide-sm">Features</a>
       <a href="https://github.com/STEALTHNET-APP" class="hide-sm">GitHub</a>
-      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Тема"></button>
+      <a class="lang" href="/ru/docs/billing.html" hreflang="ru" lang="ru" title="Русский">RU</a>
+      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Theme"></button>
     </nav>
   </div>
 </header>
 <div class="wrap doc">
   <aside class="side">
-    <input class="search" id="docSearch" type="search" placeholder="Поиск по документации" autocomplete="off">
+    <input class="search" id="docSearch" type="search"
+           placeholder="Search the documentation" autocomplete="off"
+           data-index="search.en.json" data-empty="nothing found">
     <div id="searchHits" hidden></div>
     <nav id="docNav">
-<h4>Начало</h4>
-<a href="index.html">Быстрый старт</a>
-<a href="nodes.html">Ноды</a>
-<h4>Настройка</h4>
-<a href="protocols.html">Протоколы и профили</a>
-<a href="subscriptions.html">Подписки</a>
-<a href="billing.html" aria-current="page">Тарифы и оплата</a>
-<h4>Эксплуатация</h4>
-<a href="troubleshooting.html">Если что-то не работает</a>
-<a href="faq.html">Вопросы</a>
-<a href="changelog.html">Что нового</a>
+<h4>Getting started</h4>
+<a href="index.html">Quick start</a>
+<a href="nodes.html">Nodes</a>
+<h4>Setup</h4>
+<a href="protocols.html">Protocols and profiles</a>
+<a href="subscriptions.html">Subscriptions</a>
+<a href="billing.html" aria-current="page">Plans and payments</a>
+<h4>Running it</h4>
+<a href="troubleshooting.html">When something breaks</a>
+<a href="faq.html">Questions</a>
+<a href="changelog.html">What's new</a>
 </nav>
   </aside>
   <main class="content">
-    <h1>Тарифы и оплата</h1>
+    <h1>Plans and payments</h1>
     
-<p class="lead-p">Тариф связывает цену, лимиты и доступы: сколько стоит, сколько трафика
-и устройств, какие локации получит клиент.</p>
+<p class="lead-p">A plan ties together price, limits and access: what it costs, how much
+traffic and how many devices, and which locations the client gets.</p>
 
-<h2 id="currency">Валюта одна</h2>
-<div class="note warn"><b>На весь сервис действует одна валюта.</b> Несколько сразу
-означали бы курс, пересчёт и расхождения в отчётности. Меняется в
-<b>Платёжки и валюты</b>, но уже проставленные цены не пересчитываются — их нужно
-перепроверить вручную.</div>
-<p>Исключение — Telegram Stars: они живут в собственных единицах и обычные деньги принять
-не могут, поэтому цена в звёздах задаётся отдельным полем.</p>
+<h2 id="currency">One currency</h2>
+<div class="note warn"><b>The whole service runs on a single currency.</b> Several at once
+would mean exchange rates, conversion and figures that disagree. You change it under
+<b>Payments and currencies</b>, but prices already entered are not converted — you have to
+go through them by hand.</div>
+<p>The exception is Telegram Stars: they live in their own unit and cannot take ordinary
+money, so the price in stars is a separate field.</p>
 
-<h2 id="tariffs">Тарифы</h2>
+<h2 id="tariffs">Plans</h2>
 <ul>
-  <li><b>Код</b> — служебный, по нему находятся уже сделанные покупки. У работающего
-      тарифа менять не стоит.</li>
-  <li><b>Периоды и цены</b> — сколько дней и почём. Периодов может быть несколько.</li>
-  <li><b>Лимиты</b> — трафик, устройства, стратегия сброса счётчика.</li>
-  <li><b>Сквады</b> — набор локаций, который получит клиент.</li>
-  <li><b>Видимость</b> — скрытый тариф доступен только по прямой ссылке или промокоду.</li>
+  <li><b>Code</b> — internal; past purchases are found by it. Best left alone on a plan
+      that is in use.</li>
+  <li><b>Periods and prices</b> — how many days and for how much. There can be several.</li>
+  <li><b>Limits</b> — traffic, devices, and how the counter resets.</li>
+  <li><b>Squads</b> — the set of locations the client receives.</li>
+  <li><b>Visibility</b> — a hidden plan is reachable only by direct link or promo code.</li>
 </ul>
-<p>Порядок тарифов в списке — это порядок в боте и на сайте, строки перетаскиваются.</p>
+<p>The order of plans in the list is the order in the bot and on the site; rows are dragged.</p>
 
-<h2 id="providers">Платёжные модули</h2>
-<p>Ключи вносятся в панели, а не в файлах на сервере. Они хранятся в базе и обратно
-в браузер не отдаются: показывается только признак «задан». Пустое поле при сохранении
-означает «оставить прежний ключ».</p>
-<div class="note"><b>Цена бесполезна, если её валюту не принимает ни один включённый
-модуль:</b> клиент увидит сумму, но не увидит кнопку оплаты. Панель предупреждает об этом
-на странице тарифа.</div>
-<p>Для провайдера с обычным REST API есть универсальный модуль «Своя платёжка»: принимает
-POST с суммой, возвращает ссылку на оплату и ждёт вебхук со статусом. Кода писать не нужно.</p>
+<h2 id="providers">Payment providers</h2>
+<p>Keys are entered in the panel, not in files on the server. They are kept in the database
+and never handed back to the browser: only a “set” marker is shown. An empty field on save
+means “keep the existing key”.</p>
+<div class="note"><b>A price is useless if no enabled provider takes its currency:</b> the
+client sees the amount but no pay button. The panel warns about this on the plan page.</div>
+<p>For a provider with an ordinary REST API there is a generic “Custom provider” module: it
+posts an amount, gets a payment link back and waits for a webhook with the status. No code
+to write.</p>
 
-<h2 id="refund">Возврат</h2>
-<p>Деньги возвращаются в личном кабинете провайдера — панель этого не делает за вас:
-у разных провайдеров возврат устроен по-разному, и тихая попытка «вернуть автоматически»
-при неудаче пометила бы платёж возвращённым при живых деньгах.</p>
-<p>В панели фиксируется факт возврата и, по желанию, отзывается выданная подписка.
-Частичный возврат оставляет платёж успешным и записывает вернувшуюся сумму; полный
-переводит его в «возвращён», чтобы выручка за месяц не включала эти деньги.</p>
+<h2 id="refund">Refunds</h2>
+<p>Money goes back through the provider's own dashboard — the panel does not do it for you:
+refunds work differently everywhere, and a quiet “refund automatically” that failed would
+mark a payment refunded while the money was still there.</p>
+<p>The panel records that a refund happened and, if you want, revokes the subscription.
+A partial refund leaves the payment successful and notes the amount returned; a full one
+moves it to “refunded”, so the month's revenue does not count that money.</p>
 
-<h2 id="promos">Промокоды и партнёры</h2>
-<p>Промокоды дают процент скидки, фиксированную сумму или бонусные дни; можно ограничить
-числом применений, сроком и «только первая покупка».</p>
-<p>Партнёр получает процент с каждой успешной оплаты приведённого клиента, пожизненно.
-Новая ставка применяется к будущим платежам — уже начисленные комиссии не пересчитываются.</p>
+<h2 id="promos">Promo codes and affiliates</h2>
+<p>Promo codes give a percentage off, a fixed amount or bonus days; they can be limited by
+number of uses, by date and to first purchase only.</p>
+<p>An affiliate earns a percentage of every successful payment by a client they brought,
+for life. A new rate applies to future payments — commission already earned is not
+recalculated.</p>
 
-<h2 id="infra">Расходы на серверы</h2>
-<p>У каждой ноды указываются хостер, стоимость аренды и день списания. Раздел
-<b>Инфра-биллинг</b> сводит это вместе: во что обходится парк и сколько остаётся
-после расходов.</p>
+<h2 id="infra">What the servers cost</h2>
+<p>Each node carries its hosting provider, rental cost and billing day. The
+<b>Infrastructure billing</b> section adds it up: what the fleet costs and what is left
+after it.</p>
 
-    <div class="next"><a class="btn" href="subscriptions.html">← Подписки</a><a class="btn primary" href="troubleshooting.html">Если что-то не работает →</a></div>
+    <div class="next"><a class="btn" href="subscriptions.html">← Subscriptions</a><a class="btn primary" href="troubleshooting.html">When something breaks →</a></div>
   </main>
 </div>
 <footer>
   <div class="foot-in">
-    <span>STEALTHNET SOFTWARE — панель для продажи VPN. Ставится на свой сервер.</span>
+    <span>STEALTHNET SOFTWARE — a panel for selling VPN. Runs on your own server.</span>
     <span class="right">
-      <a href="../docs/index.html">Документация</a>
+      <a href="../docs/index.html">Documentation</a>
+      <a href="../docs/changelog.html">What's new</a>
       <a href="https://github.com/STEALTHNET-APP">GitHub</a>
     </span>
   </div>
 </footer>
-<script src="../assets/site.js"></script>
+<script src="/assets/site.js"></script>
 </body>
 </html>

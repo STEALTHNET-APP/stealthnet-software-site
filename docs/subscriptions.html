@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Подписки — STEALTHNET SOFTWARE</title>
-<meta name="description" content="Форматы выдачи, отдельный сервер подписок, устройства и лимиты.">
-<meta property="og:title" content="Подписки — STEALTHNET SOFTWARE">
-<meta property="og:description" content="Форматы выдачи, отдельный сервер подписок, устройства и лимиты.">
+<title>Subscriptions — STEALTHNET SOFTWARE</title>
+<meta name="description" content="Delivery formats, a separate subscription server, devices and limits.">
+<meta property="og:title" content="Subscriptions — STEALTHNET SOFTWARE">
+<meta property="og:description" content="Delivery formats, a separate subscription server, devices and limits.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%2312233D%22/><text x=%2216%22 y=%2222%22 font-size=%2218%22 font-family=%22sans-serif%22 font-weight=%22700%22 fill=%22white%22 text-anchor=%22middle%22>S</text></svg>">
-<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="/assets/site.css">
 <script>
   /* Тему ставим до отрисовки: иначе при тёмной будет вспышка белого. */
   (function(){try{var t=localStorage.getItem('sns_theme')||'light';
@@ -22,104 +22,110 @@
   <div class="top-in">
     <a class="brand" href="../index.html"><span class="brand-mark">S</span><span><span class="brand-name">STEALTHNET</span><span class="brand-sub">SOFTWARE</span></span></a>
     <nav>
-      <a href="../docs/index.html" aria-current="page">Документация</a>
-      <a href="../index.html#features" class="hide-sm">Возможности</a>
+      <a href="../docs/index.html" aria-current="page">Documentation</a>
+      <a href="../docs/changelog.html" class="hide-sm">What's new</a>
+      <a href="../index.html#features" class="hide-sm">Features</a>
       <a href="https://github.com/STEALTHNET-APP" class="hide-sm">GitHub</a>
-      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Тема"></button>
+      <a class="lang" href="/ru/docs/subscriptions.html" hreflang="ru" lang="ru" title="Русский">RU</a>
+      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Theme"></button>
     </nav>
   </div>
 </header>
 <div class="wrap doc">
   <aside class="side">
-    <input class="search" id="docSearch" type="search" placeholder="Поиск по документации" autocomplete="off">
+    <input class="search" id="docSearch" type="search"
+           placeholder="Search the documentation" autocomplete="off"
+           data-index="search.en.json" data-empty="nothing found">
     <div id="searchHits" hidden></div>
     <nav id="docNav">
-<h4>Начало</h4>
-<a href="index.html">Быстрый старт</a>
-<a href="nodes.html">Ноды</a>
-<h4>Настройка</h4>
-<a href="protocols.html">Протоколы и профили</a>
-<a href="subscriptions.html" aria-current="page">Подписки</a>
-<a href="billing.html">Тарифы и оплата</a>
-<h4>Эксплуатация</h4>
-<a href="troubleshooting.html">Если что-то не работает</a>
-<a href="faq.html">Вопросы</a>
-<a href="changelog.html">Что нового</a>
+<h4>Getting started</h4>
+<a href="index.html">Quick start</a>
+<a href="nodes.html">Nodes</a>
+<h4>Setup</h4>
+<a href="protocols.html">Protocols and profiles</a>
+<a href="subscriptions.html" aria-current="page">Subscriptions</a>
+<a href="billing.html">Plans and payments</a>
+<h4>Running it</h4>
+<a href="troubleshooting.html">When something breaks</a>
+<a href="faq.html">Questions</a>
+<a href="changelog.html">What's new</a>
 </nav>
   </aside>
   <main class="content">
-    <h1>Подписки</h1>
+    <h1>Subscriptions</h1>
     
-<p class="lead-p">Подписка — единственное, что видит клиент. По одной ссылке приложение
-получает список локаций в том формате, который понимает.</p>
+<p class="lead-p">The subscription is the only thing a client ever sees. From one link their
+app gets the list of locations in whichever format it understands.</p>
 
-<h2 id="formats">Форматы</h2>
-<p>Формат определяется по User-Agent приложения. Правила проверяются сверху вниз,
-срабатывает первое подходящее; если не подошло ни одно — решает встроенный список
-известных приложений.</p>
+<h2 id="formats">Formats</h2>
+<p>The format is chosen by the app's User-Agent. Rules are checked top to bottom and the first
+match wins; if none matches, a built-in list of known apps decides.</p>
 <table>
-  <tr><th>Формат</th><th>Кому</th></tr>
+  <tr><th>Format</th><th>For</th></tr>
   <tr><td>Xray JSON</td><td>Happ, Streisand, v2Box, NekoBox</td></tr>
   <tr><td>Clash / Mihomo</td><td>Clash Meta, FlClash, Stash</td></tr>
   <tr><td>sing-box</td><td>sing-box, Hiddify</td></tr>
-  <tr><td>base64-список</td><td>v2rayNG, Shadowrocket и всё неизвестное</td></tr>
-  <tr><td>Веб-страница</td><td>Браузер: приложения под платформу и кнопка установки</td></tr>
+  <tr><td>base64 list</td><td>v2rayNG, Shadowrocket and anything unknown</td></tr>
+  <tr><td>Web page</td><td>A browser: apps for the platform and an install button</td></tr>
 </table>
-<p>Проверить, что именно получит конкретное приложение, можно в панели: раздел
-<b>Правила ответов</b>, поле «Вставьте User-Agent».</p>
+<p>You can check what a particular app will get from inside the panel: the
+<b>Response rules</b> section, the “Paste a User-Agent” field.</p>
 
-<h2 id="separate">Отдельный сервер</h2>
-<p>Сервис подписок выносится на другой сервер и другой домен: тогда блокировка панели
-не отрезает клиентов от конфигов, а машина с подписками вообще не имеет доступа к базе.</p>
+<h2 id="separate">A server of its own</h2>
+<p>The subscription service moves to another server and another domain: then blocking the
+panel does not cut clients off from their configs, and the subscription machine has no
+database access at all.</p>
 <pre><code>SUB_MODE=api
-PANEL_URL=https://панель.ваш-домен
-SUB_SERVICE_TOKEN=&lt;ключ из панели&gt;</code></pre>
-<p>Ключ выпускается в <b>Настройках → Сервис подписки</b> и показывается один раз.
-Там же панель отдаёт готовые команды установки и блок для Caddy.</p>
-<div class="note"><b>Рядом с панелью</b> сабка читает базу напрямую: это быстрее похода
-в API, и служебный ключ ей вообще не нужен.</div>
+PANEL_URL=https://panel.your-domain
+SUB_SERVICE_TOKEN=&lt;key from the panel&gt;</code></pre>
+<p>The key is issued in <b>Settings → Subscription service</b> and shown once. The same page
+hands you the install commands and a Caddy block.</p>
+<div class="note"><b>Next to the panel</b> the subscription service reads the database
+directly: that is faster than a round trip through the API, and it needs no service key
+at all.</div>
 
-<h2 id="devices">Устройства и лимит</h2>
-<p>Приложения представляются заголовками (<code>x-hwid</code>, <code>x-device-os</code>,
-<code>x-device-model</code>, <code>x-app-version</code>). По ним панель ведёт список
-устройств клиента и следит за лимитом из тарифа.</p>
-<p>Лимит проверяется только для нового устройства: уже зарегистрированное продолжает
-работать, даже если лимит потом уменьшили — иначе человек внезапно терял бы доступ на
-телефоне, которым пользовался вчера.</p>
-<p>При превышении клиент получает не пустоту, а понятную строку в списке локаций:
-сколько устройств занято и что делать.</p>
-<div class="note">Браузер и <code>curl</code> устройствами не считаются: они этих
-заголовков не шлют.</div>
+<h2 id="devices">Devices and the limit</h2>
+<p>Apps identify themselves with headers (<code>x-hwid</code>, <code>x-device-os</code>,
+<code>x-device-model</code>, <code>x-app-version</code>). From those the panel keeps the
+client's device list and enforces the plan's limit.</p>
+<p>The limit is only checked for a new device: one already registered keeps working even if
+you later lower the limit — otherwise somebody would suddenly lose access on the phone they
+used yesterday.</p>
+<p>Over the limit, the client gets a clear line in the location list rather than emptiness:
+how many devices are taken and what to do about it.</p>
+<div class="note">A browser and <code>curl</code> do not count as devices: they send none of
+those headers.</div>
 
-<h2 id="inactive">Когда подписка не отдаёт конфиги</h2>
+<h2 id="inactive">When a subscription hands out nothing</h2>
 <ul>
-  <li>Срок истёк или закончился трафик.</li>
-  <li>Клиент отключён администратором.</li>
-  <li>Ни один инбаунд его сквадов не поднят на живой ноде.</li>
-  <li>Исчерпан лимит устройств.</li>
+  <li>Time has run out, or traffic has.</li>
+  <li>The client was switched off by an administrator.</li>
+  <li>Not one inbound from their squads is up on a live node.</li>
+  <li>The device limit is used up.</li>
 </ul>
-<p>Во всех случаях вместо локаций приходит причина — её текст настраивается в
-<b>Настройках подписки</b> и поддерживает подстановки <code>{date}</code>,
-<code>{days}</code>, <code>{tariff}</code>.</p>
+<p>In every case the reason arrives in place of the locations — the wording is set in
+<b>Subscription settings</b> and supports <code>{date}</code>, <code>{days}</code> and
+<code>{tariff}</code>.</p>
 
-<h2 id="history">Кто запрашивал</h2>
-<p>Раздел <b>Запросы подписки</b> показывает, кто, чем и когда обращался по ссылке.
-Три запроса с одного адреса — норма, это обновление по интервалу. Десятки разных
-адресов за час означают, что ссылка утекла: отзовите подписку из карточки клиента,
-это сменит короткий идентификатор и убьёт старую ссылку.</p>
+<h2 id="history">Who has been asking</h2>
+<p>The <b>Subscription requests</b> section shows who fetched the link, with what and when.
+Three requests from one address is normal — that is the refresh interval. Dozens of different
+addresses within an hour means the link has leaked: revoke the subscription from the client's
+card, which changes the short identifier and kills the old link.</p>
 
-    <div class="next"><a class="btn" href="protocols.html">← Протоколы</a><a class="btn primary" href="billing.html">Тарифы и оплата →</a></div>
+    <div class="next"><a class="btn" href="protocols.html">← Protocols</a><a class="btn primary" href="billing.html">Plans and payments →</a></div>
   </main>
 </div>
 <footer>
   <div class="foot-in">
-    <span>STEALTHNET SOFTWARE — панель для продажи VPN. Ставится на свой сервер.</span>
+    <span>STEALTHNET SOFTWARE — a panel for selling VPN. Runs on your own server.</span>
     <span class="right">
-      <a href="../docs/index.html">Документация</a>
+      <a href="../docs/index.html">Documentation</a>
+      <a href="../docs/changelog.html">What's new</a>
       <a href="https://github.com/STEALTHNET-APP">GitHub</a>
     </span>
   </div>
 </footer>
-<script src="../assets/site.js"></script>
+<script src="/assets/site.js"></script>
 </body>
 </html>

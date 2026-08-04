@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Вопросы — STEALTHNET SOFTWARE</title>
-<meta name="description" content="Частые вопросы о панели STEALTHNET SOFTWARE.">
-<meta property="og:title" content="Вопросы — STEALTHNET SOFTWARE">
-<meta property="og:description" content="Частые вопросы о панели STEALTHNET SOFTWARE.">
+<title>Questions — STEALTHNET SOFTWARE</title>
+<meta name="description" content="Frequently asked questions about the STEALTHNET SOFTWARE panel.">
+<meta property="og:title" content="Questions — STEALTHNET SOFTWARE">
+<meta property="og:description" content="Frequently asked questions about the STEALTHNET SOFTWARE panel.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%2312233D%22/><text x=%2216%22 y=%2222%22 font-size=%2218%22 font-family=%22sans-serif%22 font-weight=%22700%22 fill=%22white%22 text-anchor=%22middle%22>S</text></svg>">
-<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="/assets/site.css">
 <script>
   /* Тему ставим до отрисовки: иначе при тёмной будет вспышка белого. */
   (function(){try{var t=localStorage.getItem('sns_theme')||'light';
@@ -22,82 +22,87 @@
   <div class="top-in">
     <a class="brand" href="../index.html"><span class="brand-mark">S</span><span><span class="brand-name">STEALTHNET</span><span class="brand-sub">SOFTWARE</span></span></a>
     <nav>
-      <a href="../docs/index.html" aria-current="page">Документация</a>
-      <a href="../index.html#features" class="hide-sm">Возможности</a>
+      <a href="../docs/index.html" aria-current="page">Documentation</a>
+      <a href="../docs/changelog.html" class="hide-sm">What's new</a>
+      <a href="../index.html#features" class="hide-sm">Features</a>
       <a href="https://github.com/STEALTHNET-APP" class="hide-sm">GitHub</a>
-      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Тема"></button>
+      <a class="lang" href="/ru/docs/faq.html" hreflang="ru" lang="ru" title="Русский">RU</a>
+      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Theme"></button>
     </nav>
   </div>
 </header>
 <div class="wrap doc">
   <aside class="side">
-    <input class="search" id="docSearch" type="search" placeholder="Поиск по документации" autocomplete="off">
+    <input class="search" id="docSearch" type="search"
+           placeholder="Search the documentation" autocomplete="off"
+           data-index="search.en.json" data-empty="nothing found">
     <div id="searchHits" hidden></div>
     <nav id="docNav">
-<h4>Начало</h4>
-<a href="index.html">Быстрый старт</a>
-<a href="nodes.html">Ноды</a>
-<h4>Настройка</h4>
-<a href="protocols.html">Протоколы и профили</a>
-<a href="subscriptions.html">Подписки</a>
-<a href="billing.html">Тарифы и оплата</a>
-<h4>Эксплуатация</h4>
-<a href="troubleshooting.html">Если что-то не работает</a>
-<a href="faq.html" aria-current="page">Вопросы</a>
-<a href="changelog.html">Что нового</a>
+<h4>Getting started</h4>
+<a href="index.html">Quick start</a>
+<a href="nodes.html">Nodes</a>
+<h4>Setup</h4>
+<a href="protocols.html">Protocols and profiles</a>
+<a href="subscriptions.html">Subscriptions</a>
+<a href="billing.html">Plans and payments</a>
+<h4>Running it</h4>
+<a href="troubleshooting.html">When something breaks</a>
+<a href="faq.html" aria-current="page">Questions</a>
+<a href="changelog.html">What's new</a>
 </nav>
   </aside>
   <main class="content">
-    <h1>Вопросы</h1>
+    <h1>Questions</h1>
     
-<h2 id="remnawave">Чем отличается от других панелей</h2>
-<p>Написана с нуля на Rust, ставится одной командой, всё в одном репозитории — панель,
-сервис подписок, бот, воркер и агент ноды. Разделены артефакты, а не исходники:
-каждая служба — свой бинарник и свой образ, и сервис подписок разворачивается
-на отдельном сервере.</p>
+<h2 id="remnawave">How it differs from other panels</h2>
+<p>Written from scratch in Rust, installs with one command, and lives in a single repository —
+panel, subscription service, bot, worker and node agent. What is split is the artefacts, not
+the sources: each service is its own binary and its own image, and the subscription service
+deploys to a separate server.</p>
 
-<h2 id="data">Что уходит наружу</h2>
-<p>Ничего. Панель, база и сервис подписок работают на вашем железе. Значки хостеров
-рисуются на месте, а не подгружаются со сторонних сервисов — иначе такой запрос
-рассказал бы им, какими серверами вы пользуетесь.</p>
+<h2 id="data">What leaves your machines</h2>
+<p>Nothing. The panel, the database and the subscription service run on your own hardware.
+Hosting-provider icons are drawn locally rather than fetched from third-party services —
+otherwise such a request would tell them which servers you use.</p>
 
-<h2 id="domains">Сбор посещаемых сайтов</h2>
-<p>Выключен по умолчанию и включается осознанно. Это журнал сайтов, куда ходят ваши
-клиенты — самое ценное, что может утечь из VPN-панели. Прежде чем включать, убедитесь,
-что это допустимо по вашей политике и по закону страны, где вы работаете.</p>
+<h2 id="domains">Collecting visited sites</h2>
+<p>Off by default, and turned on deliberately. It is a log of the sites your clients visit —
+the most valuable thing that can leak out of a VPN panel. Before enabling it, make sure it is
+allowed by your policy and by the law where you operate.</p>
 
-<h2 id="restart">Почему покупка перезапускает движок</h2>
-<p>Xray читает список клиентов при запуске: добавлять их на ходу его API в текущей версии
-не умеет — есть только управление инбаундами. Поэтому изменение состава означает
-перезапуск. Окно опроса — 15 секунд, соединения на этот момент рвутся.</p>
+<h2 id="restart">Why a purchase restarts the engine</h2>
+<p>Xray reads its client list at start-up: its API in the current version cannot add clients
+on the fly, only manage inbounds. So changing who has access means a restart. The polling
+window is 15 seconds, and connections open at that moment are dropped.</p>
 
-<h2 id="languages">Языки</h2>
-<p>Русский и английский, переключатель в шапке. Перевод накладывается после отрисовки,
-поэтому добавление строки не требует правки каждого экрана.</p>
+<h2 id="languages">Languages</h2>
+<p>Russian and English, with a switch in the header. The translation is applied after
+rendering, so adding a string does not require editing every screen.</p>
 
-<h2 id="backup">Резервные копии</h2>
-<p>Достаточно дампа PostgreSQL: в нём и клиенты, и тарифы, и профили конфигураций.
-Файлы на нодах восстанавливаются повторным запуском установщика.</p>
+<h2 id="backup">Backups</h2>
+<p>A PostgreSQL dump is enough: it holds the clients, the plans and the configuration
+profiles. Files on the nodes are restored by running the installer again.</p>
 
-<h2 id="contribute">Где взять код</h2>
-<p>Репозиторий с исходниками ещё закрыт: он откроется вместе с первым релизом,
-в организации <a href="https://github.com/STEALTHNET-APP">STEALTHNET-APP</a>. Команды установки на этих
-страницах написаны под него, так что после публикации они заработают как есть.</p>
-<p>Пока открыт только <a href="https://github.com/STEALTHNET-APP/stealthnet-software-site">репозиторий сайта</a> —
-опечатку или неточность в документации можно поправить прямо там.</p>
+<h2 id="contribute">Where to get the code</h2>
+<p>The source repository is not open yet: it opens together with the first release, in the
+<a href="https://github.com/STEALTHNET-APP">STEALTHNET-APP</a> organisation. The install commands on these pages are
+written against it, so they will work as-is once it is published.</p>
+<p>For now only the <a href="https://github.com/STEALTHNET-APP/stealthnet-software-site">site repository</a> is open —
+a typo or an inaccuracy in the documentation can be fixed right there.</p>
 
-    <div class="next"><a class="btn" href="troubleshooting.html">← Если что-то не работает</a></div>
+    <div class="next"><a class="btn" href="troubleshooting.html">← When something breaks</a></div>
   </main>
 </div>
 <footer>
   <div class="foot-in">
-    <span>STEALTHNET SOFTWARE — панель для продажи VPN. Ставится на свой сервер.</span>
+    <span>STEALTHNET SOFTWARE — a panel for selling VPN. Runs on your own server.</span>
     <span class="right">
-      <a href="../docs/index.html">Документация</a>
+      <a href="../docs/index.html">Documentation</a>
+      <a href="../docs/changelog.html">What's new</a>
       <a href="https://github.com/STEALTHNET-APP">GitHub</a>
     </span>
   </div>
 </footer>
-<script src="../assets/site.js"></script>
+<script src="/assets/site.js"></script>
 </body>
 </html>

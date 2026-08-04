@@ -33,7 +33,7 @@ ICONS = {
 }
 
 
-def build(landing, doc_page):
+def build(landing, doc_page, latest):
     # ─────────────────────────── витрина ───────────────────────────
     landing(f'''
 <div class="wrap hero">
@@ -100,6 +100,17 @@ docker compose up -d</code></pre>
     <div class="card"><h3>{ic(ICONS['server'])}Смена состава клиентов</h3>
       <p>Движок читает список клиентов при запуске, поэтому покупка или отзыв подписки
          означает его перезапуск на ноде. Окно — до 15 секунд.</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>Что нового</h2>
+  <p class="sub">Все изменения панели — на отдельной странице, свежие сверху.</p>
+  <div class="release">
+    <span class="pill">{latest['title']}</span>
+    <p>{latest['note']}</p>
+    <ul>{''.join(f'<li>{x}</li>' for x in latest['items'])}</ul>
+    <a class="btn" href="docs/changelog.html#{latest['anchor']}">Весь список изменений</a>
   </div>
 </section>
 ''')

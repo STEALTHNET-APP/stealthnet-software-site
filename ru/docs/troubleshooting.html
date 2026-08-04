@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Если что-то не работает — STEALTHNET SOFTWARE</title>
+<meta name="description" content="Разбор частых поломок: нода красная, клиент не подключается, подписка пуста.">
+<meta property="og:title" content="Если что-то не работает — STEALTHNET SOFTWARE">
+<meta property="og:description" content="Разбор частых поломок: нода красная, клиент не подключается, подписка пуста.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%2312233D%22/><text x=%2216%22 y=%2222%22 font-size=%2218%22 font-family=%22sans-serif%22 font-weight=%22700%22 fill=%22white%22 text-anchor=%22middle%22>S</text></svg>">
+<link rel="stylesheet" href="/assets/site.css">
+<script>
+  /* Тему ставим до отрисовки: иначе при тёмной будет вспышка белого. */
+  (function(){try{var t=localStorage.getItem('sns_theme')||'light';
+    document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');
+    document.documentElement.style.colorScheme=t==='dark'?'dark':'light';}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="../index.html"><span class="brand-mark">S</span><span><span class="brand-name">STEALTHNET</span><span class="brand-sub">SOFTWARE</span></span></a>
+    <nav>
+      <a href="../docs/index.html" aria-current="page">Документация</a>
+      <a href="../docs/changelog.html" class="hide-sm">Что нового</a>
+      <a href="../index.html#features" class="hide-sm">Возможности</a>
+      <a href="https://github.com/STEALTHNET-APP" class="hide-sm">GitHub</a>
+      <a class="lang" href="/docs/troubleshooting.html" hreflang="en" lang="en" title="English">EN</a>
+      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Theme"></button>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side">
+    <input class="search" id="docSearch" type="search"
+           placeholder="Поиск по документации" autocomplete="off"
+           data-index="search.ru.json" data-empty="ничего не нашлось">
+    <div id="searchHits" hidden></div>
+    <nav id="docNav">
+<h4>Начало</h4>
+<a href="index.html">Быстрый старт</a>
+<a href="nodes.html">Ноды</a>
+<h4>Настройка</h4>
+<a href="protocols.html">Протоколы и профили</a>
+<a href="subscriptions.html">Подписки</a>
+<a href="billing.html">Тарифы и оплата</a>
+<h4>Эксплуатация</h4>
+<a href="troubleshooting.html" aria-current="page">Если что-то не работает</a>
+<a href="faq.html">Вопросы</a>
+<a href="changelog.html">Что нового</a>
+</nav>
+  </aside>
+  <main class="content">
+    <h1>Если что-то не работает</h1>
+    
+<p class="lead-p">Порядок один: сначала смотрим, работает ли движок на ноде, потом —
+доходит ли до клиента конфиг, и только потом грешим на приложение.</p>
+
+<h2 id="node-red">Нода горит красной</h2>
+<p>Наведите на значок — в подсказке будет причина. Два разных случая:</p>
+<h3>Агент не выходит на связь</h3>
+<pre><code>systemctl status sn-node
+journalctl -u sn-node -n 50 --no-pager</code></pre>
+<p>Чаще всего это неверный адрес панели или протухший секрет ноды. Секрет
+перевыпускается в меню ноды, после чего команду установки нужно выполнить заново.</p>
+<h3>Движок не запустился</h3>
+<p>Причина написана в строке ноды. Проверить руками:</p>
+<pre><code>xray -test -config /etc/sn-node/config.json</code></pre>
+<p>Типичные причины: незаполненные поля из заготовки, отсутствующий файл сертификата,
+занятый порт, правило со ссылкой на несуществующую гео-базу.</p>
+<div class="note"><b>Ноду это не выключает.</b> Агент не подменяет рабочий конфиг тем,
+который движок отверг, — прежние локации продолжают обслуживаться.</div>
+
+<h2 id="empty-sub">Подписка отдаёт пусто</h2>
+<p>Проверьте по цепочке:</p>
+<ol>
+  <li>У клиента активный срок и остаток трафика.</li>
+  <li>Клиент состоит в скваде.</li>
+  <li>В скваде отмечены инбаунды.</li>
+  <li>Эти инбаунды привязаны к ноде, и нода в сети.</li>
+  <li>У инбаундов есть хосты, и хосты включены.</li>
+</ol>
+<p>Достаточно одного разрыва — и локаций у клиента не будет.</p>
+
+<h2 id="new-client">Новый клиент не подключается</h2>
+<p>Состав клиентов доезжает до ноды отдельно от конфига, в течение 15 секунд.
+Посмотрите в журнале агента:</p>
+<pre><code>journalctl -u sn-node --since '2 min ago' | grep применяем</code></pre>
+<p>Строка вида <code>применяем ... причина="изменился состав клиентов"</code> означает,
+что изменение доехало.</p>
+
+<h2 id="cert">Перестал работать Trojan или Hysteria2</h2>
+<p>Почти всегда это истёкший сертификат. Проверьте:</p>
+<pre><code>ls -l /etc/sn-node/tls/
+openssl x509 -in /etc/sn-node/tls/ваш-домен.crt -noout -enddate</code></pre>
+<p>Обновление и перезапуск движка делает ежедневная служба <code>sn-cert-sync</code>.
+Если её нет, переустановите ноду с переменной <code>NODE_DOMAIN</code>.</p>
+
+<h2 id="no-traffic">Не считается трафик</h2>
+<p>Проверьте, что в профиле есть служебный инбаунд <code>api-in</code> и секции
+<code>api</code>, <code>stats</code>, <code>policy</code>. Без них движок не отдаёт
+счётчики, а значит не работают и лимиты в тарифах. Во всех заготовках они уже есть.</p>
+
+<h2 id="logs">Куда смотреть</h2>
+<table>
+  <tr><th>Служба</th><th>Команда</th></tr>
+  <tr><td>Панель</td><td><code>journalctl -u sn-api -n 100</code></td></tr>
+  <tr><td>Подписки</td><td><code>journalctl -u sn-sub -n 100</code></td></tr>
+  <tr><td>Агент ноды</td><td><code>journalctl -u sn-node -n 100</code></td></tr>
+  <tr><td>Бот</td><td><code>journalctl -u sn-bot -n 100</code></td></tr>
+</table>
+<p>Состояние служб целиком — в панели, в <b>Справке</b>: там проверяются API, база
+и сервис подписок.</p>
+
+    <div class="next"><a class="btn" href="billing.html">← Тарифы и оплата</a><a class="btn primary" href="faq.html">Вопросы →</a></div>
+  </main>
+</div>
+<footer>
+  <div class="foot-in">
+    <span>STEALTHNET SOFTWARE — панель для продажи VPN. Ставится на свой сервер.</span>
+    <span class="right">
+      <a href="../docs/index.html">Документация</a>
+      <a href="../docs/changelog.html">Что нового</a>
+      <a href="https://github.com/STEALTHNET-APP">GitHub</a>
+    </span>
+  </div>
+</footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>

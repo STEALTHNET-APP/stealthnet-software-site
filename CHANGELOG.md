@@ -1,62 +1,66 @@
-# Что нового
+# What's new
 
 <!--
-  Как вести этот файл (в страницу не попадает — комментарии пропускаются).
+  How to keep this file (comments are stripped, they never reach the page).
 
-  Источник один: docs/changelog.html собирается отсюда, дописывать только сюда.
-  Запись пишется с точки зрения того, кто панелью пользуется: не «поправлен
-  запрос в client.service», а «в списке клиентов не сходился трафик». Если
-  изменение снаружи не видно — ему здесь не место.
+  One source: docs/changelog.html is built from here, so write only here.
+  The Russian copy is CHANGELOG.ru.md — add the same entry to both.
 
-  Новый выпуск — заголовком `## 0.2.0 — 14 сентября 2026`, внутри `###` по темам.
+  Write from the point of view of somebody using the panel: not "fixed the
+  query in client.service" but "traffic did not add up in the client list".
+  If a change is invisible from the outside, it does not belong here.
+
+  A new release is a `## 0.2.0 — 14 September 2026` heading, with `###`
+  sections by topic inside it.
 -->
 
-Изменения панели STEALTHNET SOFTWARE. Новое сверху.
+Changes in the STEALTHNET SOFTWARE panel. Newest first.
 
-## Готовится — 0.1.0
+## In progress — 0.1.0
 
-Первый публичный выпуск ещё не состоялся: код откроется вместе с ним.
-Ниже — то, что уже работает и проверено на живом стенде.
+The first public release has not happened yet: the code opens together with it.
+Below is what already works and has been checked on a live installation.
 
-### Ноды и движок
+### Nodes and the engine
 
-- Установка ноды одной командой; агент сам держит связь с панелью, применяет
-  профиль и отдаёт трафик, онлайн и нагрузку.
-- Конфигурация проверяется движком **до** применения. Негодный профиль больше
-  не может уронить уже работающую ноду: она останется на прежней конфигурации.
-- Нода горит красным, если движок не поднялся, и показывает причину прямо в
-  карточке — не приходится лезть в логи на сервере.
-- Гео-базы обновляются сами, раз в неделю, и движок перезапускается только
-  если файлы действительно изменились.
+- Attaching a node is one command; the agent keeps in touch with the panel by
+  itself, applies the profile and reports traffic, who is online and the load.
+- Configurations are validated by the engine **before** they are applied.
+  A bad profile can no longer take down a node that was working: it stays on
+  the configuration it had.
+- A node turns red when the engine fails to start, and states the reason on
+  its card — no need to go digging through logs on the server.
+- Geo databases update themselves weekly, and the engine restarts only when
+  the files have actually changed.
 
-### Протоколы и профили
+### Protocols and profiles
 
-- Протоколы: VLESS, VMess, Trojan, Shadowsocks 2022, Hysteria2.
-- Транспорты: TCP, WebSocket, gRPC, XHTTP, HTTPUpgrade, mKCP.
-- Шифрование: Reality, TLS, без шифрования за обратным прокси.
-- Одиннадцать готовых заготовок профилей: выбрали — создалось — правите под
-  себя. Каждая проверена живым трафиком, а не только по документации.
-- Девять готовых кусков маршрутизации, которые вставляются в профиль.
+- Protocols: VLESS, VMess, Trojan, Shadowsocks 2022, Hysteria2.
+- Transports: TCP, WebSocket, gRPC, XHTTP, HTTPUpgrade, mKCP.
+- Encryption: Reality, TLS, or none behind a reverse proxy.
+- Eleven ready-made configuration presets: pick one, it is created, then you
+  adjust it. Each was verified with live traffic, not only from documentation.
+- Nine ready-made routing blocks to drop into a profile.
 
-### Клиенты и подписки
+### Clients and subscriptions
 
-- Устройства считаются по HWID, число устройств ограничивается тарифом.
-- Групповые операции над клиентами: включить, выключить, обнулить трафик,
-  отозвать подписку, удалить — по выбранным или по всему фильтру.
-- Состав клиентов доезжает до нод сам, без правки профиля.
-- Сервис подписок выносится на отдельный сервер, и адрес берётся при
-  установке — он больше не зашит в код.
+- Devices are counted by HWID, and the number of them is capped by the plan.
+- Bulk actions on clients: enable, disable, reset traffic, revoke the
+  subscription, delete — for the selected rows or for the whole filter.
+- Changes to the client list reach the nodes on their own, with no profile edit.
+- The subscription service moves to a separate server, and its address is taken
+  at install time — it is no longer baked into the code.
 
-### Деньги
+### Money
 
-- Возвраты платежей, полные и частичные, с сохранением истории.
+- Refunds, full and partial, with the history kept.
 
-### Оформление
+### Appearance
 
-- Светлая тема по умолчанию, тёмная — переключателем.
-- Английский интерфейс.
+- Light theme by default, dark by a switch.
+- English interface.
 
 ---
 
-История самого сайта — в
-[коммитах репозитория](https://github.com/STEALTHNET-APP/stealthnet-software-site/commits/main).
+The history of the site itself is in
+[the repository's commits](https://github.com/STEALTHNET-APP/stealthnet-software-site/commits/main).
