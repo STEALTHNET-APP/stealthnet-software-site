@@ -42,7 +42,10 @@ LOGO = ('<span class="brand-mark">S</span>'
 
 
 def head(title, desc, depth):
-    up = '../' * depth
+    # depth — число уровней вложенности; строка означает готовый префикс.
+    # Странице 404 нужен абсолютный '/': её отдают в ответ на любой путь,
+    # и относительные ссылки посчитались бы от несуществующего адреса.
+    up = depth if isinstance(depth, str) else '../' * depth
     return f'''<!doctype html>
 <html lang="ru">
 <head>
@@ -66,7 +69,7 @@ def head(title, desc, depth):
 
 
 def topbar(depth, active):
-    up = '../' * depth
+    up = depth if isinstance(depth, str) else '../' * depth
     link = lambda href, label, key, cls='': (
         f'<a href="{up}{href}"{" aria-current=\"page\"" if active == key else ""}'
         f'{f" class=\"{cls}\"" if cls else ""}>{label}</a>')
@@ -85,7 +88,7 @@ def topbar(depth, active):
 
 
 def footer(depth):
-    up = '../' * depth
+    up = depth if isinstance(depth, str) else '../' * depth
     return f'''
 <footer>
   <div class="foot-in">
@@ -152,6 +155,29 @@ def landing(body):
         f.write(html)
 
 
+def not_found():
+    """Страница для несуществующих адресов.
+
+    GitHub Pages отдаёт её в ответ на любой ненайденный путь, поэтому все
+    ссылки внутри — абсолютные."""
+    html = (head('Страница не найдена — STEALTHNET SOFTWARE',
+                 'Такой страницы на сайте нет.', '/')
+            + topbar('/', '404')  # ключ, которого нет в меню: подсвечивать нечего
+            + '''
+<div class="wrap notfound">
+  <p class="code404">404</p>
+  <h1>Такой страницы нет</h1>
+  <p class="lead">Возможно, адрес набран с опечаткой или раздел переехал.</p>
+  <div class="cta">
+    <a class="btn primary" href="/docs/index.html">К документации</a>
+    <a class="btn" href="/">На главную</a>
+  </div>
+</div>'''
+            + footer('/'))
+    with open(os.path.join(ROOT, '404.html'), 'w', encoding='utf-8') as f:
+        f.write(html)
+
+
 def build_search_index():
     """Индекс для поиска: заголовки разделов и текст под ними.
 
@@ -178,6 +204,7 @@ def build_search_index():
 
 if __name__ == '__main__':
     content.build(landing, doc_page)
+    not_found()
     n = build_search_index()
     with open(os.path.join(ROOT, 'CNAME'), 'w') as f:
         f.write(DOMAIN + '\n')

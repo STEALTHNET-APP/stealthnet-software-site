@@ -41,7 +41,10 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{background:var(--bg);color:var(--text);font-family:var(--font-ui);
-  font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  /* На коротких страницах подвал иначе висит посреди экрана. */
+  min-height:100vh;display:flex;flex-direction:column}
+body > footer{margin-top:auto}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 code{font-family:var(--font-mono);font-size:.88em;background:var(--surface-2);
@@ -161,6 +164,14 @@ footer .right{margin-left:auto;display:flex;gap:18px}
   .top nav{gap:12px;font-size:13px}
   .top nav .hide-sm{display:none}
 }
+
+/* ── страница 404 ── */
+.notfound{padding:96px 0 120px;text-align:center}
+.notfound .code404{font-family:var(--font-mono);font-size:64px;line-height:1;
+  font-weight:700;color:var(--border-hi);letter-spacing:.04em}
+.notfound h1{margin-top:14px}
+.notfound .lead{font-size:17px;color:var(--text-2);margin-top:12px}
+.notfound .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
 
 /* На узком экране шапка не помещалась: логотип с разрядкой плюс ссылка
    не влезали в 375px и толкали страницу вбок. Ужимаем то и другое. */
