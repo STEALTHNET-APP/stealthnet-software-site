@@ -215,8 +215,8 @@ docker compose logs -f api</code></pre>
 Let's Encrypt ходит именно туда. Сертификат кладётся в <code>/etc/sn-node/tls/</code>,
 продление проверяется ежедневно, и при обновлении движок перезапускается — иначе через
 три месяца он продолжал бы отдавать просроченный.</p>
-<div class="note"><b>В профиле</b> укажите пути к этим файлам в
-<code>streamSettings.tlsSettings.certificates</code>.</div>
+<div class="note warn"><b>В профиле укажите путь к сертификату <u>этой ноды</u></b>, а не домена панели. Заготовка Hysteria2 идёт с плейсхолдером; если оставить в нём домен панели, движок на ноде ответит <code>no such file or directory</code> и откажется стартовать — вместе с остальными инбаундами профиля.<br><br>Пути задаются в <code>streamSettings.tlsSettings.certificates</code>:<br><code>/etc/sn-node/tls/домен-ноды.crt</code> и <code>.key</code>.</div>
+<div class="note"><b>Один профиль на разные ноды.</b> Если у нод разные домены, TLS-инбаунд не получится держать в общем профиле: путь в конфиге один. Заведите таким нодам отдельный профиль.</div>
 
 <h2 id="geo">Гео-базы</h2>
 <p>Правила вида <code>geoip:ru</code> и <code>geosite:category-ads-all</code> опираются

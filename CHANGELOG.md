@@ -22,6 +22,15 @@ The first public release has not happened yet: the code opens together with it.
 Below is what already works and has been checked on a live installation.
 
 ### Nodes and the engine
+- A "Restart Xray" action in the node menu. The engine used to restart only on
+  its own — on a config or client-list change — so picking up a renewed
+  certificate meant going to the server by hand.
+- Changing the profile redraws the node card: inbounds belong to a profile, and
+  the old list was wrong afterwards. On the server the bindings also stayed with
+  the previous profile, leaving the node with no inbounds at all.
+- The agent no longer logs about nftables every fifteen seconds: with every
+  plugin off it does not touch nftables at all, and a repeating failure is
+  reported once. The installer now installs nftables up front.
 - The agent is downloaded from a GitHub release; the panel stays as a fallback
   for air-gapped setups and self-built binaries. The installer checks that what
   it downloaded really is a binary: the panel serves its own page for any

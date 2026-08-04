@@ -223,8 +223,8 @@ give it a domain:</p>
 that is where the Let's Encrypt check goes. The certificate lands in
 <code>/etc/sn-node/tls/</code>, renewal is checked daily, and the engine restarts when it
 changes — otherwise three months later it would still be serving an expired one.</p>
-<div class="note"><b>In the profile</b> point
-<code>streamSettings.tlsSettings.certificates</code> at those files.</div>
+<div class="note warn"><b>Point the profile at <u>this node's</u> certificate</b>, not the panel's domain. The Hysteria2 preset ships with a placeholder; leave the panel's domain in it and the engine on the node answers <code>no such file or directory</code> and refuses to start — taking the profile's other inbounds with it.<br><br>The paths go in <code>streamSettings.tlsSettings.certificates</code>:<br><code>/etc/sn-node/tls/your-node-domain.crt</code> and <code>.key</code>.</div>
+<div class="note"><b>One profile across nodes.</b> If your nodes have different domains, a TLS inbound cannot live in a shared profile: the path in the config is a single value. Give those nodes a profile of their own.</div>
 
 <h2 id="geo">Geo databases</h2>
 <p>Rules like <code>geoip:ru</code> and <code>geosite:category-ads-all</code> rely on the
