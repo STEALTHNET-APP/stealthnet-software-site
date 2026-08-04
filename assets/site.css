@@ -71,7 +71,9 @@ code{font-family:var(--font-mono);font-size:.88em;background:var(--surface-2);
 .icon-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8}
 
 /* ── общее ── */
-.wrap{max-width:var(--w);margin:0 auto;padding:0 20px}
+/* Только боковые поля: у section.wrap класс перебил бы `section{padding-top:52px;padding-bottom:52px}`
+   целиком, и вертикальные отступы секций обнулились бы. */
+.wrap{max-width:var(--w);margin:0 auto;padding-left:20px;padding-right:20px}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:10px;
   font-weight:600;font-size:14px;border:1px solid var(--border-hi);background:var(--surface);
   color:var(--text);cursor:pointer;transition:all .15s}
@@ -100,7 +102,7 @@ code{font-family:var(--font-mono);font-size:.88em;background:var(--surface-2);
   background:var(--accent-dim);color:var(--accent)}
 .card .ic svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8}
 
-section{padding:52px 0}
+section{padding-top:52px;padding-bottom:52px}
 section > h2{font-size:clamp(22px,3vw,28px);letter-spacing:-.02em;font-weight:700;margin-bottom:10px}
 section > .sub{color:var(--text-2);margin-bottom:26px;max-width:70ch}
 
@@ -183,5 +185,5 @@ footer .right{margin-left:auto;display:flex;gap:18px}
   .brand-sub{font-size:8px;letter-spacing:.14em}
   .top nav{gap:10px}
   .icon-btn{width:30px;height:30px}
-  .wrap{padding:0 14px}
+  .wrap{padding-left:14px;padding-right:14px}
 }
