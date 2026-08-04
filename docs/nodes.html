@@ -63,6 +63,9 @@ address and the key. It installs the engine, the agent and a systemd unit:</p>
 <pre><code>PANEL_URL=https://panel.your-domain NODE_SECRET=... bash install-node.sh</code></pre>
 <p>The secret is shown once: only its hash is stored. If you lose it, issue a new one from
 the node's menu.</p>
+<p>The script takes the agent from a GitHub release, falling back to the panel itself when
+that is unreachable. Point it elsewhere with <code>AGENT_URL</code>, or pin a release with
+<code>AGENT_RELEASE</code>.</p>
 
 <h2 id="tls">Certificate</h2>
 <p>Reality needs no certificate — it hides behind somebody else's site. Trojan, Hysteria2

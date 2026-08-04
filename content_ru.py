@@ -201,6 +201,9 @@ docker compose logs -f api</code></pre>
 <pre><code>PANEL_URL=https://панель.ваш-домен NODE_SECRET=... bash install-node.sh</code></pre>
 <p>Секрет показывается один раз: в базе хранится только его хэш. Потеряли — перевыпустите
 в меню ноды.</p>
+<p>Скрипт берёт агента из релиза на GitHub, а если тот недоступен — с самой панели.
+Свой адрес задаётся переменной <code>AGENT_URL</code>, конкретный выпуск —
+<code>AGENT_RELEASE</code>.</p>
 
 <h2 id="tls">Сертификат</h2>
 <p>Reality сертификат не нужна — она прикрывается чужим сайтом. А Trojan, Hysteria2

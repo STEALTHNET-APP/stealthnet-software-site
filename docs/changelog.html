@@ -58,6 +58,10 @@
 <p>The first public release has not happened yet: the code opens together with it. Below is what already works and has been checked on a live installation.</p>
 <h3>Nodes and the engine</h3>
 <ul>
+<li>The agent is downloaded from a GitHub release; the panel stays as a fallback for air-gapped setups and self-built binaries. The installer checks that what it downloaded really is a binary: the panel serves its own page for any unknown address, and that page was being installed instead of the agent — systemd answered "Exec format error".</li>
+<li>The node's country is picked from a searchable list, by name or by code. It used to be typed by hand, where "GE" meant Georgia, not Germany.</li>
+<li>A deleted node frees its name. Deletion is soft, but the uniqueness rule did not tell live rows from deleted ones, so the name stayed taken forever.</li>
+<li>The "already taken" error names the field instead of saying "a record with this value already exists".</li>
 <li>The window shown after creating a node was rewritten for somebody with a bare server: the Docker-free path comes first, as numbered steps — log in over SSH, one command, wait. The command is shown in full instead of being cut off.</li>
 <li>The "Copy" buttons in the node and subscription-service install windows put the name of the tab into the clipboard instead of the command itself.</li>
 <li>Attaching a node is one command; the agent keeps in touch with the panel by itself, applies the profile and reports traffic, who is online and the load.</li>
