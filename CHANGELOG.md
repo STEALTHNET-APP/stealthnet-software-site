@@ -22,6 +22,17 @@ The first public release has not happened yet: the code opens together with it.
 Below is what already works and has been checked on a live installation.
 
 ### The Telegram bot
+- A mini app: the button opens the subscription page right inside Telegram. Toggled
+  on and off; you can point it at your own address instead.
+- Promo codes in the bot. The button shows the discounted price straight away —
+  seeing one figure and paying another is not possible. A refusal says what is
+  actually wrong: "used up", "first purchase only", not a blanket "invalid".
+- "Invite a friend": the client gets their own link and a share of what the invited
+  person pays. Earnings land in the same "Affiliates" section as everything else.
+- A trial plan is marked in the list and never offered twice.
+- Auto-renewal is toggled by the client in their subscription card.
+- "How to connect": pick a device, get the app for it and your own link. The app
+  list is the same one the subscription page uses — no second list to drift.
 - A "Documents" screen replaces "Help": the offer, the agreement and any links of
   your own, added as a list in the panel. There used to be two buttons about the
   same thing side by side: "Help" and "Contact support".
@@ -37,6 +48,8 @@ Below is what already works and has been checked on a live installation.
   channel, people are let through: a broken setting must not cut off every client.
 
 ### Nodes and the engine
+- An admin action log. It has been written all along, but there was nowhere to read
+  it in the panel — working out "who changed this" meant querying the database.
 - The agent is updated from the panel: "Apply to every node". A node whose agent is
   too old to understand the panel is updated once with `update-node.sh` on the
   server — everything after that is buttons.
