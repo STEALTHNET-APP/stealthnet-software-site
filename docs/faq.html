@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вопросы — STEALTHNET SOFTWARE</title>
+<meta name="description" content="Частые вопросы о панели STEALTHNET SOFTWARE.">
+<meta property="og:title" content="Вопросы — STEALTHNET SOFTWARE">
+<meta property="og:description" content="Частые вопросы о панели STEALTHNET SOFTWARE.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%2312233D%22/><text x=%2216%22 y=%2222%22 font-size=%2218%22 font-family=%22sans-serif%22 font-weight=%22700%22 fill=%22white%22 text-anchor=%22middle%22>S</text></svg>">
+<link rel="stylesheet" href="../assets/site.css">
+<script>
+  /* Тему ставим до отрисовки: иначе при тёмной будет вспышка белого. */
+  (function(){try{var t=localStorage.getItem('sns_theme')||'light';
+    document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');
+    document.documentElement.style.colorScheme=t==='dark'?'dark':'light';}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="../index.html"><span class="brand-mark">S</span><span><span class="brand-name">STEALTHNET</span><span class="brand-sub">SOFTWARE</span></span></a>
+    <nav>
+      <a href="../docs/index.html" aria-current="page">Документация</a>
+      <a href="../index.html#features" class="hide-sm">Возможности</a>
+      <a href="https://github.com/STEALTHNET-APP/stealthnet-software" class="hide-sm">GitHub</a>
+      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Тема"></button>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side">
+    <input class="search" id="docSearch" type="search" placeholder="Поиск по документации" autocomplete="off">
+    <div id="searchHits" hidden></div>
+    <nav id="docNav">
+<h4>Начало</h4>
+<a href="index.html">Быстрый старт</a>
+<a href="nodes.html">Ноды</a>
+<h4>Настройка</h4>
+<a href="protocols.html">Протоколы и профили</a>
+<a href="subscriptions.html">Подписки</a>
+<a href="billing.html">Тарифы и оплата</a>
+<h4>Эксплуатация</h4>
+<a href="troubleshooting.html">Если что-то не работает</a>
+<a href="faq.html" aria-current="page">Вопросы</a>
+</nav>
+  </aside>
+  <main class="content">
+    <h1>Вопросы</h1>
+    
+<h2 id="remnawave">Чем отличается от других панелей</h2>
+<p>Написана с нуля на Rust, ставится одной командой, всё в одном репозитории — панель,
+сервис подписок, бот, воркер и агент ноды. Разделены артефакты, а не исходники:
+каждая служба — свой бинарник и свой образ, и сервис подписок разворачивается
+на отдельном сервере.</p>
+
+<h2 id="data">Что уходит наружу</h2>
+<p>Ничего. Панель, база и сервис подписок работают на вашем железе. Значки хостеров
+рисуются на месте, а не подгружаются со сторонних сервисов — иначе такой запрос
+рассказал бы им, какими серверами вы пользуетесь.</p>
+
+<h2 id="domains">Сбор посещаемых сайтов</h2>
+<p>Выключен по умолчанию и включается осознанно. Это журнал сайтов, куда ходят ваши
+клиенты — самое ценное, что может утечь из VPN-панели. Прежде чем включать, убедитесь,
+что это допустимо по вашей политике и по закону страны, где вы работаете.</p>
+
+<h2 id="restart">Почему покупка перезапускает движок</h2>
+<p>Xray читает список клиентов при запуске: добавлять их на ходу его API в текущей версии
+не умеет — есть только управление инбаундами. Поэтому изменение состава означает
+перезапуск. Окно опроса — 15 секунд, соединения на этот момент рвутся.</p>
+
+<h2 id="languages">Языки</h2>
+<p>Русский и английский, переключатель в шапке. Перевод накладывается после отрисовки,
+поэтому добавление строки не требует правки каждого экрана.</p>
+
+<h2 id="backup">Резервные копии</h2>
+<p>Достаточно дампа PostgreSQL: в нём и клиенты, и тарифы, и профили конфигураций.
+Файлы на нодах восстанавливаются повторным запуском установщика.</p>
+
+<h2 id="contribute">Как помочь проекту</h2>
+<p>Ошибки и предложения — в <a href="https://github.com/STEALTHNET-APP/stealthnet-software/issues">issues</a>.
+Правки принимаются пул-реквестами; в репозитории есть <code>CONTRIBUTING.md</code>
+с описанием устройства и того, как проверить изменение.</p>
+
+    <div class="next"><a class="btn" href="troubleshooting.html">← Если что-то не работает</a></div>
+  </main>
+</div>
+<footer>
+  <div class="foot-in">
+    <span>STEALTHNET SOFTWARE — панель для продажи VPN. Ставится на свой сервер.</span>
+    <span class="right">
+      <a href="../docs/index.html">Документация</a>
+      <a href="https://github.com/STEALTHNET-APP/stealthnet-software">GitHub</a>
+    </span>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

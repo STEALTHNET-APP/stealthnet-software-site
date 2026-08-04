@@ -1,0 +1,186 @@
+#!/usr/bin/env python3
+"""Сборка сайта stealthnet.software.
+
+Сайт — обычная статика, и GitHub Pages отдаёт её как есть. Этот скрипт
+нужен только чтобы шапка, оглавление и подвал не разъезжались между
+страницами: правится один шаблон, а не восемь копий.
+
+Готовый HTML лежит в репозитории и коммитится. Хотите поправить одну
+страницу — правьте HTML напрямую, скрипт запускать не обязательно.
+
+    python3 build.py
+"""
+import json
+import os
+import re
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+DOMAIN = 'stealthnet.software'
+
+# Оглавление документации: заголовок раздела → список страниц.
+NAV = [
+    ('Начало', [
+        ('index.html', 'Быстрый старт'),
+        ('nodes.html', 'Ноды'),
+    ]),
+    ('Настройка', [
+        ('protocols.html', 'Протоколы и профили'),
+        ('subscriptions.html', 'Подписки'),
+        ('billing.html', 'Тарифы и оплата'),
+    ]),
+    ('Эксплуатация', [
+        ('troubleshooting.html', 'Если что-то не работает'),
+        ('faq.html', 'Вопросы'),
+    ]),
+]
+
+LOGO = ('<span class="brand-mark">S</span>'
+        '<span><span class="brand-name">STEALTHNET</span>'
+        '<span class="brand-sub">SOFTWARE</span></span>')
+
+
+def head(title, desc, depth):
+    up = '../' * depth
+    return f'''<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content="{desc}">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%2312233D%22/><text x=%2216%22 y=%2222%22 font-size=%2218%22 font-family=%22sans-serif%22 font-weight=%22700%22 fill=%22white%22 text-anchor=%22middle%22>S</text></svg>">
+<link rel="stylesheet" href="{up}assets/site.css">
+<script>
+  /* Тему ставим до отрисовки: иначе при тёмной будет вспышка белого. */
+  (function(){{try{{var t=localStorage.getItem('sns_theme')||'light';
+    document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');
+    document.documentElement.style.colorScheme=t==='dark'?'dark':'light';}}catch(e){{}}}})();
+</script>
+</head>
+<body>'''
+
+
+def topbar(depth, active):
+    up = '../' * depth
+    link = lambda href, label, key, cls='': (
+        f'<a href="{up}{href}"{" aria-current=\"page\"" if active == key else ""}'
+        f'{f" class=\"{cls}\"" if cls else ""}>{label}</a>')
+    return f'''
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="{up}index.html">{LOGO}</a>
+    <nav>
+      {link('docs/index.html', 'Документация', 'docs')}
+      {link('index.html#features', 'Возможности', '', 'hide-sm')}
+      <a href="https://github.com/STEALTHNET-APP/stealthnet-software" class="hide-sm">GitHub</a>
+      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Тема"></button>
+    </nav>
+  </div>
+</header>'''
+
+
+def footer(depth):
+    up = '../' * depth
+    return f'''
+<footer>
+  <div class="foot-in">
+    <span>STEALTHNET SOFTWARE — панель для продажи VPN. Ставится на свой сервер.</span>
+    <span class="right">
+      <a href="{up}docs/index.html">Документация</a>
+      <a href="https://github.com/STEALTHNET-APP/stealthnet-software">GitHub</a>
+    </span>
+  </div>
+</footer>
+<script src="{up}assets/site.js"></script>
+</body>
+</html>'''
+
+
+def doc_nav(current):
+    out = ['<nav id="docNav">']
+    for group, pages in NAV:
+        out.append(f'<h4>{group}</h4>')
+        for href, label in pages:
+            cur = ' aria-current="page"' if href == current else ''
+            out.append(f'<a href="{href}"{cur}>{label}</a>')
+    out.append('</nav>')
+    return '\n'.join(out)
+
+
+def doc_page(fname, title, desc, body, prev=None, nxt=None):
+    nav_html = doc_nav(fname)
+    steps = ''
+    if prev or nxt:
+        parts = []
+        if prev:
+            parts.append(f'<a class="btn" href="{prev[0]}">← {prev[1]}</a>')
+        if nxt:
+            parts.append(f'<a class="btn primary" href="{nxt[0]}">{nxt[1]} →</a>')
+        steps = f'<div class="next">{"".join(parts)}</div>'
+
+    html = (head(f'{title} — STEALTHNET SOFTWARE', desc, 1)
+            + topbar(1, 'docs')
+            + f'''
+<div class="wrap doc">
+  <aside class="side">
+    <input class="search" id="docSearch" type="search" placeholder="Поиск по документации" autocomplete="off">
+    <div id="searchHits" hidden></div>
+    {nav_html}
+  </aside>
+  <main class="content">
+    <h1>{title}</h1>
+    {body}
+    {steps}
+  </main>
+</div>'''
+            + footer(1))
+    with open(os.path.join(ROOT, 'docs', fname), 'w', encoding='utf-8') as f:
+        f.write(html)
+
+
+def landing(body):
+    html = head('STEALTHNET SOFTWARE — панель для продажи VPN',
+                'Открытая панель управления VPN: ноды, подписки, тарифы, приём оплат '
+                'и телеграм-бот. Ставится на свой сервер.', 0) \
+        + topbar(0, 'home') + body + footer(0)
+    with open(os.path.join(ROOT, 'index.html'), 'w', encoding='utf-8') as f:
+        f.write(html)
+
+
+def build_search_index():
+    """Индекс для поиска: заголовки разделов и текст под ними.
+
+    Собираем из готовых страниц, а не из отдельного источника, — тогда
+    индекс не разъедется с содержимым."""
+    items = []
+    for _, pages in NAV:
+        for href, label in pages:
+            path = os.path.join(ROOT, 'docs', href)
+            if not os.path.exists(path):
+                continue
+            html = open(path, encoding='utf-8').read()
+            body = html.split('<main class="content">', 1)[-1]
+            for m in re.finditer(r'<h2 id="([^"]+)">(.*?)</h2>(.*?)(?=<h2 |</main>)', body, re.S):
+                anchor, title, chunk = m.group(1), m.group(2), m.group(3)
+                text = re.sub(r'<[^>]+>', ' ', chunk)
+                text = re.sub(r'\s+', ' ', text).strip()[:400]
+                items.append({'url': f'{href}#{anchor}', 'section': label,
+                              'title': re.sub(r'<[^>]+>', '', title), 'text': text})
+    with open(os.path.join(ROOT, 'assets', 'search.json'), 'w', encoding='utf-8') as f:
+        json.dump(items, f, ensure_ascii=False)
+    return len(items)
+
+
+if __name__ == '__main__':
+    import content
+    content.build(landing, doc_page)
+    n = build_search_index()
+    with open(os.path.join(ROOT, 'CNAME'), 'w') as f:
+        f.write(DOMAIN + '\n')
+    # .nojekyll: без него Pages прогоняет содержимое через Jekyll и
+    # выбрасывает каталоги, начинающиеся с подчёркивания.
+    open(os.path.join(ROOT, '.nojekyll'), 'w').close()
+    print(f'собрано; записей в поиске: {n}')

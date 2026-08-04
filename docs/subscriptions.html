@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Подписки — STEALTHNET SOFTWARE</title>
+<meta name="description" content="Форматы выдачи, отдельный сервер подписок, устройства и лимиты.">
+<meta property="og:title" content="Подписки — STEALTHNET SOFTWARE">
+<meta property="og:description" content="Форматы выдачи, отдельный сервер подписок, устройства и лимиты.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%2312233D%22/><text x=%2216%22 y=%2222%22 font-size=%2218%22 font-family=%22sans-serif%22 font-weight=%22700%22 fill=%22white%22 text-anchor=%22middle%22>S</text></svg>">
+<link rel="stylesheet" href="../assets/site.css">
+<script>
+  /* Тему ставим до отрисовки: иначе при тёмной будет вспышка белого. */
+  (function(){try{var t=localStorage.getItem('sns_theme')||'light';
+    document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');
+    document.documentElement.style.colorScheme=t==='dark'?'dark':'light';}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="../index.html"><span class="brand-mark">S</span><span><span class="brand-name">STEALTHNET</span><span class="brand-sub">SOFTWARE</span></span></a>
+    <nav>
+      <a href="../docs/index.html" aria-current="page">Документация</a>
+      <a href="../index.html#features" class="hide-sm">Возможности</a>
+      <a href="https://github.com/STEALTHNET-APP/stealthnet-software" class="hide-sm">GitHub</a>
+      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Тема"></button>
+    </nav>
+  </div>
+</header>
+<div class="wrap doc">
+  <aside class="side">
+    <input class="search" id="docSearch" type="search" placeholder="Поиск по документации" autocomplete="off">
+    <div id="searchHits" hidden></div>
+    <nav id="docNav">
+<h4>Начало</h4>
+<a href="index.html">Быстрый старт</a>
+<a href="nodes.html">Ноды</a>
+<h4>Настройка</h4>
+<a href="protocols.html">Протоколы и профили</a>
+<a href="subscriptions.html" aria-current="page">Подписки</a>
+<a href="billing.html">Тарифы и оплата</a>
+<h4>Эксплуатация</h4>
+<a href="troubleshooting.html">Если что-то не работает</a>
+<a href="faq.html">Вопросы</a>
+</nav>
+  </aside>
+  <main class="content">
+    <h1>Подписки</h1>
+    
+<p class="lead-p">Подписка — единственное, что видит клиент. По одной ссылке приложение
+получает список локаций в том формате, который понимает.</p>
+
+<h2 id="formats">Форматы</h2>
+<p>Формат определяется по User-Agent приложения. Правила проверяются сверху вниз,
+срабатывает первое подходящее; если не подошло ни одно — решает встроенный список
+известных приложений.</p>
+<table>
+  <tr><th>Формат</th><th>Кому</th></tr>
+  <tr><td>Xray JSON</td><td>Happ, Streisand, v2Box, NekoBox</td></tr>
+  <tr><td>Clash / Mihomo</td><td>Clash Meta, FlClash, Stash</td></tr>
+  <tr><td>sing-box</td><td>sing-box, Hiddify</td></tr>
+  <tr><td>base64-список</td><td>v2rayNG, Shadowrocket и всё неизвестное</td></tr>
+  <tr><td>Веб-страница</td><td>Браузер: приложения под платформу и кнопка установки</td></tr>
+</table>
+<p>Проверить, что именно получит конкретное приложение, можно в панели: раздел
+<b>Правила ответов</b>, поле «Вставьте User-Agent».</p>
+
+<h2 id="separate">Отдельный сервер</h2>
+<p>Сервис подписок выносится на другой сервер и другой домен: тогда блокировка панели
+не отрезает клиентов от конфигов, а машина с подписками вообще не имеет доступа к базе.</p>
+<pre><code>SUB_MODE=api
+PANEL_URL=https://панель.ваш-домен
+SUB_SERVICE_TOKEN=&lt;ключ из панели&gt;</code></pre>
+<p>Ключ выпускается в <b>Настройках → Сервис подписки</b> и показывается один раз.
+Там же панель отдаёт готовые команды установки и блок для Caddy.</p>
+<div class="note"><b>Рядом с панелью</b> сабка читает базу напрямую: это быстрее похода
+в API, и служебный ключ ей вообще не нужен.</div>
+
+<h2 id="devices">Устройства и лимит</h2>
+<p>Приложения представляются заголовками (<code>x-hwid</code>, <code>x-device-os</code>,
+<code>x-device-model</code>, <code>x-app-version</code>). По ним панель ведёт список
+устройств клиента и следит за лимитом из тарифа.</p>
+<p>Лимит проверяется только для нового устройства: уже зарегистрированное продолжает
+работать, даже если лимит потом уменьшили — иначе человек внезапно терял бы доступ на
+телефоне, которым пользовался вчера.</p>
+<p>При превышении клиент получает не пустоту, а понятную строку в списке локаций:
+сколько устройств занято и что делать.</p>
+<div class="note">Браузер и <code>curl</code> устройствами не считаются: они этих
+заголовков не шлют.</div>
+
+<h2 id="inactive">Когда подписка не отдаёт конфиги</h2>
+<ul>
+  <li>Срок истёк или закончился трафик.</li>
+  <li>Клиент отключён администратором.</li>
+  <li>Ни один инбаунд его сквадов не поднят на живой ноде.</li>
+  <li>Исчерпан лимит устройств.</li>
+</ul>
+<p>Во всех случаях вместо локаций приходит причина — её текст настраивается в
+<b>Настройках подписки</b> и поддерживает подстановки <code>{date}</code>,
+<code>{days}</code>, <code>{tariff}</code>.</p>
+
+<h2 id="history">Кто запрашивал</h2>
+<p>Раздел <b>Запросы подписки</b> показывает, кто, чем и когда обращался по ссылке.
+Три запроса с одного адреса — норма, это обновление по интервалу. Десятки разных
+адресов за час означают, что ссылка утекла: отзовите подписку из карточки клиента,
+это сменит короткий идентификатор и убьёт старую ссылку.</p>
+
+    <div class="next"><a class="btn" href="protocols.html">← Протоколы</a><a class="btn primary" href="billing.html">Тарифы и оплата →</a></div>
+  </main>
+</div>
+<footer>
+  <div class="foot-in">
+    <span>STEALTHNET SOFTWARE — панель для продажи VPN. Ставится на свой сервер.</span>
+    <span class="right">
+      <a href="../docs/index.html">Документация</a>
+      <a href="https://github.com/STEALTHNET-APP/stealthnet-software">GitHub</a>
+    </span>
+  </div>
+</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>
