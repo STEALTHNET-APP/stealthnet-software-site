@@ -161,3 +161,16 @@ footer .right{margin-left:auto;display:flex;gap:18px}
   .top nav{gap:12px;font-size:13px}
   .top nav .hide-sm{display:none}
 }
+
+/* На узком экране шапка не помещалась: логотип с разрядкой плюс ссылка
+   не влезали в 375px и толкали страницу вбок. Ужимаем то и другое. */
+@media(max-width:560px){
+  .top-in{padding:10px 14px;gap:12px}
+  .brand{gap:8px}
+  .brand-mark{width:28px;height:28px;border-radius:8px;font-size:15px}
+  .brand-name{font-size:12.5px;letter-spacing:.07em}
+  .brand-sub{font-size:8px;letter-spacing:.14em}
+  .top nav{gap:10px}
+  .icon-btn{width:30px;height:30px}
+  .wrap{padding:0 14px}
+}

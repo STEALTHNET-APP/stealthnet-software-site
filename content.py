@@ -8,6 +8,15 @@
 """
 
 
+# Репозиторий с кодом ещё не открыт, поэтому ссылки в шапке и на кнопке
+# ведут на организацию — иначе посетитель упирается в 404. Когда код
+# выложат, достаточно поменять GH_LINK на GH_REPO здесь: и шапка, и
+# подвал, и кнопка на витрине берут адрес отсюда.
+GH_ORG = 'https://github.com/STEALTHNET-APP'
+GH_REPO = 'https://github.com/STEALTHNET-APP/stealthnet-software'
+GH_LINK = GH_ORG
+
+
 def ic(path):
     return f'<span class="ic"><svg viewBox="0 0 24 24">{path}</svg></span>'
 
@@ -36,7 +45,7 @@ def build(landing, doc_page):
     <a class="btn primary" href="docs/index.html">
       <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       Быстрый старт</a>
-    <a class="btn" href="https://github.com/STEALTHNET-APP/stealthnet-software">Исходный код</a>
+    <a class="btn" href="{GH_LINK}">Исходный код</a>
   </div>
   <p class="note">Rust и PostgreSQL. Одна команда для установки, одна для подключения ноды.</p>
 </div>
@@ -486,7 +495,7 @@ openssl x509 -in /etc/sn-node/tls/ваш-домен.crt -noout -enddate</code></
 
     # ───────────────────────── вопросы ─────────────────────────
     doc_page('faq.html', 'Вопросы',
-             'Частые вопросы о панели STEALTHNET SOFTWARE.', '''
+             'Частые вопросы о панели STEALTHNET SOFTWARE.', f'''
 <h2 id="remnawave">Чем отличается от других панелей</h2>
 <p>Написана с нуля на Rust, ставится одной командой, всё в одном репозитории — панель,
 сервис подписок, бот, воркер и агент ноды. Разделены артефакты, а не исходники:
@@ -516,8 +525,10 @@ openssl x509 -in /etc/sn-node/tls/ваш-домен.crt -noout -enddate</code></
 <p>Достаточно дампа PostgreSQL: в нём и клиенты, и тарифы, и профили конфигураций.
 Файлы на нодах восстанавливаются повторным запуском установщика.</p>
 
-<h2 id="contribute">Как помочь проекту</h2>
-<p>Ошибки и предложения — в <a href="https://github.com/STEALTHNET-APP/stealthnet-software/issues">issues</a>.
-Правки принимаются пул-реквестами; в репозитории есть <code>CONTRIBUTING.md</code>
-с описанием устройства и того, как проверить изменение.</p>
+<h2 id="contribute">Где взять код</h2>
+<p>Репозиторий с исходниками ещё закрыт: он откроется вместе с первым релизом,
+в организации <a href="{GH_LINK}">STEALTHNET-APP</a>. Команды установки на этих
+страницах написаны под него, так что после публикации они заработают как есть.</p>
+<p>Пока открыт только <a href="{GH_ORG}/stealthnet-software-site">репозиторий сайта</a> —
+опечатку или неточность в документации можно поправить прямо там.</p>
 ''', prev=('troubleshooting.html', 'Если что-то не работает'))

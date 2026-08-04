@@ -14,6 +14,8 @@ import json
 import os
 import re
 
+import content
+
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = 'stealthnet.software'
 
@@ -75,7 +77,7 @@ def topbar(depth, active):
     <nav>
       {link('docs/index.html', 'Документация', 'docs')}
       {link('index.html#features', 'Возможности', '', 'hide-sm')}
-      <a href="https://github.com/STEALTHNET-APP/stealthnet-software" class="hide-sm">GitHub</a>
+      <a href="{content.GH_LINK}" class="hide-sm">GitHub</a>
       <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Тема"></button>
     </nav>
   </div>
@@ -90,7 +92,7 @@ def footer(depth):
     <span>STEALTHNET SOFTWARE — панель для продажи VPN. Ставится на свой сервер.</span>
     <span class="right">
       <a href="{up}docs/index.html">Документация</a>
-      <a href="https://github.com/STEALTHNET-APP/stealthnet-software">GitHub</a>
+      <a href="{content.GH_LINK}">GitHub</a>
     </span>
   </div>
 </footer>
@@ -175,7 +177,6 @@ def build_search_index():
 
 
 if __name__ == '__main__':
-    import content
     content.build(landing, doc_page)
     n = build_search_index()
     with open(os.path.join(ROOT, 'CNAME'), 'w') as f:
