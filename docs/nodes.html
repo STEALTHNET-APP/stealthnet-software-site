@@ -97,6 +97,22 @@ certificate only at start-up and would otherwise keep serving an expired one. Th
 "Restart Xray" action in the node menu; in a certbot job it is
 <code>--deploy-hook "systemctl restart sn-node"</code>.</div>
 
+<h2 id="update">Updating</h2>
+<p>The engine version is set in the panel: the <b>“Xray version”</b> button on the nodes page.
+The agent compares its own on every poll, downloads the release, makes sure the binary runs
+and reports the expected version, and only then replaces the working one. Nodes left behind
+are listed there too.</p>
+<p>The agent itself is updated with <b>“Apply to every node”</b> in the same window. It
+replaces itself and exits — the service brings it back up.</p>
+
+<div class="note warn"><b>A node with an old agent does not understand the panel's commands</b>
+and stays on its previous engine — in the list this shows up as mismatched versions. Such a
+node has to be updated once, on the server itself:</div>
+<pre><code>curl -fsSL https://panel.your-domain/update-node.sh | PANEL_URL=https://panel.your-domain bash</code></pre>
+<p>The node secret is not needed: it is already in the systemd unit. The script leaves the
+engine alone — the panel owns its version and the agent will bring the node to it. To pin a
+specific version, name it: <code>XRAY_VERSION=v26.7.11</code>.</p>
+
 <h2 id="geo">Geo databases</h2>
 <p>Rules like <code>geoip:ru</code> and <code>geosite:category-ads-all</code> rely on the
 <code>geoip.dat</code> and <code>geosite.dat</code> files. The engine's archive installs them

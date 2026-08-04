@@ -37,6 +37,9 @@ Below is what already works and has been checked on a live installation.
   channel, people are let through: a broken setting must not cut off every client.
 
 ### Nodes and the engine
+- The agent is updated from the panel: "Apply to every node". A node whose agent is
+  too old to understand the panel is updated once with `update-node.sh` on the
+  server — everything after that is buttons.
 - The Xray version is set in the panel once and rolls out to the whole fleet:
   the agent compares its own on every poll, downloads the release, checks the
   binary runs and reports the right version, and only then replaces the working
