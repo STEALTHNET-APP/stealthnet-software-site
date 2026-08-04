@@ -21,6 +21,18 @@ Changes in the STEALTHNET SOFTWARE panel. Newest first.
 The first public release has not happened yet: the code opens together with it.
 Below is what already works and has been checked on a live installation.
 
+### The Telegram bot
+- The Telegram bot is configured in the panel, under "Telegram bot": greeting, a
+  notice under the menu, help text, support link. The bot picks changes up within
+  half a minute — no restart needed.
+- A separate image per bot screen. Set one shared image and it is used everywhere
+  a specific one is missing.
+- Support tickets inside the bot: the client writes, you answer under "Tickets",
+  and the reply reaches them in the bot. Both sides see the same thread.
+- A channel-subscription gate. Until someone subscribes, the bot goes no further.
+  No channel set means no check at all. If the bot loses admin rights in the
+  channel, people are let through: a broken setting must not cut off every client.
+
 ### Nodes and the engine
 - The Xray version is set in the panel once and rolls out to the whole fleet:
   the agent compares its own on every poll, downloads the release, checks the
