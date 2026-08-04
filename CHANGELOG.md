@@ -87,6 +87,9 @@ Below is what already works and has been checked on a live installation.
 - Nine ready-made routing blocks to drop into a profile.
 
 ### Clients and subscriptions
+- Small amounts of traffic were displayed as "0 MiB" and looked like a counter that
+  had been wiped: anything under a gigabyte was rounded to megabytes. Small values
+  now show in kibibytes and bytes, and a real zero says so.
 - The subscription returns the reason in the format the app asked for. With the
   device limit reached it used to send a "# reason" line regardless, so an app
   expecting Xray JSON showed a parse error instead of an explanation. The

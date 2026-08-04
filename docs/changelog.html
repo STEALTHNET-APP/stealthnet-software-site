@@ -87,6 +87,7 @@
 </ul>
 <h3>Clients and subscriptions</h3>
 <ul>
+<li>Small amounts of traffic were displayed as "0 MiB" and looked like a counter that had been wiped: anything under a gigabyte was rounded to megabytes. Small values now show in kibibytes and bytes, and a real zero says so.</li>
 <li>The subscription returns the reason in the format the app asked for. With the device limit reached it used to send a "# reason" line regardless, so an app expecting Xray JSON showed a parse error instead of an explanation. The device-limit wording is now editable like the others.</li>
 <li>Devices are counted by HWID, and the number of them is capped by the plan.</li>
 <li>Bulk actions on clients: enable, disable, reset traffic, revoke the subscription, delete — for the selected rows or for the whole filter.</li>
