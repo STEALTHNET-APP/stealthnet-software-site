@@ -58,6 +58,12 @@ Below is what already works and has been checked on a live installation.
   the files have actually changed.
 
 ### Protocols and profiles
+- Installing a node is one path again: certificate issuance was taken out of the
+  installer. Reality does not need one, and anything over TLS needs a certificate
+  for its own node's domain — a manual step, covered in the nodes section.
+- Every profile preset now has a "?" button with step-by-step instructions on what
+  it takes to make it work. The editor has the same button, where the hint is
+  matched against what the config actually contains.
 
 - Protocols: VLESS, VMess, Trojan, Shadowsocks 2022, Hysteria2.
 - Transports: TCP, WebSocket, gRPC, XHTTP, HTTPUpgrade, mKCP.

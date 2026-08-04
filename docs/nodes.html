@@ -68,17 +68,34 @@ that is unreachable. Point it elsewhere with <code>AGENT_URL</code>, or pin a re
 <code>AGENT_RELEASE</code>.</p>
 
 <h2 id="tls">Certificate</h2>
-<p>Reality needs no certificate — it hides behind somebody else's site. Trojan, Hysteria2
-and anything running over TLS will not start without one at all.</p>
-<p>A bare node has no certificate to begin with, so the installer issues one itself when you
-give it a domain:</p>
-<pre><code>NODE_DOMAIN=de1.your-domain PANEL_URL=... NODE_SECRET=... bash install-node.sh</code></pre>
-<p>The domain must have an A record pointing at this machine, and port 80 must be free:
-that is where the Let's Encrypt check goes. The certificate lands in
-<code>/etc/sn-node/tls/</code>, renewal is checked daily, and the engine restarts when it
-changes — otherwise three months later it would still be serving an expired one.</p>
-<div class="note warn"><b>Point the profile at <u>this node's</u> certificate</b>, not the panel's domain. The Hysteria2 preset ships with a placeholder; leave the panel's domain in it and the engine on the node answers <code>no such file or directory</code> and refuses to start — taking the profile's other inbounds with it.<br><br>The paths go in <code>streamSettings.tlsSettings.certificates</code>:<br><code>/etc/sn-node/tls/your-node-domain.crt</code> and <code>.key</code>.</div>
-<div class="note"><b>One profile across nodes.</b> If your nodes have different domains, a TLS inbound cannot live in a shared profile: the path in the config is a single value. Give those nodes a profile of their own.</div>
+<p>The installer issues no certificates: the install is the same for every node, with no
+branches. Reality — the default choice — needs none at all, since it hides behind somebody
+else's site.</p>
+<p>A certificate is only needed by what runs over TLS: Trojan, Hysteria2 and the like. There
+it is tied to the domain of one particular node, so it is issued on the spot.</p>
+<p>Point a domain's A record at the node, free up port 80, and issue it:</p>
+<pre><code>apt-get install -y certbot
+certbot certonly --standalone -d de1.your-domain
+
+mkdir -p /etc/sn-node/tls
+cp /etc/letsencrypt/live/de1.your-domain/fullchain.pem /etc/sn-node/tls/de1.your-domain.crt
+cp /etc/letsencrypt/live/de1.your-domain/privkey.pem   /etc/sn-node/tls/de1.your-domain.key</code></pre>
+<p>Then point the profile at those paths, in
+<code>streamSettings.tlsSettings.certificates</code>.</p>
+
+<div class="note warn"><b>The path is to <u>this node's</u> certificate, not the panel's
+domain.</b> The Hysteria2 preset ships with a placeholder; leave the panel's domain in it and
+the engine on the node answers <code>no such file or directory</code> and refuses to start —
+taking the profile's other inbounds with it.</div>
+
+<div class="note"><b>One profile across nodes.</b> The path in the config is a single value, so
+a TLS inbound cannot live in a profile shared by nodes with different domains. Give those nodes
+a profile of their own.</div>
+
+<div class="note"><b>After a renewal</b> the engine has to be restarted: it reads the
+certificate only at start-up and would otherwise keep serving an expired one. There is a
+"Restart Xray" action in the node menu; in a certbot job it is
+<code>--deploy-hook "systemctl restart sn-node"</code>.</div>
 
 <h2 id="geo">Geo databases</h2>
 <p>Rules like <code>geoip:ru</code> and <code>geosite:category-ads-all</code> rely on the
