@@ -87,6 +87,8 @@
 </ul>
 <h3>Clients and subscriptions</h3>
 <ul>
+<li>Next to the traffic counter you can now see when it wipes and on what schedule. A scheduled reset used to look like a fault: two gigabytes yesterday, zero today, and nothing explaining why.</li>
+<li>The "reset strategy" field in the client card finally works: it was there, but its value went nowhere. Changing the schedule also recalculates the next reset date — otherwise the counter would still wipe on the old one.</li>
 <li>Small amounts of traffic were displayed as "0 MiB" and looked like a counter that had been wiped: anything under a gigabyte was rounded to megabytes. Small values now show in kibibytes and bytes, and a real zero says so.</li>
 <li>The subscription returns the reason in the format the app asked for. With the device limit reached it used to send a "# reason" line regardless, so an app expecting Xray JSON showed a parse error instead of an explanation. The device-limit wording is now editable like the others.</li>
 <li>Devices are counted by HWID, and the number of them is capped by the plan.</li>

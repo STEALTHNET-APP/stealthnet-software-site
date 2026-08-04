@@ -87,6 +87,12 @@ Below is what already works and has been checked on a live installation.
 - Nine ready-made routing blocks to drop into a profile.
 
 ### Clients and subscriptions
+- Next to the traffic counter you can now see when it wipes and on what schedule.
+  A scheduled reset used to look like a fault: two gigabytes yesterday, zero
+  today, and nothing explaining why.
+- The "reset strategy" field in the client card finally works: it was there, but
+  its value went nowhere. Changing the schedule also recalculates the next reset
+  date — otherwise the counter would still wipe on the old one.
 - Small amounts of traffic were displayed as "0 MiB" and looked like a counter that
   had been wiped: anything under a gigabyte was rounded to megabytes. Small values
   now show in kibibytes and bytes, and a real zero says so.
