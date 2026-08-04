@@ -22,8 +22,12 @@ The first public release has not happened yet: the code opens together with it.
 Below is what already works and has been checked on a live installation.
 
 ### The Telegram bot
-- A mini app: the button opens the subscription page right inside Telegram. Toggled
-  on and off; you can point it at your own address instead.
+- The mini app is a client cabinet inside Telegram: subscription state, traffic
+  left, devices, the plan list and payment. No password: Telegram signs the user
+  data and the panel checks that signature with the bot key. It is shown to
+  people who have not bought anything yet — that is where they pick a plan.
+- A "Connect" button opens the subscription page inside Telegram: ready links and
+  apps for the platform. It appears only with an active subscription.
 - Promo codes in the bot. The button shows the discounted price straight away —
   seeing one figure and paying another is not possible. A refusal says what is
   actually wrong: "used up", "first purchase only", not a blanket "invalid".
