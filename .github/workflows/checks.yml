@@ -1,0 +1,22 @@
+name: Check website
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Build and check the committed documentation
+        run: |
+          python3 -m venv .venv
+          .venv/bin/pip install -r requirements.txt
+          .venv/bin/python build.py
+          .venv/bin/python check.py
+          node --check assets/site.js
+          git diff --exit-code -- '*.html' 'assets/search.*.json' sitemap.xml robots.txt

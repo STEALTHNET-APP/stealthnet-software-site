@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .DS_Store
 .claude-launch-serve.py
+.venv/
+.qa/
+.impeccable/review/

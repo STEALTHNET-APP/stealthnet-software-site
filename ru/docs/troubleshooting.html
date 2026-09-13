@@ -1,131 +1,68 @@
-<!doctype html>
-<html lang="ru">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Если что-то не работает — STEALTHNET SOFTWARE</title>
-<meta name="description" content="Разбор частых поломок: нода красная, клиент не подключается, подписка пуста.">
-<meta property="og:title" content="Если что-то не работает — STEALTHNET SOFTWARE">
-<meta property="og:description" content="Разбор частых поломок: нода красная, клиент не подключается, подписка пуста.">
-<meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%2312233D%22/><text x=%2216%22 y=%2222%22 font-size=%2218%22 font-family=%22sans-serif%22 font-weight=%22700%22 fill=%22white%22 text-anchor=%22middle%22>S</text></svg>">
-<link rel="stylesheet" href="/assets/site.css">
-<script>
-  /* Тему ставим до отрисовки: иначе при тёмной будет вспышка белого. */
-  (function(){try{var t=localStorage.getItem('sns_theme')||'light';
-    document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');
-    document.documentElement.style.colorScheme=t==='dark'?'dark':'light';}catch(e){}})();
-</script>
-</head>
-<body>
-<header class="top">
-  <div class="top-in">
-    <a class="brand" href="../index.html"><span class="brand-mark">S</span><span><span class="brand-name">STEALTHNET</span><span class="brand-sub">SOFTWARE</span></span></a>
-    <nav>
-      <a href="../docs/index.html" aria-current="page">Документация</a>
-      <a href="../docs/changelog.html" class="hide-sm">Что нового</a>
-      <a href="../index.html#features" class="hide-sm">Возможности</a>
-      <a href="https://github.com/STEALTHNET-APP" class="hide-sm">GitHub</a>
-      <a class="lang" href="/docs/troubleshooting.html" hreflang="en" lang="en" title="English">EN</a>
-      <button class="icon-btn" id="themeBtn" onclick="__toggleTheme()" title="Theme"></button>
-    </nav>
-  </div>
-</header>
-<div class="wrap doc">
-  <aside class="side">
-    <input class="search" id="docSearch" type="search"
-           placeholder="Поиск по документации" autocomplete="off"
-           data-index="search.ru.json" data-empty="ничего не нашлось">
-    <div id="searchHits" hidden></div>
-    <nav id="docNav">
-<h4>Начало</h4>
-<a href="index.html">Быстрый старт</a>
-<a href="nodes.html">Ноды</a>
-<h4>Настройка</h4>
-<a href="protocols.html">Протоколы и профили</a>
-<a href="subscriptions.html">Подписки</a>
-<a href="billing.html">Тарифы и оплата</a>
-<h4>Эксплуатация</h4>
-<a href="troubleshooting.html" aria-current="page">Если что-то не работает</a>
-<a href="faq.html">Вопросы</a>
-<a href="changelog.html">Что нового</a>
-</nav>
-  </aside>
-  <main class="content">
-    <h1>Если что-то не работает</h1>
-    
-<p class="lead-p">Порядок один: сначала смотрим, работает ли движок на ноде, потом —
-доходит ли до клиента конфиг, и только потом грешим на приложение.</p>
-
-<h2 id="node-red">Нода горит красной</h2>
-<p>Наведите на значок — в подсказке будет причина. Два разных случая:</p>
-<h3>Агент не выходит на связь</h3>
-<pre><code>systemctl status sn-node
-journalctl -u sn-node -n 50 --no-pager</code></pre>
-<p>Чаще всего это неверный адрес панели или протухший секрет ноды. Секрет
-перевыпускается в меню ноды, после чего команду установки нужно выполнить заново.</p>
-<h3>Движок не запустился</h3>
-<p>Причина написана в строке ноды. Проверить руками:</p>
-<pre><code>xray -test -config /etc/sn-node/config.json</code></pre>
-<p>Типичные причины: незаполненные поля из заготовки, отсутствующий файл сертификата,
-занятый порт, правило со ссылкой на несуществующую гео-базу.</p>
-<div class="note"><b>Ноду это не выключает.</b> Агент не подменяет рабочий конфиг тем,
-который движок отверг, — прежние локации продолжают обслуживаться.</div>
-
-<h2 id="empty-sub">Подписка отдаёт пусто</h2>
-<p>Проверьте по цепочке:</p>
-<ol>
-  <li>У клиента активный срок и остаток трафика.</li>
-  <li>Клиент состоит в скваде.</li>
-  <li>В скваде отмечены инбаунды.</li>
-  <li>Эти инбаунды привязаны к ноде, и нода в сети.</li>
-  <li>У инбаундов есть хосты, и хосты включены.</li>
-</ol>
-<p>Достаточно одного разрыва — и локаций у клиента не будет.</p>
-
-<h2 id="new-client">Новый клиент не подключается</h2>
-<p>Состав клиентов доезжает до ноды отдельно от конфига, в течение 15 секунд.
-Посмотрите в журнале агента:</p>
-<pre><code>journalctl -u sn-node --since '2 min ago' | grep применяем</code></pre>
-<p>Строка вида <code>применяем ... причина="изменился состав клиентов"</code> означает,
-что изменение доехало.</p>
-
-<h2 id="cert">Перестал работать Trojan или Hysteria2</h2>
-<p>Почти всегда это истёкший сертификат. Проверьте:</p>
-<pre><code>ls -l /etc/sn-node/tls/
-openssl x509 -in /etc/sn-node/tls/ваш-домен.crt -noout -enddate</code></pre>
-<p>Обновление и перезапуск движка делает ежедневная служба <code>sn-cert-sync</code>.
-Если её нет, переустановите ноду с переменной <code>NODE_DOMAIN</code>.</p>
-
-<h2 id="no-traffic">Не считается трафик</h2>
-<p>Проверьте, что в профиле есть служебный инбаунд <code>api-in</code> и секции
-<code>api</code>, <code>stats</code>, <code>policy</code>. Без них движок не отдаёт
-счётчики, а значит не работают и лимиты в тарифах. Во всех заготовках они уже есть.</p>
-
-<h2 id="logs">Куда смотреть</h2>
-<table>
-  <tr><th>Служба</th><th>Команда</th></tr>
-  <tr><td>Панель</td><td><code>journalctl -u sn-api -n 100</code></td></tr>
-  <tr><td>Подписки</td><td><code>journalctl -u sn-sub -n 100</code></td></tr>
-  <tr><td>Агент ноды</td><td><code>journalctl -u sn-node -n 100</code></td></tr>
-  <tr><td>Бот</td><td><code>journalctl -u sn-bot -n 100</code></td></tr>
-</table>
-<p>Состояние служб целиком — в панели, в <b>Справке</b>: там проверяются API, база
-и сервис подписок.</p>
-
-    <div class="next"><a class="btn" href="billing.html">← Тарифы и оплата</a><a class="btn primary" href="faq.html">Вопросы →</a></div>
-  </main>
+<!doctype html><html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Решение проблем · STEALTHNET</title><meta name="description" content="Начинайте с конкретной неработающей операции и времени ошибки. Не публикуйте .env, токены, код доступа и полную ссылку подписки. Симптом Проверить Панель не открывается DNS, 8"/><meta name="theme-color" content="#fafbf9"/><link rel="canonical" href="https://stealthnet.software/ru/docs/troubleshooting.html"/><link rel="alternate" hreflang="en" href="https://stealthnet.software/docs/troubleshooting.html"/><link rel="icon" href="/assets/favicon.svg"/><meta property="og:type" content="website"/><meta property="og:title" content="Решение проблем · STEALTHNET"/><meta property="og:description" content="Начинайте с конкретной неработающей операции и времени ошибки. Не публикуйте .env, токены, код доступа и полную ссылку подписки. Симптом Проверить Панель не открывается DNS, 8"/><meta property="og:url" content="https://stealthnet.software/ru/docs/troubleshooting.html"/><meta property="og:image" content="https://stealthnet.software/assets/media/panel-nodes-ru.png"/><link rel="preload" href="/assets/fonts/onest.ttf" as="font" type="font/ttf" crossorigin/><link rel="stylesheet" href="/assets/site.css?v=20260914"/><script defer src="/assets/site.js?v=20260914"></script></head><body class="docs-page" data-lang="ru"><a class="skip" href="#main">Перейти к содержимому</a><header class="site-header"><div class="header-inner"><a class="brand" href="/ru/" aria-label="STEALTHNET"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#000"/><rect x=".75" y=".75" width="98.5" height="98.5" rx="21.4" fill="none" stroke="#67766c" stroke-width="1.5"/><g color="#fff" transform="translate(50 50) scale(.76) translate(-50.35 -59.85)"><path fill="currentColor" d="M50.6 26.1c14.9 0 25 8.4 25.6 21.2H60.5c-.4-4.6-4-7.4-9.6-7.4-5.3 0-8.6 2.2-8.6 5.6 0 2.9 2.3 4.5 7.5 5.6l10.4 2.2c11.6 2.5 17.4 8.4 17.4 18.3 0 13.3-10.6 22-27 22-16.4 0-27-8.3-27.5-21.6h15.9c.5 4.8 4.5 7.7 10.7 7.7 5.7 0 9.3-2.3 9.3-5.9 0-2.9-2.2-4.6-7.4-5.7l-10.3-2.2C29.4 63.2 23.6 57 23.6 47.5c0-13 10.3-21.4 27-21.4Z"/></g></svg><span>STEALTHNET</span></a><nav aria-label="Основная навигация"><a class="nav-link " href="/ru/">Проект</a><a class="nav-link active" href="/ru/docs/index.html">Документация</a><a class="nav-link github-link" href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 20c-5 1-5-3-7-3m14 5v-4c0-1-.4-2-1-2.5 4-.5 6-2 6-6.5 0-1.5-.5-2.5-1.5-3.5.4-1 .3-2-.2-3-2 0-3 1-3.5 1.5a12 12 0 0 0-7.6 0C7.7 3.5 6.7 2.5 4.7 2.5c-.5 1-.6 2-.2 3C3.5 6.5 3 7.5 3 9c0 4.5 2 6 6 6.5-.6.5-1 1.5-1 2.5v4"/></svg> GitHub</a></nav><div class="header-actions"><button class="search-trigger" data-search aria-label="Поиск по документации"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span>Поиск по документации</span><kbd>⌘ K</kbd></button><a class="language" href="/docs/troubleshooting.html" hreflang="en" lang="en" aria-label="Read this page in English">EN</a></div></div></header><div class="docs-layout"><aside class="doc-sidebar"><div class="sidebar-heading">Документация<a href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE/releases/latest">v0.2.0</a></div><a class="sidebar-overview" href="/ru/docs/index.html" ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16M3 3h5a4 4 0 0 1 4 2 4 4 0 0 1 4-2h5v16h-5a4 4 0 0 0-4 2 4 4 0 0 0-4-2H3Z"/></svg>Обзор</a><nav aria-label="Навигация по документации"><details class="nav-group" ><summary>Начало работы<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/installation.html" >Установка панели</a><a href="/ru/docs/sections/getting-started.html" >Первый запуск</a><a href="/ru/docs/sections/home.html" >Главная панели</a></div></details><details class="nav-group" ><summary>Серверы и сеть<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/node-installation.html" >Установка ноды</a><a href="/ru/docs/sections/nodes.html" >Управление серверами</a><a href="/ru/docs/sections/hosts.html" >Хосты</a><a href="/ru/docs/sections/squads-int.html" >Внутренние сквады</a><a href="/ru/docs/sections/squads-ext.html" >Внешние сквады</a><a href="/ru/docs/sections/nodes-metrics.html" >Состояние серверов</a><a href="/ru/docs/sections/nodes-stats.html" >История трафика</a><a href="/ru/docs/sections/node-plugins.html" >Фильтры и защита</a></div></details><details class="nav-group" ><summary>Профили и конфиги<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/profiles.html" >Профили и шаблоны</a><a href="/ru/docs/sections/profiles.html" >Инбаунды и профили</a><a href="/ru/docs/sections/config.html" >Редактор Xray</a><a href="/ru/docs/selfsteal.html" >Сайт Selfsteal</a></div></details><details class="nav-group" ><summary>Подписки<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/subscription-installation.html" >Установка сервиса</a><a href="/ru/docs/sections/sub-settings.html" >Настройки подписки</a><a href="/ru/docs/sections/subpage.html" >Страница подключения</a><a href="/ru/docs/sections/templates.html" >DNS и маршрутизация</a><a href="/ru/docs/sections/response-rules.html" >Форматы ответа</a><a href="/ru/docs/sections/happ-routing.html" >Маршрутизация Happ</a></div></details><details class="nav-group" ><summary>Клиенты и Mini App<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/cabinet-installation.html" >Установка кабинета</a><a href="/ru/docs/sections/cabinet.html" >Кабинет и Mini App</a><a href="/ru/docs/branding.html" >Брендинг и языки</a><a href="/ru/docs/sections/users.html" >Карточки клиентов</a><a href="/ru/docs/sections/support.html" >Поддержка клиентов</a><a href="/ru/docs/addons.html" >Докупка устройств и трафика</a></div></details><details class="nav-group" ><summary>Telegram<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/sections/bot.html" >Настройка бота</a><a href="/ru/docs/sections/broadcasts.html" >Рассылки</a><a href="/ru/docs/team-notifications.html" >Уведомления команды</a></div></details><details class="nav-group" ><summary>Тарифы и оплаты<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/sections/tariffs.html" >Тарифы</a><a href="/ru/docs/payment-gateways.html" >Платёжные интеграции</a><a href="/ru/docs/sections/providers.html" >Настройка оплат</a><a href="/ru/docs/sections/payments.html" >Оплаты и возвраты</a><a href="/ru/docs/sections/promos.html" >Промокоды</a><a href="/ru/docs/sections/partners.html" >Реферальная программа</a><a href="/ru/docs/sections/infra-billing.html" >Расходы на серверы</a></div></details><details class="nav-group" ><summary>Команда и управление<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/sections/team.html" >Владелец и сотрудники</a><a href="/ru/docs/sections/admin-profile.html" >Профиль администратора</a><a href="/ru/docs/sections/settings.html" >Настройки панели</a><a href="/ru/docs/sections/audit.html" >Журнал действий</a></div></details><details class="nav-group" open><summary>Обновления и диагностика<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/backup-restore.html" >Резервные копии</a><a href="/ru/docs/troubleshooting.html" aria-current=page>Решение проблем</a><a href="/ru/docs/sections/hwid-inspector.html" >Устройства клиентов</a><a href="/ru/docs/sections/srh-inspector.html" >Запросы подписок</a><a href="/ru/docs/sections/sessions.html" >Сессии трафика</a><a href="/ru/docs/sections/torrent-reports.html" >События блокировки</a><a href="/ru/docs/sections/http-stats.html" >Статистика доменов</a></div></details><details class="nav-group" ><summary>Разработка<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/releases.html" >Сборки и релизы</a><a href="/ru/docs/development.html" >Архитектура и разработка</a></div></details></nav><a class="sidebar-community" href="https://t.me/stealthnet_admin_panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 18-7-4 18-6-5-4 3v-7m4 4 6-8-10 4-4-2Z"/></svg>Сообщество<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7m0-7L10 14M10 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-6"/></svg></a></aside><main class="doc-main" id="main"><details class="mobile-navigation"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>Содержание<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><aside class="doc-sidebar"><div class="sidebar-heading">Документация<a href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE/releases/latest">v0.2.0</a></div><a class="sidebar-overview" href="/ru/docs/index.html" ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16M3 3h5a4 4 0 0 1 4 2 4 4 0 0 1 4-2h5v16h-5a4 4 0 0 0-4 2 4 4 0 0 0-4-2H3Z"/></svg>Обзор</a><nav aria-label="Навигация по документации"><details class="nav-group" ><summary>Начало работы<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/installation.html" >Установка панели</a><a href="/ru/docs/sections/getting-started.html" >Первый запуск</a><a href="/ru/docs/sections/home.html" >Главная панели</a></div></details><details class="nav-group" ><summary>Серверы и сеть<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/node-installation.html" >Установка ноды</a><a href="/ru/docs/sections/nodes.html" >Управление серверами</a><a href="/ru/docs/sections/hosts.html" >Хосты</a><a href="/ru/docs/sections/squads-int.html" >Внутренние сквады</a><a href="/ru/docs/sections/squads-ext.html" >Внешние сквады</a><a href="/ru/docs/sections/nodes-metrics.html" >Состояние серверов</a><a href="/ru/docs/sections/nodes-stats.html" >История трафика</a><a href="/ru/docs/sections/node-plugins.html" >Фильтры и защита</a></div></details><details class="nav-group" ><summary>Профили и конфиги<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/profiles.html" >Профили и шаблоны</a><a href="/ru/docs/sections/profiles.html" >Инбаунды и профили</a><a href="/ru/docs/sections/config.html" >Редактор Xray</a><a href="/ru/docs/selfsteal.html" >Сайт Selfsteal</a></div></details><details class="nav-group" ><summary>Подписки<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/subscription-installation.html" >Установка сервиса</a><a href="/ru/docs/sections/sub-settings.html" >Настройки подписки</a><a href="/ru/docs/sections/subpage.html" >Страница подключения</a><a href="/ru/docs/sections/templates.html" >DNS и маршрутизация</a><a href="/ru/docs/sections/response-rules.html" >Форматы ответа</a><a href="/ru/docs/sections/happ-routing.html" >Маршрутизация Happ</a></div></details><details class="nav-group" ><summary>Клиенты и Mini App<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/cabinet-installation.html" >Установка кабинета</a><a href="/ru/docs/sections/cabinet.html" >Кабинет и Mini App</a><a href="/ru/docs/branding.html" >Брендинг и языки</a><a href="/ru/docs/sections/users.html" >Карточки клиентов</a><a href="/ru/docs/sections/support.html" >Поддержка клиентов</a><a href="/ru/docs/addons.html" >Докупка устройств и трафика</a></div></details><details class="nav-group" ><summary>Telegram<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/sections/bot.html" >Настройка бота</a><a href="/ru/docs/sections/broadcasts.html" >Рассылки</a><a href="/ru/docs/team-notifications.html" >Уведомления команды</a></div></details><details class="nav-group" ><summary>Тарифы и оплаты<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/sections/tariffs.html" >Тарифы</a><a href="/ru/docs/payment-gateways.html" >Платёжные интеграции</a><a href="/ru/docs/sections/providers.html" >Настройка оплат</a><a href="/ru/docs/sections/payments.html" >Оплаты и возвраты</a><a href="/ru/docs/sections/promos.html" >Промокоды</a><a href="/ru/docs/sections/partners.html" >Реферальная программа</a><a href="/ru/docs/sections/infra-billing.html" >Расходы на серверы</a></div></details><details class="nav-group" ><summary>Команда и управление<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/sections/team.html" >Владелец и сотрудники</a><a href="/ru/docs/sections/admin-profile.html" >Профиль администратора</a><a href="/ru/docs/sections/settings.html" >Настройки панели</a><a href="/ru/docs/sections/audit.html" >Журнал действий</a></div></details><details class="nav-group" open><summary>Обновления и диагностика<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/backup-restore.html" >Резервные копии</a><a href="/ru/docs/troubleshooting.html" aria-current=page>Решение проблем</a><a href="/ru/docs/sections/hwid-inspector.html" >Устройства клиентов</a><a href="/ru/docs/sections/srh-inspector.html" >Запросы подписок</a><a href="/ru/docs/sections/sessions.html" >Сессии трафика</a><a href="/ru/docs/sections/torrent-reports.html" >События блокировки</a><a href="/ru/docs/sections/http-stats.html" >Статистика доменов</a></div></details><details class="nav-group" ><summary>Разработка<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/releases.html" >Сборки и релизы</a><a href="/ru/docs/development.html" >Архитектура и разработка</a></div></details></nav><a class="sidebar-community" href="https://t.me/stealthnet_admin_panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 18-7-4 18-6-5-4 3v-7m4 4 6-8-10 4-4-2Z"/></svg>Сообщество<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7m0-7L10 14M10 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-6"/></svg></a></aside></details><nav class="breadcrumbs" aria-label="Путь к статье"><a href="/ru/docs/index.html">Документация</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg><a href="/ru/docs/category/operations.html">Обновления и диагностика</a></nav><article class="prose"><h1>Решение проблем</h1><details class="article-contents"><summary>На этой странице<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div class="toc">
+<ul>
+<li><a href="#_1">Что приложить к сообщению об ошибке</a></li>
+</ul>
 </div>
-<footer>
-  <div class="foot-in">
-    <span>STEALTHNET SOFTWARE — панель для продажи VPN. Ставится на свой сервер.</span>
-    <span class="right">
-      <a href="../docs/index.html">Документация</a>
-      <a href="../docs/changelog.html">Что нового</a>
-      <a href="https://github.com/STEALTHNET-APP">GitHub</a>
-    </span>
-  </div>
-</footer>
-<script src="/assets/site.js"></script>
-</body>
-</html>
+</details><p>Начинайте с конкретной неработающей операции и времени ошибки. Не публикуйте .env, токены, код доступа и полную ссылку подписки.</p>
+<table>
+<thead>
+<tr>
+<th>Симптом</th>
+<th>Проверить</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Панель не открывается</td>
+<td>DNS, 80/443, Caddy, <code>systemctl status sn-api</code>, <code>stealthnet doctor</code></td>
+</tr>
+<tr>
+<td>API работает, база нет</td>
+<td>PostgreSQL, DATABASE_URL, журналы API, свободный диск</td>
+</tr>
+<tr>
+<td>Сервис подписок не отвечает</td>
+<td>Локальный и публичный <code>/ready</code>, sn-sub, его режим db/api и служебный ключ</td>
+</tr>
+<tr>
+<td>Нода на связи, VPN нет</td>
+<td>Статус Xray, профиль, активный инбаунд, порт, хост и внутренний сквад</td>
+</tr>
+<tr>
+<td>Клиент не видит локацию</td>
+<td>Срок/статус/трафик, сквад, активная нода, включённый хост, исключения форматов</td>
+</tr>
+<tr>
+<td>Нет докупок</td>
+<td>Пакеты именно текущего тарифа, допустимость подписки, покупки кабинета и кнопка бота</td>
+</tr>
+<tr>
+<td>Оплата ожидает</td>
+<td>Статус провайдера, callback HTTPS, сумма/валюта и внешний ID</td>
+</tr>
+<tr>
+<td>Mini App недоступно</td>
+<td>Установленный кабинет, выбранная установка, <code>/ready</code>, ключ и настройки бота</td>
+</tr>
+<tr>
+<td>Копирование не сработало</td>
+<td>HTTPS и разрешение буфера; интерфейс должен показывать результат или ошибку</td>
+</tr>
+<tr>
+<td>EN-текста нет</td>
+<td>Переключатель языка, поля English бренда и соответствующего тарифа</td>
+</tr>
+<tr>
+<td>Нет обновлений</td>
+<td>Есть ли стабильный Release, оба архива и SHA256; состояние проверки GitHub</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_1">Что приложить к сообщению об ошибке</h2>
+<p>Версия панели и Xray, ОС/архитектура, раздел, шаги воспроизведения, ожидаемый и фактический результат, время с часовым поясом, обезличенный фрагмент журнала. Для визуального бага — размер окна, язык, тема и скриншот без персональных данных. Для уязвимостей используйте <a href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE/blob/main/SECURITY.md">порядок приватного сообщения</a>.</p>
+<p>Проверка API, выдачи подписки и VPN-соединения — три разных проверки. После исправления повторите исходный сценарий и ближайший связанный: например, после оплаты проверьте и срок, и подключение.</p><div class="article-meta"><a href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE/blob/main/docs/ru/troubleshooting.md"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7m0-7L10 14M10 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-6"/></svg>Изменить на GitHub</a><span>Релиз 0.2.0</span></div><nav class="article-pagination"><a href="/ru/docs/backup-restore.html"><small>Назад</small><strong>Резервные копии<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong></a><a href="/ru/docs/sections/hwid-inspector.html"><small>Далее</small><strong>Устройства клиентов<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong></a></nav></article></main><aside class="doc-toc"><strong>На этой странице</strong><div class="toc">
+<ul>
+<li><a href="#_1">Что приложить к сообщению об ошибке</a></li>
+</ul>
+</div>
+<a class="toc-top" href="#main">Наверх</a></aside></div><footer class="site-footer"><div class="footer-brand"><a class="brand" href="/ru/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#000"/><rect x=".75" y=".75" width="98.5" height="98.5" rx="21.4" fill="none" stroke="#67766c" stroke-width="1.5"/><g color="#fff" transform="translate(50 50) scale(.76) translate(-50.35 -59.85)"><path fill="currentColor" d="M50.6 26.1c14.9 0 25 8.4 25.6 21.2H60.5c-.4-4.6-4-7.4-9.6-7.4-5.3 0-8.6 2.2-8.6 5.6 0 2.9 2.3 4.5 7.5 5.6l10.4 2.2c11.6 2.5 17.4 8.4 17.4 18.3 0 13.3-10.6 22-27 22-16.4 0-27-8.3-27.5-21.6h15.9c.5 4.8 4.5 7.7 10.7 7.7 5.7 0 9.3-2.3 9.3-5.9 0-2.9-2.2-4.6-7.4-5.7l-10.3-2.2C29.4 63.2 23.6 57 23.6 47.5c0-13 10.3-21.4 27-21.4Z"/></g></svg><span>STEALTHNET</span></a><p>Инфраструктура ваша. Управление — в одной панели.</p></div><div class="footer-links"><a href="/ru/docs/index.html">Документация</a><a href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE">GitHub</a><a href="https://t.me/stealthnet_admin_panel">Сообщество</a><a href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE/blob/main/LICENSE">AGPL-3.0</a></div><p class="footer-meta">© 2026 STEALTHNET · <a href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE/releases/latest">Релиз 0.2.0</a></p></footer><dialog class="search-dialog" id="search-dialog" aria-labelledby="search-title"><div class="dialog-top"><h2 id="search-title">Поиск по документации</h2><button class="icon-button" data-close aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div><label class="search-field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span class="sr-only">Поиск по документации</span><input type="search" autocomplete="off" id="search-input" placeholder="Вопрос, настройка или команда…" /></label><p class="search-status" id="search-status" role="status"></p><div id="search-results"></div><div class="search-bottom">Содержание<a href="/ru/docs/index.html">Все категории<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a></div></dialog><dialog class="image-dialog" id="image-dialog" aria-label="Открыть скриншот"><button class="icon-button" data-close aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button><p></p></dialog><div class="toast" id="toast" role="status"></div><script type="application/json" id="ui-strings">{"home": "Проект", "docs": "Документация", "install": "Установить STEALTHNET", "community": "Сообщество", "search": "Поиск по документации", "placeholder": "Вопрос, настройка или команда…", "close": "Закрыть", "contents": "Содержание", "onpage": "На этой странице", "prev": "Назад", "next": "Далее", "edit": "Изменить на GitHub", "copied": "Скопировано", "copy": "Копировать", "failed": "Не удалось скопировать. Выделите и скопируйте текст вручную.", "empty": "Ничего не найдено. Попробуйте «установка», «нода» или «подписка».", "loading": "Ищем…", "searcherror": "Поиск не загрузился. Откройте категорию ниже или попробуйте снова.", "browse": "Открыть документацию", "all": "Все категории", "release": "Релиз", "source": "Открытый код · AGPL-3.0", "skip": "Перейти к содержимому", "openimage": "Открыть скриншот", "demo": "Настоящие интерфейсы с демонстрационными данными.", "guide": "Открыть инструкцию", "navigatetitle": "Навигация по документации", "support": "Поддержать проект", "wallet": "Скопировать адрес TRC20", "read": "Читать инструкцию", "overview": "Обзор", "article": "Статья", "up": "Наверх"}</script></body></html>

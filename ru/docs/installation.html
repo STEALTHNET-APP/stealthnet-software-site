@@ -1,0 +1,265 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Установка панели · STEALTHNET</title><meta name="description" content="Установка использует готовые GitHub Releases. Rust, Git, Node.js и Docker на сервере клиента не нужны. Установщик настраивает PostgreSQL, панель, сервис подписок при совместно"/><meta name="theme-color" content="#fafbf9"/><link rel="canonical" href="https://stealthnet.software/ru/docs/installation.html"/><link rel="alternate" hreflang="en" href="https://stealthnet.software/docs/installation.html"/><link rel="icon" href="/assets/favicon.svg"/><meta property="og:type" content="website"/><meta property="og:title" content="Установка панели · STEALTHNET"/><meta property="og:description" content="Установка использует готовые GitHub Releases. Rust, Git, Node.js и Docker на сервере клиента не нужны. Установщик настраивает PostgreSQL, панель, сервис подписок при совместно"/><meta property="og:url" content="https://stealthnet.software/ru/docs/installation.html"/><meta property="og:image" content="https://stealthnet.software/assets/media/panel-nodes-ru.png"/><link rel="preload" href="/assets/fonts/onest.ttf" as="font" type="font/ttf" crossorigin/><link rel="stylesheet" href="/assets/site.css?v=20260914"/><script defer src="/assets/site.js?v=20260914"></script></head><body class="docs-page" data-lang="ru"><a class="skip" href="#main">Перейти к содержимому</a><header class="site-header"><div class="header-inner"><a class="brand" href="/ru/" aria-label="STEALTHNET"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#000"/><rect x=".75" y=".75" width="98.5" height="98.5" rx="21.4" fill="none" stroke="#67766c" stroke-width="1.5"/><g color="#fff" transform="translate(50 50) scale(.76) translate(-50.35 -59.85)"><path fill="currentColor" d="M50.6 26.1c14.9 0 25 8.4 25.6 21.2H60.5c-.4-4.6-4-7.4-9.6-7.4-5.3 0-8.6 2.2-8.6 5.6 0 2.9 2.3 4.5 7.5 5.6l10.4 2.2c11.6 2.5 17.4 8.4 17.4 18.3 0 13.3-10.6 22-27 22-16.4 0-27-8.3-27.5-21.6h15.9c.5 4.8 4.5 7.7 10.7 7.7 5.7 0 9.3-2.3 9.3-5.9 0-2.9-2.2-4.6-7.4-5.7l-10.3-2.2C29.4 63.2 23.6 57 23.6 47.5c0-13 10.3-21.4 27-21.4Z"/></g></svg><span>STEALTHNET</span></a><nav aria-label="Основная навигация"><a class="nav-link " href="/ru/">Проект</a><a class="nav-link active" href="/ru/docs/index.html">Документация</a><a class="nav-link github-link" href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 20c-5 1-5-3-7-3m14 5v-4c0-1-.4-2-1-2.5 4-.5 6-2 6-6.5 0-1.5-.5-2.5-1.5-3.5.4-1 .3-2-.2-3-2 0-3 1-3.5 1.5a12 12 0 0 0-7.6 0C7.7 3.5 6.7 2.5 4.7 2.5c-.5 1-.6 2-.2 3C3.5 6.5 3 7.5 3 9c0 4.5 2 6 6 6.5-.6.5-1 1.5-1 2.5v4"/></svg> GitHub</a></nav><div class="header-actions"><button class="search-trigger" data-search aria-label="Поиск по документации"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span>Поиск по документации</span><kbd>⌘ K</kbd></button><a class="language" href="/docs/installation.html" hreflang="en" lang="en" aria-label="Read this page in English">EN</a></div></div></header><div class="docs-layout"><aside class="doc-sidebar"><div class="sidebar-heading">Документация<a href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE/releases/latest">v0.2.0</a></div><a class="sidebar-overview" href="/ru/docs/index.html" ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16M3 3h5a4 4 0 0 1 4 2 4 4 0 0 1 4-2h5v16h-5a4 4 0 0 0-4 2 4 4 0 0 0-4-2H3Z"/></svg>Обзор</a><nav aria-label="Навигация по документации"><details class="nav-group" open><summary>Начало работы<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/installation.html" aria-current=page>Установка панели</a><a href="/ru/docs/sections/getting-started.html" >Первый запуск</a><a href="/ru/docs/sections/home.html" >Главная панели</a></div></details><details class="nav-group" ><summary>Серверы и сеть<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/node-installation.html" >Установка ноды</a><a href="/ru/docs/sections/nodes.html" >Управление серверами</a><a href="/ru/docs/sections/hosts.html" >Хосты</a><a href="/ru/docs/sections/squads-int.html" >Внутренние сквады</a><a href="/ru/docs/sections/squads-ext.html" >Внешние сквады</a><a href="/ru/docs/sections/nodes-metrics.html" >Состояние серверов</a><a href="/ru/docs/sections/nodes-stats.html" >История трафика</a><a href="/ru/docs/sections/node-plugins.html" >Фильтры и защита</a></div></details><details class="nav-group" ><summary>Профили и конфиги<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/profiles.html" >Профили и шаблоны</a><a href="/ru/docs/sections/profiles.html" >Инбаунды и профили</a><a href="/ru/docs/sections/config.html" >Редактор Xray</a><a href="/ru/docs/selfsteal.html" >Сайт Selfsteal</a></div></details><details class="nav-group" ><summary>Подписки<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/subscription-installation.html" >Установка сервиса</a><a href="/ru/docs/sections/sub-settings.html" >Настройки подписки</a><a href="/ru/docs/sections/subpage.html" >Страница подключения</a><a href="/ru/docs/sections/templates.html" >DNS и маршрутизация</a><a href="/ru/docs/sections/response-rules.html" >Форматы ответа</a><a href="/ru/docs/sections/happ-routing.html" >Маршрутизация Happ</a></div></details><details class="nav-group" ><summary>Клиенты и Mini App<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/cabinet-installation.html" >Установка кабинета</a><a href="/ru/docs/sections/cabinet.html" >Кабинет и Mini App</a><a href="/ru/docs/branding.html" >Брендинг и языки</a><a href="/ru/docs/sections/users.html" >Карточки клиентов</a><a href="/ru/docs/sections/support.html" >Поддержка клиентов</a><a href="/ru/docs/addons.html" >Докупка устройств и трафика</a></div></details><details class="nav-group" ><summary>Telegram<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/sections/bot.html" >Настройка бота</a><a href="/ru/docs/sections/broadcasts.html" >Рассылки</a><a href="/ru/docs/team-notifications.html" >Уведомления команды</a></div></details><details class="nav-group" ><summary>Тарифы и оплаты<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/sections/tariffs.html" >Тарифы</a><a href="/ru/docs/payment-gateways.html" >Платёжные интеграции</a><a href="/ru/docs/sections/providers.html" >Настройка оплат</a><a href="/ru/docs/sections/payments.html" >Оплаты и возвраты</a><a href="/ru/docs/sections/promos.html" >Промокоды</a><a href="/ru/docs/sections/partners.html" >Реферальная программа</a><a href="/ru/docs/sections/infra-billing.html" >Расходы на серверы</a></div></details><details class="nav-group" ><summary>Команда и управление<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/sections/team.html" >Владелец и сотрудники</a><a href="/ru/docs/sections/admin-profile.html" >Профиль администратора</a><a href="/ru/docs/sections/settings.html" >Настройки панели</a><a href="/ru/docs/sections/audit.html" >Журнал действий</a></div></details><details class="nav-group" ><summary>Обновления и диагностика<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/backup-restore.html" >Резервные копии</a><a href="/ru/docs/troubleshooting.html" >Решение проблем</a><a href="/ru/docs/sections/hwid-inspector.html" >Устройства клиентов</a><a href="/ru/docs/sections/srh-inspector.html" >Запросы подписок</a><a href="/ru/docs/sections/sessions.html" >Сессии трафика</a><a href="/ru/docs/sections/torrent-reports.html" >События блокировки</a><a href="/ru/docs/sections/http-stats.html" >Статистика доменов</a></div></details><details class="nav-group" ><summary>Разработка<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/releases.html" >Сборки и релизы</a><a href="/ru/docs/development.html" >Архитектура и разработка</a></div></details></nav><a class="sidebar-community" href="https://t.me/stealthnet_admin_panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 18-7-4 18-6-5-4 3v-7m4 4 6-8-10 4-4-2Z"/></svg>Сообщество<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7m0-7L10 14M10 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-6"/></svg></a></aside><main class="doc-main" id="main"><details class="mobile-navigation"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>Содержание<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><aside class="doc-sidebar"><div class="sidebar-heading">Документация<a href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE/releases/latest">v0.2.0</a></div><a class="sidebar-overview" href="/ru/docs/index.html" ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16M3 3h5a4 4 0 0 1 4 2 4 4 0 0 1 4-2h5v16h-5a4 4 0 0 0-4 2 4 4 0 0 0-4-2H3Z"/></svg>Обзор</a><nav aria-label="Навигация по документации"><details class="nav-group" open><summary>Начало работы<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/installation.html" aria-current=page>Установка панели</a><a href="/ru/docs/sections/getting-started.html" >Первый запуск</a><a href="/ru/docs/sections/home.html" >Главная панели</a></div></details><details class="nav-group" ><summary>Серверы и сеть<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/node-installation.html" >Установка ноды</a><a href="/ru/docs/sections/nodes.html" >Управление серверами</a><a href="/ru/docs/sections/hosts.html" >Хосты</a><a href="/ru/docs/sections/squads-int.html" >Внутренние сквады</a><a href="/ru/docs/sections/squads-ext.html" >Внешние сквады</a><a href="/ru/docs/sections/nodes-metrics.html" >Состояние серверов</a><a href="/ru/docs/sections/nodes-stats.html" >История трафика</a><a href="/ru/docs/sections/node-plugins.html" >Фильтры и защита</a></div></details><details class="nav-group" ><summary>Профили и конфиги<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/profiles.html" >Профили и шаблоны</a><a href="/ru/docs/sections/profiles.html" >Инбаунды и профили</a><a href="/ru/docs/sections/config.html" >Редактор Xray</a><a href="/ru/docs/selfsteal.html" >Сайт Selfsteal</a></div></details><details class="nav-group" ><summary>Подписки<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/subscription-installation.html" >Установка сервиса</a><a href="/ru/docs/sections/sub-settings.html" >Настройки подписки</a><a href="/ru/docs/sections/subpage.html" >Страница подключения</a><a href="/ru/docs/sections/templates.html" >DNS и маршрутизация</a><a href="/ru/docs/sections/response-rules.html" >Форматы ответа</a><a href="/ru/docs/sections/happ-routing.html" >Маршрутизация Happ</a></div></details><details class="nav-group" ><summary>Клиенты и Mini App<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/cabinet-installation.html" >Установка кабинета</a><a href="/ru/docs/sections/cabinet.html" >Кабинет и Mini App</a><a href="/ru/docs/branding.html" >Брендинг и языки</a><a href="/ru/docs/sections/users.html" >Карточки клиентов</a><a href="/ru/docs/sections/support.html" >Поддержка клиентов</a><a href="/ru/docs/addons.html" >Докупка устройств и трафика</a></div></details><details class="nav-group" ><summary>Telegram<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/sections/bot.html" >Настройка бота</a><a href="/ru/docs/sections/broadcasts.html" >Рассылки</a><a href="/ru/docs/team-notifications.html" >Уведомления команды</a></div></details><details class="nav-group" ><summary>Тарифы и оплаты<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/sections/tariffs.html" >Тарифы</a><a href="/ru/docs/payment-gateways.html" >Платёжные интеграции</a><a href="/ru/docs/sections/providers.html" >Настройка оплат</a><a href="/ru/docs/sections/payments.html" >Оплаты и возвраты</a><a href="/ru/docs/sections/promos.html" >Промокоды</a><a href="/ru/docs/sections/partners.html" >Реферальная программа</a><a href="/ru/docs/sections/infra-billing.html" >Расходы на серверы</a></div></details><details class="nav-group" ><summary>Команда и управление<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/sections/team.html" >Владелец и сотрудники</a><a href="/ru/docs/sections/admin-profile.html" >Профиль администратора</a><a href="/ru/docs/sections/settings.html" >Настройки панели</a><a href="/ru/docs/sections/audit.html" >Журнал действий</a></div></details><details class="nav-group" ><summary>Обновления и диагностика<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/backup-restore.html" >Резервные копии</a><a href="/ru/docs/troubleshooting.html" >Решение проблем</a><a href="/ru/docs/sections/hwid-inspector.html" >Устройства клиентов</a><a href="/ru/docs/sections/srh-inspector.html" >Запросы подписок</a><a href="/ru/docs/sections/sessions.html" >Сессии трафика</a><a href="/ru/docs/sections/torrent-reports.html" >События блокировки</a><a href="/ru/docs/sections/http-stats.html" >Статистика доменов</a></div></details><details class="nav-group" ><summary>Разработка<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/releases.html" >Сборки и релизы</a><a href="/ru/docs/development.html" >Архитектура и разработка</a></div></details></nav><a class="sidebar-community" href="https://t.me/stealthnet_admin_panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 18-7-4 18-6-5-4 3v-7m4 4 6-8-10 4-4-2Z"/></svg>Сообщество<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7m0-7L10 14M10 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-6"/></svg></a></aside></details><nav class="breadcrumbs" aria-label="Путь к статье"><a href="/ru/docs/index.html">Документация</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg><a href="/ru/docs/category/start.html">Начало работы</a></nav><article class="prose"><h1>Установка панели</h1><details class="article-contents"><summary>На этой странице<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div class="toc">
+<ul>
+<li><a href="#_1">Подготовьте сервер</a></li>
+<li><a href="#github">Установка через GitHub</a></li>
+<li><a href="#_2">Размещение подписки и поля мастера</a></li>
+<li><a href="#_3">Одна команда</a></li>
+<li><a href="#_4">После установки</a></li>
+<li><a href="#_5">Быстрое обновление</a></li>
+<li><a href="#_6">Если установка оборвалась</a><ul>
+<li><a href="#_7">Панель открылась без оформления</a></li>
+<li><a href="#_8">Диагностика незавершённой установки</a></li>
+<li><a href="#https-urlerror">Последний шаг остановился на HTTPS / URLError</a></li>
+</ul>
+</li>
+<li><a href="#reverse-proxy">Свой reverse proxy / автоматическая установка</a></li>
+<li><a href="#_9">Файлы на сервере</a></li>
+<li><a href="#_10">Что сохраняется при обновлении</a></li>
+<li><a href="#_11">Владелец и сотрудники</a></li>
+<li><a href="#_12">Ошибка «Нет терминала» до вопросов установки</a></li>
+</ul>
+</div>
+</details><p>Установка использует готовые GitHub Releases. Rust, Git, Node.js и Docker на сервере клиента не нужны. Установщик настраивает PostgreSQL, панель, сервис подписок при совместном размещении, фоновые задачи, Telegram-бот (если указан токен) и Caddy с автоматическим HTTPS.</p>
+<h2 id="_1">Подготовьте сервер</h2>
+<ul>
+<li>Debian 12 / 13 или Ubuntu 22.04 / 24.04 / 26.04 LTS; systemd; архитектура amd64 или arm64.</li>
+<li>Рекомендуются 2 vCPU, 2 ГБ RAM и 10 ГБ свободного диска. Установщик остановится при памяти меньше 1 ГБ или свободном месте меньше 3 ГБ.</li>
+<li>Доступ root по SSH. Существующая установка и её база не перезаписываются.</li>
+<li>Два разных домена: для панели и подписок. A/AAAA направляются на сервер, где размещается соответствующий сервис. Для отдельной подписки её DNS можно настроить после установки панели.</li>
+<li>В firewall провайдера откройте TCP 80 и 443. SSH оставьте доступным. Порты PostgreSQL 5432 и служб 8080/8081 остаются локальными. Активный UFW получит только правила для 80/443; остальные правила сохраняются.</li>
+</ul>
+<p>Клиентский кабинет и Mini App устанавливаются из админки после запуска панели. До установки кабинета Mini App показывает страницу с объяснением, а не работает через панель напрямую. Ноды устанавливаются отдельно из раздела «Ноды».</p>
+<h2 id="github">Установка через GitHub</h2>
+<p>На чистом Debian/Ubuntu войдите по SSH <strong>как root</strong> и выполните:</p>
+<pre><code class="language-bash">apt-get update
+apt-get install -y git curl ca-certificates
+git clone --branch v0.2.0 --depth 1 https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE.git /root/stealthnet-installer
+cd /root/stealthnet-installer
+bash install.sh --version v0.2.0
+</code></pre>
+<p>Откроется мастер: укажите домены панели и подписки, название сервиса, валюту и данные владельца. Установщик сам скачает готовый релиз для архитектуры сервера, проверит SHA256 и установит PostgreSQL, системные службы и HTTPS. Компилировать Rust не требуется.</p>
+<p>Репозиторий загрузится в <code>/root/stealthnet-installer</code>, а рабочая панель установится в <code>/opt/stealthnet-software</code>. Обновлять установленную панель затем нужно командой <code>make update</code> из её рабочего каталога.</p>
+<h2 id="_2">Размещение подписки и поля мастера</h2>
+<p>В начале выберите <strong>1 — на этом сервере</strong> или <strong>2 — на отдельном сервере</strong>.</p>
+<ul>
+<li><strong>На этом сервере:</strong> оба домена направляются на IP панели. Мастер устанавливает <code>sn-sub</code>, настраивает HTTPS и проверяет подписку.</li>
+<li><strong>На отдельном сервере:</strong> на IP панели направляется только её домен. Домен подписки сохранится для клиентских ссылок; его DNS можно настроить позже на IP второй машины. Мастер не устанавливает локальный <code>sn-sub</code>, не создаёт для него сайт Caddy и не ждёт готовности удалённой подписки.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Пример и пояснение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Домен панели</td>
+<td><code>panel.example.com</code> — вход администратора; DNS A/AAAA на IP сервера панели</td>
+</tr>
+<tr>
+<td>Домен подписки</td>
+<td><code>sub.example.com</code> — адрес подключения клиентов; отдельный домен на IP выбранного сервера подписки, без <code>/ID</code></td>
+</tr>
+<tr>
+<td>Название сервиса</td>
+<td><code>My VPN</code> — название, которое увидят клиенты</td>
+</tr>
+<tr>
+<td>Валюта проекта</td>
+<td><code>USD</code>, <code>EUR</code>, <code>RUB</code>, <code>UAH</code> — код из трёх латинских букв для цен и баланса; не сумма и не символ <code>$</code>. Stars настраиваются отдельно</td>
+</tr>
+</tbody>
+</table>
+<p>Можно вставить адрес вида <code>https://panel.example.com/</code>: мастер выделит домен. Путь, порт, параметры или логин в адресе не принимаются. При ошибке домена или валюты поле запрашивается повторно; уже введённые ответы сохраняются.</p>
+<p>После установки панели для отдельного сервера откройте <strong>Настройки → Сервис подписки → Установка → На отдельном сервере</strong>, выпустите служебный ключ и выполните команду на второй машине. Затем настройте там DNS/HTTPS и проверьте <code>/ready</code> и реальную ссылку клиента. До этого подписка ещё не готова. <a href="/ru/docs/subscription-installation.html">Полная инструкция</a>.</p>
+<p>Выбор сохраняется в <code>installation.json</code>: обновление и <code>stealthnet doctor</code> проверяют только размещённые на панели службы. Обновление отдельной подписки выполняется на её сервере. В установках прежних версий отсутствие выбора означает прежнее размещение вместе с панелью.</p>
+<h2 id="_3">Одна команда</h2>
+<p>Войдите на сервер по SSH <strong>как root</strong> и выполните:</p>
+<pre><code class="language-bash">bash -c 'set -e; apt-get update -qq; apt-get install -y --no-install-recommends curl ca-certificates; sn_file=$(mktemp); trap '\''rm -f &quot;$sn_file&quot;'\'' EXIT; curl --proto &quot;=https&quot; --proto-redir &quot;=https&quot; --tlsv1.2 -fsSL https://raw.githubusercontent.com/STEALTHNET-APP/STEALTHNET-SOFTWARE/main/install.sh -o &quot;$sn_file&quot;; bash &quot;$sn_file&quot;'
+</code></pre>
+<p>Более короткий вариант, когда curl уже установлен:</p>
+<pre><code class="language-bash">curl --proto '=https' --proto-redir '=https' --tlsv1.2 -fsSL https://raw.githubusercontent.com/STEALTHNET-APP/STEALTHNET-SOFTWARE/main/install.sh -o /root/stealthnet-install.sh
+bash /root/stealthnet-install.sh
+</code></pre>
+<p>Мастер попросит домены, название сервиса, валюту проекта, логин и пароль владельца. Пустой пароль означает генерацию случайного пароля. Токен Telegram можно пропустить и добавить позже. Пароли и токены не выводятся при вводе и не передаются в аргументах процессов.</p>
+<p>Загрузчик определяет архитектуру и тег последнего стабильного релиза, скачивает архив и его SHA256 по HTTPS, проверяет архив и каждый файл из манифеста. Изменённый архив, чужая архитектура, неполный релиз или отсутствие контрольной суммы останавливают установку.</p>
+<p>После подготовки базы применяются все миграции по порядку. Демо-клиенты, тарифы и платёжные реквизиты не создаются. Валюта и название берутся из вашего ввода. Службы работают от отдельного пользователя <code>stealthnet</code>; база и ключи доступны только root через файл окружения systemd.</p>
+<p>Успешное завершение означает, что API ответил с рабочей базой, службы панели запущены и её HTTPS-домен проверен с проверкой сертификата. При совместном размещении также проверяются <code>/ready</code> и HTTPS подписки; отдельный сервис проверяется после его установки на второй машине. Если сертификат не выпущен, установщик сообщает ошибку, а не готовность.</p>
+<p>Данные владельца находятся в <code>/root/stealthnet-access.txt</code>, права <code>600</code>. Сохраните их в менеджере паролей и удалите этот файл. Он не публикуется через веб-сервер.</p>
+<h2 id="_4">После установки</h2>
+<pre><code class="language-bash">stealthnet doctor                  # релиз, службы, API, база, подписки и HTTPS
+stealthnet status                  # состояние служб (бот без токена будет отключён)
+stealthnet logs api                # журнал API, также sub / worker / bot
+stealthnet bot-token               # добавить/заменить токен бота скрытым вводом
+stealthnet admin-password          # сменить пароль существующего администратора
+</code></pre>
+<p>В админке создайте профиль, ноду, хост и сквад, затем настройте тарифы и платежи. В разделе клиентского кабинета задайте брендинг и выполните установку. Пакеты устройств и трафика задаются отдельно в каждом тарифе.</p>
+<h2 id="_5">Быстрое обновление</h2>
+<p>На сервере панели от root:</p>
+<pre><code class="language-bash">cd /opt/stealthnet-software
+make update
+</code></pre>
+<p>То же из любой папки:</p>
+<pre><code class="language-bash">stealthnet update
+</code></pre>
+<p>Конкретный опубликованный релиз:</p>
+<pre><code class="language-bash">make update VERSION=v0.2.0
+# или
+stealthnet update --version v0.2.0
+</code></pre>
+<p>Для конкретной версии используйте тег опубликованного релиза.</p>
+<p>Обновление проверяет файлы, создаёт PostgreSQL dump и копию конфигурации, применяет миграции, атомарно переключает <code>current</code>, перезапускает службы панели и проверяет их. Ноды и их Xray не перезапускаются. Их обновление выполняется отдельно из раздела нод. Кабинет и отдельный сервис подписок обновляются своими командами.</p>
+<p>Верхняя кнопка версии в админке открывает сведения о сборке и проверку GitHub. Проверка выполняется на сервере панели, результат сохраняется на 15 минут; ошибка — на одну минуту. Публикуемые стабильные релизы должны содержать готовые архивы обеих архитектур с SHA256. Страница различает новую версию, актуальную сборку, сборку новее GitHub, отсутствие релизов и ошибку связи. Описание релиза показывается текстом без исполнения HTML.</p>
+<p>Резервные копии: <code>/opt/stealthnet-software/backups/&lt;дата-UTC&gt;/</code>. При ошибке запуска новой версии возвращаются прежние бинарники. <strong>Уже применённые миграции автоматически не отменяются.</strong> Релизы должны использовать обратно совместимые миграции. Восстановление БД из dump — отдельная операция в окно обслуживания: оно отменяет изменения данных после момента копии.</p>
+<h2 id="_6">Если установка оборвалась</h2>
+<h3 id="_7">Панель открылась без оформления</h3>
+<p>В релизах до <strong>0.1.7</strong> правило Caddy <code>/app*</code> могло возвращать заглушку Mini App вместо <code>/app.css</code>. Браузер сообщал <code>MIME type ('text/html') is not a supported stylesheet</code>. Обновите установленную панель от root:</p>
+<pre><code class="language-bash">cd /opt/stealthnet-software
+make update VERSION=v0.2.0
+</code></pre>
+<p>Обновление создаёт резервную копию и исправляет старое правило в конфигурации, созданной установщиком, сохраняя остальные настройки. После обновления перезагрузите страницу с очисткой кэша (<code>Ctrl+F5</code> / <code>Cmd+Shift+R</code>). Для своего reverse proxy используйте пути <code>/app</code> и <code>/app/*</code>, без перехвата <code>/app.css</code>. Новые установки и обновления проверяют тип и содержимое основного CSS и JavaScript перед сообщением об успехе. Страница входа показывает версию API без надписи «стенд».</p>
+<h3 id="_8">Диагностика незавершённой установки</h3>
+<p>Журнал: <code>/var/log/stealthnet/install-&lt;дата&gt;.log</code>. Он доступен только root и скрывает введённые секреты. Журналы служб: <code>journalctl -u sn-api -n 100</code>, <code>journalctl -u sn-sub -n 100</code>, <code>journalctl -u caddy -n 100</code>.</p>
+<p>Исправьте причину и повторите ту же команду. Незавершённая установка использует сохранённые параметры и ключи, повторно проверяет миграции и запуск. Не удаляйте <code>.env</code> или <code>.install-pending.json</code>, чтобы «начать заново»: они связывают настройку с уже созданной базой. Повторный запуск на готовой панели предлагает обновление, а не создаёт владельца заново.</p>
+<p>Частые причины:</p>
+<table>
+<thead>
+<tr>
+<th>Ошибка</th>
+<th>Что проверить</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Нет релиза / HTTP 404</td>
+<td>Опубликован ли стабильный GitHub Release, правильный ли тег. Черновики недоступны клиентам.</td>
+</tr>
+<tr>
+<td>SHA256 не совпадает</td>
+<td>Повторить загрузку; если повторяется — проверить файлы релиза. Не отключать проверку.</td>
+</tr>
+<tr>
+<td>Нет DNS-записи</td>
+<td>A/AAAA домена панели; при совместном размещении — также домена подписки. Дождитесь распространения DNS.</td>
+</tr>
+<tr>
+<td>HTTPS не проходит</td>
+<td>IP в DNS, неверная AAAA, TCP 80/443 в firewall провайдера, журнал Caddy, лимиты ACME.</td>
+</tr>
+<tr>
+<td>Порт занят</td>
+<td>Другой сервис на 80/443 или 8080/8081; мастер не выключает его автоматически.</td>
+</tr>
+<tr>
+<td>База/роль уже есть</td>
+<td>Возможно, это существующая установка. Её пароль не будет автоматически заменён.</td>
+</tr>
+<tr>
+<td>apt заблокирован</td>
+<td>Дождаться unattended-upgrades и повторить команду; apt ожидает блокировку до 180 секунд.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="https-urlerror">Последний шаг остановился на HTTPS / <code>URLError</code></h3>
+<p>Если ошибка появилась после строки «Проверяем HTTPS и сертификаты», локальные API, база и сервис подписок уже прошли проверку. Старые версии мастера показывают только <code>URLError</code>: это общий тип ошибки соединения, а не доказательство проблемы с сертификатом.</p>
+<p>Выполните на сервере от root:</p>
+<pre><code class="language-bash">systemctl is-active caddy sn-api sn-sub
+ss -lntp | grep -E ':(80|443|8080|8081)\b'
+curl --connect-timeout 5 --max-time 10 -sS http://127.0.0.1:8080/api/health
+journalctl -u caddy -n 50 --no-pager
+</code></pre>
+<p>Сверьте DNS домена панели с её публичным IP. При совместном размещении туда же должен вести домен подписки; для отдельной машины её домен проверяется на том сервере. Запись AAAA нужна только при работающем IPv6. Проверьте TCP 80/443 как в firewall сервера, так и в сетевых правилах провайдера; порты приложений 8080/8081 открывать наружу не нужно.</p>
+<ul>
+<li><code>Connection refused</code> / «соединение отклонено»: на выбранном IP и порту нет доступного слушателя либо соединение отклоняет firewall. Проверьте адрес, статус Caddy и список портов.</li>
+<li><code>Timeout</code> / «время ожидания»: проверьте адрес, маршрутизацию и блокировку трафика.</li>
+<li>Ошибка сертификата: проверьте журнал Caddy, DNS, доступность портов для ACME и время сервера. Не отключайте проверку TLS.</li>
+<li>HTTP 502: веб-сервер доступен, но не получает корректный ответ от приложения; проверьте локальный API и маршрут reverse proxy.</li>
+</ul>
+<p>После исправления <strong>повторите команду установки той же версии</strong>. Установка, остановившаяся на шаге 7, ещё не считается завершённой: <code>make update</code> её не завершает. Сохраните <code>.env</code>, <code>.install-pending.json</code> и созданную базу — повторный запуск использует их.</p>
+<h2 id="reverse-proxy">Свой reverse proxy / автоматическая установка</h2>
+<p>Для уже настроенного nginx/Caddy или автоматизации создайте <strong>root-owned JSON с правами 600</strong>. Это режим для администратора инфраструктуры, обычному клиенту достаточно мастера.</p>
+<p>Обязательные поля: <code>panel_domain</code>, <code>sub_domain</code>, <code>brand</code>, <code>currency</code>, <code>admin_user</code>, <code>admin_password</code>. Необязательные: <code>bot_token</code> (пустая строка отключает бот), <code>proxy</code> (<code>caddy</code>, по умолчанию, или <code>external</code>), <code>subscription_placement</code> (<code>local</code>, по умолчанию, или <code>remote</code>). Домен подписки остаётся обязательным в обоих вариантах: для отдельного сервера можно указать будущий домен без готового DNS. <code>proxy</code> выбирает управление HTTPS, а <code>subscription_placement</code> — сервер подписки; это разные настройки. Пароль: 12–128 символов. Конфигурацию передают файлом, не аргументами командной строки.</p>
+<pre><code class="language-bash">chmod 600 /root/install.json
+bash /root/stealthnet-install.sh --config /root/install.json
+</code></pre>
+<p>В режиме <code>external</code> установщик не меняет веб-сервер и его firewall. Он проверяет только локальные службы, оставляет пример в <code>/opt/stealthnet-software/Caddyfile.example</code> и явно сообщает, что внешний HTTPS нужно настроить самостоятельно. Проксируйте панель со статикой из <code>current/web</code>, <code>/api/*</code> на <code>127.0.0.1:8080</code>, подписки на <code>127.0.0.1:8081</code>. Пути <code>/app</code> и <code>/app/*</code> должны отдавать <code>miniapp-unavailable.html</code>. Caddy-пример содержит эти правила и заголовки.</p>
+<p>При закрытом доступе к GitHub можно перенести опубликованный архив и <code>.sha256</code> по доверенному каналу, проверить <code>sha256sum</code>, безопасно распаковать и выполнить <code>python3 &lt;релиз&gt;/deploy/installer.py install --release-dir &lt;релиз&gt; --config /root/install.json</code>. При таком способе администратор отвечает за проверку внешней SHA256 до запуска; внутренний манифест проверяется установщиком.</p>
+<h2 id="_9">Файлы на сервере</h2>
+<table>
+<thead>
+<tr>
+<th>Путь</th>
+<th>Содержимое</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/opt/stealthnet-software/.env</code></td>
+<td>База, ключ шифрования кодов, токены; root, 600</td>
+</tr>
+<tr>
+<td><code>/opt/stealthnet-software/releases/&lt;версия&gt;</code></td>
+<td>Неизменяемые бинарники и статика</td>
+</tr>
+<tr>
+<td><code>/opt/stealthnet-software/current</code></td>
+<td>Активный релиз</td>
+</tr>
+<tr>
+<td><code>/opt/stealthnet-software/installation.json</code></td>
+<td>Версия и параметры установки без пароля</td>
+</tr>
+<tr>
+<td><code>/var/lib/stealthnet</code></td>
+<td>Рабочий каталог служб</td>
+</tr>
+<tr>
+<td><code>/etc/systemd/system/sn-*.service</code></td>
+<td>Службы api, sub, bot, worker</td>
+</tr>
+<tr>
+<td><code>/etc/caddy/stealthnet/panel.caddy</code></td>
+<td>Домены панели и подписок; другие сайты Caddy сохраняются</td>
+</tr>
+<tr>
+<td><code>/var/log/stealthnet</code></td>
+<td>Закрытые журналы установщика</td>
+</tr>
+</tbody>
+</table>
+<p>Сохранение <code>.env</code>, особенно <code>CABINET_CODE_KEY</code>, обязательно для восстановления клиентских кодов. Вместе с дампом базы храните копию этого файла вне сервера.</p>
+<p>Старые установки из исходников продолжают использовать <code>deploy/update-source.sh</code> через корневой <code>update.sh</code>. Этот режим пересобирает уже загруженные исходники и не переводит существующий стенд на релизную структуру автоматически.</p>
+<h2 id="_10">Что сохраняется при обновлении</h2>
+<p><code>make update</code> меняет готовый код и применяет новые миграции один раз. Пользователи, подписки, платежи, тарифы, профили, брендинг и тексты находятся в PostgreSQL; обновление не запускает <code>db/seed.sql</code> и не создаёт владельца заново. <code>.env</code> и ключ <code>CABINET_CODE_KEY</code> сохраняются без изменения. Текущая конфигурация reverse proxy и дополнительные настройки systemd при обновлении не переписываются.</p>
+<p>Свои изображения размещайте в <code>/opt/stealthnet-software/shared/public/</code>, например <code>logo.svg</code>. При стандартной установке Caddy файл доступен как <code>https://panel.example.com/custom/logo.svg</code>; этот адрес можно указать в брендинге админки. Содержимое <code>shared/</code> не заменяется релизом и входит в резервную копию обновления. Это публичный каталог: ключи и конфигурационные файлы туда не кладут. Для внешнего прокси настройте аналогичный маршрут <code>/custom/</code>.</p>
+<p>Каталоги <code>releases/</code> и <code>current/web</code> содержат код конкретной версии: свои файлы и ручные правки туда не помещайте. Правки исходников и CSS внутри релиза не являются настройками брендинга. Старый релиз остаётся на диске; при ошибке готовности установщик возвращает прежние бинарники. Возврат бинарников не отменяет применённые миграции; для отката данных используется сохранённый dump.</p>
+<h2 id="_11">Владелец и сотрудники</h2>
+<ul>
+<li><a href="/ru/docs/sections/admin-profile.html">Профиль администратора</a></li>
+<li><a href="/ru/docs/sections/team.html">Первый администратор и команда</a></li>
+</ul>
+<h2 id="_12">Ошибка «Нет терминала» до вопросов установки</h2>
+<p>В старом мастере терминал SSH ошибочно открывался как файл с возможностью перемотки. В версии <strong>0.1.6</strong> это исправлено. Если установка остановилась сразу после проверки SHA256 с сообщением «Нет терминала», повторно запустите загрузчик без закрепления старой версии. Файл <code>install.json</code> для обычного интерактивного запуска не нужен; на этом этапе база и учётная запись владельца ещё не создавались.</p>
+<p>При запуске через удалённую команду SSH без терминала используйте интерактивный сеанс <code>ssh -t root@SERVER_IP</code> или настройку через <code>--config</code>, описанную выше.</p><div class="article-meta"><a href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE/blob/main/docs/ru/installation.md"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7m0-7L10 14M10 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-6"/></svg>Изменить на GitHub</a><span>Релиз 0.2.0</span></div><nav class="article-pagination"><a href="/ru/docs/sections/getting-started.html"><small>Далее</small><strong>Первый запуск<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong></a></nav></article></main><aside class="doc-toc"><strong>На этой странице</strong><div class="toc">
+<ul>
+<li><a href="#_1">Подготовьте сервер</a></li>
+<li><a href="#github">Установка через GitHub</a></li>
+<li><a href="#_2">Размещение подписки и поля мастера</a></li>
+<li><a href="#_3">Одна команда</a></li>
+<li><a href="#_4">После установки</a></li>
+<li><a href="#_5">Быстрое обновление</a></li>
+<li><a href="#_6">Если установка оборвалась</a><ul>
+<li><a href="#_7">Панель открылась без оформления</a></li>
+<li><a href="#_8">Диагностика незавершённой установки</a></li>
+<li><a href="#https-urlerror">Последний шаг остановился на HTTPS / URLError</a></li>
+</ul>
+</li>
+<li><a href="#reverse-proxy">Свой reverse proxy / автоматическая установка</a></li>
+<li><a href="#_9">Файлы на сервере</a></li>
+<li><a href="#_10">Что сохраняется при обновлении</a></li>
+<li><a href="#_11">Владелец и сотрудники</a></li>
+<li><a href="#_12">Ошибка «Нет терминала» до вопросов установки</a></li>
+</ul>
+</div>
+<a class="toc-top" href="#main">Наверх</a></aside></div><footer class="site-footer"><div class="footer-brand"><a class="brand" href="/ru/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#000"/><rect x=".75" y=".75" width="98.5" height="98.5" rx="21.4" fill="none" stroke="#67766c" stroke-width="1.5"/><g color="#fff" transform="translate(50 50) scale(.76) translate(-50.35 -59.85)"><path fill="currentColor" d="M50.6 26.1c14.9 0 25 8.4 25.6 21.2H60.5c-.4-4.6-4-7.4-9.6-7.4-5.3 0-8.6 2.2-8.6 5.6 0 2.9 2.3 4.5 7.5 5.6l10.4 2.2c11.6 2.5 17.4 8.4 17.4 18.3 0 13.3-10.6 22-27 22-16.4 0-27-8.3-27.5-21.6h15.9c.5 4.8 4.5 7.7 10.7 7.7 5.7 0 9.3-2.3 9.3-5.9 0-2.9-2.2-4.6-7.4-5.7l-10.3-2.2C29.4 63.2 23.6 57 23.6 47.5c0-13 10.3-21.4 27-21.4Z"/></g></svg><span>STEALTHNET</span></a><p>Инфраструктура ваша. Управление — в одной панели.</p></div><div class="footer-links"><a href="/ru/docs/index.html">Документация</a><a href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE">GitHub</a><a href="https://t.me/stealthnet_admin_panel">Сообщество</a><a href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE/blob/main/LICENSE">AGPL-3.0</a></div><p class="footer-meta">© 2026 STEALTHNET · <a href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE/releases/latest">Релиз 0.2.0</a></p></footer><dialog class="search-dialog" id="search-dialog" aria-labelledby="search-title"><div class="dialog-top"><h2 id="search-title">Поиск по документации</h2><button class="icon-button" data-close aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div><label class="search-field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span class="sr-only">Поиск по документации</span><input type="search" autocomplete="off" id="search-input" placeholder="Вопрос, настройка или команда…" /></label><p class="search-status" id="search-status" role="status"></p><div id="search-results"></div><div class="search-bottom">Содержание<a href="/ru/docs/index.html">Все категории<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a></div></dialog><dialog class="image-dialog" id="image-dialog" aria-label="Открыть скриншот"><button class="icon-button" data-close aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button><p></p></dialog><div class="toast" id="toast" role="status"></div><script type="application/json" id="ui-strings">{"home": "Проект", "docs": "Документация", "install": "Установить STEALTHNET", "community": "Сообщество", "search": "Поиск по документации", "placeholder": "Вопрос, настройка или команда…", "close": "Закрыть", "contents": "Содержание", "onpage": "На этой странице", "prev": "Назад", "next": "Далее", "edit": "Изменить на GitHub", "copied": "Скопировано", "copy": "Копировать", "failed": "Не удалось скопировать. Выделите и скопируйте текст вручную.", "empty": "Ничего не найдено. Попробуйте «установка», «нода» или «подписка».", "loading": "Ищем…", "searcherror": "Поиск не загрузился. Откройте категорию ниже или попробуйте снова.", "browse": "Открыть документацию", "all": "Все категории", "release": "Релиз", "source": "Открытый код · AGPL-3.0", "skip": "Перейти к содержимому", "openimage": "Открыть скриншот", "demo": "Настоящие интерфейсы с демонстрационными данными.", "guide": "Открыть инструкцию", "navigatetitle": "Навигация по документации", "support": "Поддержать проект", "wallet": "Скопировать адрес TRC20", "read": "Читать инструкцию", "overview": "Обзор", "article": "Статья", "up": "Наверх"}</script></body></html>

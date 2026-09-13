@@ -1,101 +1,33 @@
-/* Обвязка сайта: тема, копирование кода и поиск по документации.
- *
- * Ничего, кроме этого файла, странице не нужно — ни сборки, ни зависимостей.
- */
 'use strict';
-
-/* ── тема ──
-   Светлая по умолчанию, как в панели. Атрибут ставится до первой
-   отрисовки скриптом в <head>, здесь только переключение. */
-(function theme() {
-  const KEY = 'sns_theme';
-  const root = document.documentElement;
-  const apply = (t) => {
-    root.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
-    root.style.colorScheme = t === 'dark' ? 'dark' : 'light';
-  };
-  window.__toggleTheme = () => {
-    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    try { localStorage.setItem(KEY, next); } catch (_) {}
-    apply(next);
-    paintThemeButton();
-  };
-  function paintThemeButton() {
-    const b = document.getElementById('themeBtn');
-    if (!b) return;
-    const dark = root.getAttribute('data-theme') === 'dark';
-    b.title = dark ? 'Светлая тема' : 'Тёмная тема';
-    b.innerHTML = dark
-      ? '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>'
-      : '<svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>';
-  }
-  document.addEventListener('DOMContentLoaded', paintThemeButton);
+(() => {
+ const strings=JSON.parse(document.getElementById('ui-strings').textContent),lang=document.documentElement.lang;
+ const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s));
+ let timer;
+ function toast(message){const el=$('#toast');el.textContent=message;el.classList.add('visible');clearTimeout(timer);timer=setTimeout(()=>el.classList.remove('visible'),3500)}
+ async function copy(value,button){try{await navigator.clipboard.writeText(value);const before=button.innerHTML;button.textContent=strings.copied;toast(strings.copied);setTimeout(()=>button.innerHTML=before,1800)}catch{toast(strings.failed)}}
+ $$('pre').forEach(pre=>{const button=document.createElement('button');button.type='button';button.className='copy-button';button.textContent=strings.copy;const text=pre.querySelector('code')?.textContent||pre.textContent;button.addEventListener('click',()=>copy(text,button));pre.append(button)});
+ $$('[data-copy]').forEach(b=>b.addEventListener('click',()=>copy(b.dataset.copy,b)));
+ $$('.prose table').forEach(table=>{const wrap=document.createElement('div');wrap.className='table-scroll';wrap.tabIndex=0;wrap.role='region';wrap.setAttribute('aria-label',lang==='ru'?'Таблица':'Table');table.before(wrap);wrap.append(table)});
+ const imageDialog=$('#image-dialog');
+ function showImage(src,title){let image=imageDialog.querySelector('img');if(!image){image=document.createElement('img');imageDialog.insertBefore(image,imageDialog.querySelector('p'));}image.src=src;image.alt=title;imageDialog.querySelector('p').textContent=title;imageDialog.showModal()}
+ const galleryImage=$('#gallery-image');
+ $$('[data-gallery]').forEach(tab=>tab.addEventListener('click',e=>{e.preventDefault();$$('[data-gallery]').forEach(a=>{a.classList.toggle('selected',a===tab);a.setAttribute('aria-current',String(a===tab))});galleryImage.src=tab.href;galleryImage.alt=tab.dataset.title;galleryImage.style.animation='none';requestAnimationFrame(()=>galleryImage.style.animation='');$('.gallery-stage').classList.toggle('is-portrait',tab.dataset.gallery==='miniapp');$('#gallery-title').textContent=tab.dataset.title;$('#gallery-description').textContent=tab.dataset.description;$$('[data-gallery-expand]').forEach(a=>a.href=tab.href)}));
+ $$('[data-gallery-expand]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();showImage(a.href,galleryImage.alt)}));
+ $$('dialog [data-close]').forEach(b=>b.addEventListener('click',()=>b.closest('dialog').close()));
+ $$('dialog').forEach(d=>d.addEventListener('click',e=>{if(e.target===d){const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close()}}));
+ const dialog=$('#search-dialog'),input=$('#search-input'),results=$('#search-results'),status=$('#search-status');
+ let index=null,pending=null,queryVersion=0;
+ async function loadIndex(){if(index)return index;if(!pending)pending=fetch('/assets/search.'+lang+'.json').then(r=>{if(!r.ok)throw Error('load');return r.json()}).then(data=>{index=data;return data}).finally(()=>pending=null);return pending}
+ const normalized=s=>s.toLocaleLowerCase(lang).replace(/ё/g,'е');
+ function excerpt(text,terms){const n=normalized(text),at=Math.max(0,Math.min(...terms.map(t=>n.indexOf(t)).filter(x=>x>=0))-55);return (at?'…':'')+text.slice(at,at+180)+(at+180<text.length?'…':'')}
+ function highlighted(parent,text,terms){const escaped=terms.map(t=>t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'));if(!escaped.length){parent.textContent=text;return}const re=new RegExp('('+escaped.join('|')+')','gi');let start=0;for(const match of text.matchAll(re)){parent.append(document.createTextNode(text.slice(start,match.index)));const mark=document.createElement('mark');mark.textContent=match[0];parent.append(mark);start=match.index+match[0].length}parent.append(document.createTextNode(text.slice(start)))}
+ async function search(){const revision=++queryVersion,q=normalized(input.value.trim()),terms=q.split(/\s+/).filter(Boolean);results.replaceChildren();status.textContent=strings.loading;try{const data=await loadIndex();if(revision!==queryVersion)return;const scored=data.map(row=>{const title=normalized(row.title),category=normalized(row.category),text=normalized(row.text);const valid=terms.every(x=>title.includes(x)||category.includes(x)||text.includes(x));return {...row,score:valid?terms.reduce((a,x)=>a+(title.includes(x)?100:0)+(category.includes(x)?20:0)+(text.includes(x)?1:0),0):-1}}).filter(x=>x.score>=0).sort((a,b)=>b.score-a.score).slice(0,18);status.textContent=!scored.length?strings.empty:q?(lang==='ru'?'Найдено статей: ':'Articles found: ')+scored.length:(lang==='ru'?'Начните с этих инструкций или введите запрос.':'Start with these guides or enter a search.');for(const row of scored){const a=document.createElement('a');a.className='search-result';a.href=row.url;const category=document.createElement('small');category.textContent=row.category;const strong=document.createElement('strong');highlighted(strong,row.title,terms);const p=document.createElement('p');highlighted(p,excerpt(row.text,terms),terms);a.append(category,strong,p);results.append(a)}}catch{if(revision===queryVersion)status.textContent=strings.searcherror}}
+ function openSearch(){if(!dialog.open)dialog.showModal();input.focus();search()}
+ $$('[data-search]').forEach(b=>b.addEventListener('click',openSearch));
+ let debounce;input.addEventListener('input',()=>{clearTimeout(debounce);debounce=setTimeout(search,110)});
+ input.addEventListener('keydown',e=>{if(e.key==='ArrowDown'){e.preventDefault();results.querySelector('a')?.focus()}if(e.key==='Enter'){const first=results.querySelector('a');if(first)location.href=first.href}});
+ results.addEventListener('keydown',e=>{if(!['ArrowDown','ArrowUp'].includes(e.key))return;e.preventDefault();const links=Array.from(results.querySelectorAll('a')),at=links.indexOf(document.activeElement);if(e.key==='ArrowUp'&&at===0){input.focus();return}links[Math.max(0,Math.min(links.length-1,at+(e.key==='ArrowDown'?1:-1)))]?.focus()});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&dialog.open){e.preventDefault();dialog.close();return;}if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openSearch()}});
+ const headings=$$('.prose h2[id],.prose h3[id]');
+ if('IntersectionObserver' in window){const visible=new Set();const observer=new IntersectionObserver(entries=>{entries.forEach(x=>x.isIntersecting?visible.add(x.target.id):visible.delete(x.target.id));const first=headings.find(x=>visible.has(x.id));if(first)$$('.doc-toc .toc a').forEach(a=>a.classList.toggle('active',decodeURIComponent(a.hash)==='#'+first.id))},{rootMargin:'-90px 0px -65% 0px'});headings.forEach(h=>observer.observe(h))}
 })();
-
-/* ── копирование команд ──
-   Кнопку добавляем скриптом: в разметке она была бы лишним шумом в
-   каждом блоке. Через data-атрибут, потому что кавычки внутри команд
-   ломают обработчик, записанный прямо в onclick. */
-document.addEventListener('DOMContentLoaded', () => {
-  for (const pre of document.querySelectorAll('pre')) {
-    const b = document.createElement('button');
-    b.className = 'copy';
-    b.type = 'button';
-    b.textContent = 'копировать';
-    b.addEventListener('click', () => {
-      const text = pre.querySelector('code')?.innerText ?? pre.innerText;
-      const done = () => { b.textContent = 'скопировано'; setTimeout(() => { b.textContent = 'копировать'; }, 1600); };
-      const fail = () => { b.textContent = 'не вышло — выделите вручную'; };
-      if (navigator.clipboard?.writeText) navigator.clipboard.writeText(text).then(done, fail);
-      else fail();
-    });
-    pre.appendChild(b);
-  }
-});
-
-/* ── поиск по документации ──
-   Индекс собирается из содержимого самих страниц, свой на каждый язык:
-   имя файла приходит в data-index, чтобы поиск в русской документации не
-   отдавал английские заголовки. Совпадения ищем по заголовкам и первому
-   абзацу раздела: этого хватает, чтобы попасть в нужное место, и не
-   требует ни сервера, ни библиотеки. */
-document.addEventListener('DOMContentLoaded', async () => {
-  const input = document.getElementById('docSearch');
-  const box = document.getElementById('searchHits');
-  const nav = document.getElementById('docNav');
-  if (!input || !box) return;
-
-  const nothing = input.dataset.empty || 'nothing found';
-  let index = [];
-  try {
-    const res = await fetch('/assets/' + (input.dataset.index || 'search.en.json'));
-    if (res.ok) index = await res.json();
-  } catch (_) { /* поиск не критичен: без него оглавление на месте */ }
-
-  const norm = (s) => s.toLowerCase().replace(/ё/g, 'е');
-
-  input.addEventListener('input', () => {
-    const q = norm(input.value.trim());
-    if (q.length < 2) {
-      box.innerHTML = '';
-      box.hidden = true;
-      if (nav) nav.hidden = false;
-      return;
-    }
-    const hits = index
-      .map((it) => {
-        const hay = norm(it.title + ' ' + it.section + ' ' + it.text);
-        const at = hay.indexOf(q);
-        return at < 0 ? null : { it, at };
-      })
-      .filter(Boolean)
-      .sort((a, b) => a.at - b.at)
-      .slice(0, 8);
-
-    box.hidden = false;
-    if (nav) nav.hidden = true;
-    box.innerHTML = hits.length
-      ? hits.map((h) => `<a class="hit" href="${h.it.url}"><b>${h.it.section}</b><br>${h.it.title}</a>`).join('')
-      : `<div class="hit">${nothing}</div>`;
-  });
-});

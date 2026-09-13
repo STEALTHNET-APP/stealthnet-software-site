@@ -1,0 +1,419 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-13T22:00:04.260Z",
+  "title": "Design System: STEALTHNET Website",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Green Ink",
+        "tonalRamp": [
+          "oklch(15.00% 0.02779 183.78)",
+          "oklch(26.43% 0.02779 183.78)",
+          "oklch(37.86% 0.02779 183.78)",
+          "oklch(49.29% 0.02779 183.78)",
+          "oklch(60.71% 0.02779 183.78)",
+          "oklch(72.14% 0.02779 183.78)",
+          "oklch(83.57% 0.02779 183.78)",
+          "oklch(95.00% 0.02779 183.78)"
+        ]
+      },
+      "deep": {
+        "role": "neutral",
+        "displayName": "Deep Ink",
+        "tonalRamp": [
+          "oklch(15.00% 0.02221 185.39)",
+          "oklch(26.43% 0.02221 185.39)",
+          "oklch(37.86% 0.02221 185.39)",
+          "oklch(49.29% 0.02221 185.39)",
+          "oklch(60.71% 0.02221 185.39)",
+          "oklch(72.14% 0.02221 185.39)",
+          "oklch(83.57% 0.02221 185.39)",
+          "oklch(95.00% 0.02221 185.39)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Sage",
+        "tonalRamp": [
+          "oklch(15.00% 0.02185 170.48)",
+          "oklch(26.43% 0.02185 170.48)",
+          "oklch(37.86% 0.02185 170.48)",
+          "oklch(49.29% 0.02185 170.48)",
+          "oklch(60.71% 0.02185 170.48)",
+          "oklch(72.14% 0.02185 170.48)",
+          "oklch(83.57% 0.02185 170.48)",
+          "oklch(95.00% 0.02185 170.48)"
+        ]
+      },
+      "mint": {
+        "role": "primary",
+        "displayName": "Fresh Mint",
+        "tonalRamp": [
+          "oklch(15.00% 0.07460 157.11)",
+          "oklch(26.43% 0.07460 157.11)",
+          "oklch(37.86% 0.07460 157.11)",
+          "oklch(49.29% 0.07460 157.11)",
+          "oklch(60.71% 0.07460 157.11)",
+          "oklch(72.14% 0.07460 157.11)",
+          "oklch(83.57% 0.07460 157.11)",
+          "oklch(95.00% 0.07460 157.11)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Ink Rule",
+        "tonalRamp": [
+          "oklch(15.00% 0.03266 171.81)",
+          "oklch(26.43% 0.03266 171.81)",
+          "oklch(37.86% 0.03266 171.81)",
+          "oklch(49.29% 0.03266 171.81)",
+          "oklch(60.71% 0.03266 171.81)",
+          "oklch(72.14% 0.03266 171.81)",
+          "oklch(83.57% 0.03266 171.81)",
+          "oklch(95.00% 0.03266 171.81)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Cool Paper",
+        "tonalRamp": [
+          "oklch(15.00% 0.00283 128.49)",
+          "oklch(26.43% 0.00283 128.49)",
+          "oklch(37.86% 0.00283 128.49)",
+          "oklch(49.29% 0.00283 128.49)",
+          "oklch(60.71% 0.00283 128.49)",
+          "oklch(72.14% 0.00283 128.49)",
+          "oklch(83.57% 0.00283 128.49)",
+          "oklch(95.00% 0.00283 128.49)"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Reading Ink",
+        "tonalRamp": [
+          "oklch(15.00% 0.03067 168.41)",
+          "oklch(26.43% 0.03067 168.41)",
+          "oklch(37.86% 0.03067 168.41)",
+          "oklch(49.29% 0.03067 168.41)",
+          "oklch(60.71% 0.03067 168.41)",
+          "oklch(72.14% 0.03067 168.41)",
+          "oklch(83.57% 0.03067 168.41)",
+          "oklch(95.00% 0.03067 168.41)"
+        ]
+      },
+      "secondary": {
+        "role": "neutral",
+        "displayName": "Secondary Green",
+        "tonalRamp": [
+          "oklch(15.00% 0.02983 164.65)",
+          "oklch(26.43% 0.02983 164.65)",
+          "oklch(37.86% 0.02983 164.65)",
+          "oklch(49.29% 0.02983 164.65)",
+          "oklch(60.71% 0.02983 164.65)",
+          "oklch(72.14% 0.02983 164.65)",
+          "oklch(83.57% 0.02983 164.65)",
+          "oklch(95.00% 0.02983 164.65)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Reading Green",
+        "tonalRamp": [
+          "oklch(15.00% 0.09221 160.56)",
+          "oklch(26.43% 0.09221 160.56)",
+          "oklch(37.86% 0.09221 160.56)",
+          "oklch(49.29% 0.09221 160.56)",
+          "oklch(60.71% 0.09221 160.56)",
+          "oklch(72.14% 0.09221 160.56)",
+          "oklch(83.57% 0.09221 160.56)",
+          "oklch(95.00% 0.09221 160.56)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Paper Rule",
+        "tonalRamp": [
+          "oklch(15.00% 0.01254 156.98)",
+          "oklch(26.43% 0.01254 156.98)",
+          "oklch(37.86% 0.01254 156.98)",
+          "oklch(49.29% 0.01254 156.98)",
+          "oklch(60.71% 0.01254 156.98)",
+          "oklch(72.14% 0.01254 156.98)",
+          "oklch(83.57% 0.01254 156.98)",
+          "oklch(95.00% 0.01254 156.98)"
+        ]
+      },
+      "on-ink": {
+        "role": "neutral",
+        "displayName": "Pale Ink Text",
+        "tonalRamp": [
+          "oklch(15.00% 0.00746 151.89)",
+          "oklch(26.43% 0.00746 151.89)",
+          "oklch(37.86% 0.00746 151.89)",
+          "oklch(49.29% 0.00746 151.89)",
+          "oklch(60.71% 0.00746 151.89)",
+          "oklch(72.14% 0.00746 151.89)",
+          "oklch(83.57% 0.00746 151.89)",
+          "oklch(95.00% 0.00746 151.89)"
+        ]
+      },
+      "action-ink": {
+        "role": "neutral",
+        "displayName": "Action Ink",
+        "tonalRamp": [
+          "oklch(15.00% 0.03940 164.67)",
+          "oklch(26.43% 0.03940 164.67)",
+          "oklch(37.86% 0.03940 164.67)",
+          "oklch(49.29% 0.03940 164.67)",
+          "oklch(60.71% 0.03940 164.67)",
+          "oklch(72.14% 0.03940 164.67)",
+          "oklch(83.57% 0.03940 164.67)",
+          "oklch(95.00% 0.03940 164.67)"
+        ]
+      },
+      "docs-action": {
+        "role": "primary",
+        "displayName": "Solid Action Green",
+        "tonalRamp": [
+          "oklch(15.00% 0.08829 156.33)",
+          "oklch(26.43% 0.08829 156.33)",
+          "oklch(37.86% 0.08829 156.33)",
+          "oklch(49.29% 0.08829 156.33)",
+          "oklch(60.71% 0.08829 156.33)",
+          "oklch(72.14% 0.08829 156.33)",
+          "oklch(83.57% 0.08829 156.33)",
+          "oklch(95.00% 0.08829 156.33)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "tonalRamp": [
+          "oklch(15.00% 0.00000 0.00)",
+          "oklch(26.43% 0.00000 0.00)",
+          "oklch(37.86% 0.00000 0.00)",
+          "oklch(49.29% 0.00000 0.00)",
+          "oklch(60.71% 0.00000 0.00)",
+          "oklch(72.14% 0.00000 0.00)",
+          "oklch(83.57% 0.00000 0.00)",
+          "oklch(95.00% 0.00000 0.00)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Presentation Display",
+        "purpose": "Large introductory presentation headings; follows responsive overrides in the stylesheet."
+      },
+      "headline": {
+        "displayName": "Presentation Headline",
+        "purpose": "Major presentation section headings."
+      },
+      "title": {
+        "displayName": "Presentation Title",
+        "purpose": "Repeated content titles and gallery captions."
+      },
+      "body": {
+        "displayName": "Base Body",
+        "purpose": "General website text; each content role sets its reading density."
+      },
+      "label": {
+        "displayName": "Action Label",
+        "purpose": "Shared presentation button labels."
+      },
+      "article-title": {
+        "displayName": "Article Title",
+        "purpose": "Technical reading page titles."
+      },
+      "article-body": {
+        "displayName": "Article Body",
+        "purpose": "Long instructions within the bounded article measure."
+      },
+      "code": {
+        "displayName": "Command Block",
+        "purpose": "Preformatted command blocks in technical articles."
+      }
+    },
+    "shadows": [
+      {
+        "name": "modal",
+        "value": "0 26px 90px #001b1766",
+        "purpose": "Search and image dialogs over a dimmed page; backdrop is #001611b3."
+      },
+      {
+        "name": "feedback",
+        "value": "0 7px 30px #08261e33",
+        "purpose": "Transient copy-feedback toast."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Shared exposure easing from --ease."
+      },
+      {
+        "name": "gallery-exposure",
+        "value": "350ms",
+        "purpose": "Gallery image exposure from brightness .82 and opacity .75 to full brightness and opacity; no layout movement."
+      },
+      {
+        "name": "control-transition",
+        "value": "160ms",
+        "purpose": "Button background, text and border color changes."
+      },
+      {
+        "name": "navigation-transition",
+        "value": "150ms",
+        "purpose": "Gallery selector color/background and navigation chevron rotation."
+      },
+      {
+        "name": "feedback-exposure",
+        "value": "200ms",
+        "purpose": "Toast exposure; status is displayed for 3500ms and copied button text for 1800ms."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: reduce",
+        "purpose": "Disable animations and transitions, and change smooth scrolling to auto."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "700px"
+      },
+      {
+        "name": "compact-layout",
+        "value": "920px"
+      },
+      {
+        "name": "two-column-docs",
+        "value": "1200px"
+      },
+      {
+        "name": "wide-docs-frame",
+        "value": "1600px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Mint Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary action on the ink presentation surface.",
+      "html": "<div class=\"ds-ink-sample\"><a class=\"ds-mint-button\" href=\"/docs/installation.html\">Install STEALTHNET<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></a></div>",
+      "css": "@font-face{font-family:Onest;src:url('/assets/fonts/onest.ttf') format('truetype');font-style:normal;font-weight:100 900;font-display:swap}.ds-ink-sample{background:var(--ink,#102522);padding:20px}.ds-mint-button{display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:50px;padding:12px 21px;border:1px solid #688175;border-radius:9px;font:550 14px/1.4 Onest,sans-serif;text-decoration:none;cursor:pointer;transition:background .16s,color .16s,border-color .16s}.ds-mint-button svg{width:18px;height:18px}.ds-mint-button:focus-visible{outline:3px solid #df9657;outline-offset:4px}.ds-mint-button{background:var(--mint,#b5edca);color:#102b20;border-color:var(--mint,#b5edca)}.ds-mint-button:hover{background:#d1f6de;border-color:#d1f6de}"
+    },
+    {
+      "name": "Ink Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Outlined companion action on the ink presentation surface.",
+      "html": "<div class=\"ds-ink-sample\"><a class=\"ds-outline-button\" href=\"/docs/index.html\">Documentation<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></a></div>",
+      "css": "@font-face{font-family:Onest;src:url('/assets/fonts/onest.ttf') format('truetype');font-style:normal;font-weight:100 900;font-display:swap}.ds-ink-sample{background:var(--ink,#102522);padding:20px}.ds-outline-button{display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:50px;padding:12px 21px;border:1px solid #688175;border-radius:9px;font:550 14px/1.4 Onest,sans-serif;text-decoration:none;cursor:pointer;transition:background .16s,color .16s,border-color .16s}.ds-outline-button svg{width:18px;height:18px}.ds-outline-button:focus-visible{outline:3px solid #df9657;outline-offset:4px}.ds-outline-button{background:transparent;color:#f2f7f3}.ds-outline-button:hover{background:#264036;border-color:#97b6a5}"
+    },
+    {
+      "name": "Reading Primary Button",
+      "kind": "button",
+      "refersTo": "button-docs-primary",
+      "description": "Filled green action inside light documentation content.",
+      "html": "<a class=\"ds-reading-primary\" href=\"/docs/installation.html\">Install the panel<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></a>",
+      "css": "@font-face{font-family:Onest;src:url('/assets/fonts/onest.ttf') format('truetype');font-style:normal;font-weight:100 900;font-display:swap}.ds-reading-primary{display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:50px;padding:12px 21px;border:1px solid #688175;border-radius:9px;font:550 14px/1.4 Onest,sans-serif;text-decoration:none;cursor:pointer;transition:background .16s,color .16s,border-color .16s}.ds-reading-primary svg{width:18px;height:18px}.ds-reading-primary:focus-visible{outline:3px solid #df9657;outline-offset:4px}.ds-reading-primary{min-height:44px;font-size:13px;background:#1e603d;color:#fff;border-color:#1e603d}.ds-reading-primary:hover{background:#16482d;color:#fff}"
+    },
+    {
+      "name": "Reading Secondary Button",
+      "kind": "button",
+      "refersTo": "button-docs-secondary",
+      "description": "Quiet outlined action inside documentation content.",
+      "html": "<a class=\"ds-reading-secondary\" href=\"/docs/index.html\">Browse documentation<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></a>",
+      "css": "@font-face{font-family:Onest;src:url('/assets/fonts/onest.ttf') format('truetype');font-style:normal;font-weight:100 900;font-display:swap}.ds-reading-secondary{display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:50px;padding:12px 21px;border:1px solid #688175;border-radius:9px;font:550 14px/1.4 Onest,sans-serif;text-decoration:none;cursor:pointer;transition:background .16s,color .16s,border-color .16s}.ds-reading-secondary svg{width:18px;height:18px}.ds-reading-secondary:focus-visible{outline:3px solid #df9657;outline-offset:4px}.ds-reading-secondary{min-height:44px;font-size:13px;background:#fff;color:#1e603d;border-color:#a9c4b0}.ds-reading-secondary:hover{background:#e1eee0;color:#184e2f}"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "search-field",
+      "description": "Localized search input with a persistent accessible label and a visible focus-within state.",
+      "html": "<label class=\"ds-search-field\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"10.5\" cy=\"10.5\" r=\"6.5\"/><path d=\"m16 16 5 5\"/></svg><span class=\"ds-search-label\">Search documentation</span><input type=\"search\" autocomplete=\"off\" placeholder=\"Search for a question, setting or command…\" /></label>",
+      "css": "@font-face{font-family:Onest;src:url('/assets/fonts/onest.ttf') format('truetype');font-style:normal;font-weight:100 900;font-display:swap}.ds-search-field{display:flex;align-items:center;gap:13px;border:1px solid #aecab5;border-radius:9px;padding:13px 16px;color:var(--accent,#176645);background:var(--paper,#fafbf9)}.ds-search-field:focus-within{outline:2px solid #317e51;outline-offset:2px}.ds-search-field svg{width:20px;height:20px;flex-shrink:0}.ds-search-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}.ds-search-field input{border:0;background:transparent;outline:none;width:100%;min-width:0;color:var(--text,#20352d);font:400 15px Onest,sans-serif;caret-color:var(--accent,#176645)}.ds-search-field input::placeholder{color:#5b7663}@media(max-width:700px){.ds-search-field input{font-size:16px}.ds-search-field input::placeholder{font-size:13px}}"
+    },
+    {
+      "name": "Categorized Documentation Navigation",
+      "kind": "nav",
+      "refersTo": "nav-article",
+      "description": "Native disclosure groups and a highlighted current article; shared by the desktop sidebar and mobile Contents.",
+      "html": "<nav class=\"ds-doc-nav\" aria-label=\"Documentation navigation\"><details class=\"ds-nav-group\" open><summary>Getting started<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m9 5 7 7-7 7\"/></svg></summary><div><a href=\"/docs/installation.html\" aria-current=\"page\">Install the panel</a><a href=\"/docs/sections/getting-started.html\">First setup</a><a href=\"/docs/sections/home.html\">Dashboard</a></div></details></nav>",
+      "css": "@font-face{font-family:Onest;src:url('/assets/fonts/onest.ttf') format('truetype');font-style:normal;font-weight:100 900;font-display:swap}.ds-doc-nav{max-width:266px;background:var(--paper,#fafbf9);color:var(--text,#20352d);font-family:Onest,sans-serif;padding:16px}.ds-nav-group summary{list-style:none;cursor:pointer;font-size:12px;font-weight:600;padding:9px 5px;display:flex;align-items:center;justify-content:space-between;gap:8px;line-height:1.4}.ds-nav-group summary::-webkit-details-marker{display:none}.ds-nav-group summary svg{width:12px;height:12px;transition:transform .15s}.ds-nav-group[open] summary svg{transform:rotate(90deg)}.ds-nav-group>div{padding:2px 0 6px}.ds-nav-group a{display:block;padding:7px 10px;border-radius:6px;font-size:12px;color:var(--secondary,#52675d);margin-block:2px;line-height:1.4;text-decoration:none}.ds-nav-group a[aria-current]{color:var(--accent,#176645);background:#e4f0e5;font-weight:600}.ds-nav-group a:hover{background:#eef3ed;color:var(--accent,#176645)}.ds-nav-group a:focus-visible{outline:3px solid #df9657;outline-offset:4px}.ds-nav-group summary:focus-visible{outline:3px solid #df9657;outline-offset:4px}@media(prefers-reduced-motion:reduce){.ds-nav-group summary svg{transition:none}}"
+    },
+    {
+      "name": "Gallery Selector",
+      "kind": "chip",
+      "refersTo": "gallery-selector",
+      "description": "Real image links with a pale current selection; the site script enhances them into synchronized image and caption changes.",
+      "html": "<nav class=\"ds-gallery-selectors\" aria-label=\"Interface gallery\"><a class=\"ds-gallery-link\" href=\"/assets/media/panel-nodes-en.png\" aria-current=\"true\">Admin panel</a><a class=\"ds-gallery-link\" href=\"/assets/media/storefront-en.png\">Storefront</a><a class=\"ds-gallery-link\" href=\"/assets/media/cabinet-en.png\">Customer account</a><a class=\"ds-gallery-link\" href=\"/assets/media/miniapp-en.png\">Mini App</a></nav>",
+      "css": "@font-face{font-family:Onest;src:url('/assets/fonts/onest.ttf') format('truetype');font-style:normal;font-weight:100 900;font-display:swap}.ds-gallery-selectors{display:flex;gap:7px;flex-wrap:wrap;background:var(--ink,#102522);padding:20px}.ds-gallery-link{font:400 14px/1.6 Onest,sans-serif;color:var(--muted,#b7c9c2);padding:10px 19px;border-radius:8px;text-decoration:none;transition:color .15s,background .15s}.ds-gallery-link:hover{color:#fff;background:#243c33}.ds-gallery-link[aria-current=true]{background:#e9f4ed;color:var(--ink,#102522);font-weight:600}.ds-gallery-link:focus-visible{outline:3px solid #df9657;outline-offset:4px}@media(max-width:700px){.ds-gallery-selectors{gap:3px;flex-wrap:nowrap;overflow:auto}.ds-gallery-link{padding:8px 10px;white-space:nowrap;font-size:11px;border-radius:6px}}@media(prefers-reduced-motion:reduce){.ds-gallery-link{transition:none}}"
+    },
+    {
+      "name": "Related Reading Card",
+      "kind": "card",
+      "refersTo": "article-link-card",
+      "description": "Previous/next article navigation with a subtle border and hover tint.",
+      "html": "<a class=\"ds-article-card\" href=\"/docs/sections/getting-started.html\"><small>Next</small><strong>First setup<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></strong></a>",
+      "css": "@font-face{font-family:Onest;src:url('/assets/fonts/onest.ttf') format('truetype');font-style:normal;font-weight:100 900;font-display:swap}.ds-article-card{display:flex;flex-direction:column;gap:5px;max-width:340px;border:1px solid var(--rule,#dce5df);border-radius:9px;padding:18px 20px;background:var(--paper,#fafbf9);color:var(--accent,#176645);font-family:Onest,sans-serif;text-decoration:none}.ds-article-card:hover{border-color:#8fba99;background:#eff5ec}.ds-article-card small{font-size:11px;color:var(--secondary,#52675d);line-height:1.85}.ds-article-card strong{display:flex;justify-content:space-between;gap:12px;font-size:13px;font-weight:650;line-height:1.5}.ds-article-card svg{width:15px;height:15px}.ds-article-card:focus-visible{outline:3px solid #df9657;outline-offset:4px}"
+    },
+    {
+      "name": "On This Page Disclosure",
+      "kind": "custom",
+      "refersTo": "article-contents",
+      "description": "Article heading navigation shown at widths up to 1200px when the right-hand rail is hidden.",
+      "html": "<details class=\"ds-article-contents\" open><summary>On this page<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m9 5 7 7-7 7\"/></svg></summary><nav class=\"ds-contents-links\" aria-label=\"On this page\"><ul><li><a href=\"/docs/installation.html#install-from-github\">Install from GitHub</a></li><li><a href=\"/docs/installation.html#requirements\">Requirements</a></li><li><a href=\"/docs/installation.html#download-and-run\">Download and run</a></li></ul></nav></details>",
+      "css": "@font-face{font-family:Onest;src:url('/assets/fonts/onest.ttf') format('truetype');font-style:normal;font-weight:100 900;font-display:swap}.ds-article-contents{border:1px solid var(--rule,#dce5df);border-radius:8px;background:#f0f5ed;color:var(--text,#20352d);font-family:Onest,sans-serif}.ds-article-contents summary{cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:13px 16px;font-weight:550;font-size:13px;list-style:none}.ds-article-contents summary::-webkit-details-marker{display:none}.ds-article-contents summary svg{width:14px;height:14px;transform:rotate(90deg)}.ds-article-contents[open] summary svg{transform:rotate(-90deg)}.ds-contents-links{padding:0 17px 15px;max-height:50vh;overflow:auto}.ds-contents-links ul{list-style:none;margin:0;padding:0}.ds-contents-links li{margin:4px 0;font-size:12px;line-height:1.7}.ds-contents-links a{display:block;padding:3px 0;color:var(--accent,#176645);text-decoration:none}.ds-contents-links a:hover{text-decoration:underline}.ds-article-contents summary:focus-visible{outline:3px solid #df9657;outline-offset:4px}.ds-contents-links a:focus-visible{outline:3px solid #df9657;outline-offset:4px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Contemporary Field Guide",
+    "overview": "STEALTHNET pairs spacious product presentation with compact, carefully indexed technical reading. Deep green ink gives real product imagery a strong setting; pale paper gives instructions room to be read. Shared typography, green accents, fine rules and gently rounded controls connect these two treatments.\n\nThe character is direct, composed and practical. Authentic application screenshots provide visual evidence, while clear labels and predictable navigation carry the interface. Expression comes from type scale, image scale and the rhythm of open space and dense information. The approved black rounded-square mark with its white S is a fixed identity asset.",
+    "keyCharacteristics": [
+      "One locally served variable typeface for English and Russian.",
+      "Deep ink presentation and pale paper reading surfaces within one green palette.",
+      "Large authentic product images and precise, compact navigation.",
+      "Fine dividing rules, flat resting surfaces and rounded interactive controls.",
+      "Visible focus, explicit labels and navigation that survives without JavaScript."
+    ],
+    "rules": [
+      {
+        "name": "The Contextual Accent Rule",
+        "body": "Use mint on ink and darker green on paper; retain this contrast relationship when extending either surface.",
+        "section": "colors"
+      },
+      {
+        "name": "The Reading Measure Rule",
+        "body": "Let navigation use compact type, but preserve the article's open line height and bounded measure. Long commands and tables scroll within their own regions.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Resting Surface Rule",
+        "body": "Use rules and tonal separation for ordinary page structure. Reserve the established shadows for modal and feedback layers.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use the local Onest font and the same hierarchy for English and Russian.",
+      "Do retain the exact approved white S on its black rounded square in the logo and favicon.",
+      "Do use actual product captures with their demonstration labels and origin sidecars.",
+      "Do keep language links on the equivalent page and keep both category contents and article contents available at narrow widths.",
+      "Do preserve visible keyboard focus, persistent accessible control names and native link/disclosure behavior.",
+      "Do keep article text readable without JavaScript and use scripts to enhance search, copying and image viewing."
+    ],
+    "donts": [
+      "Don't replace the owner-approved logo with the angular release icon or an approximation.",
+      "Don't treat screenshot UI colors or isolated page adjustments as global website tokens.",
+      "Don't add invented customer figures, ratings, telemetry or testimonials as visual proof.",
+      "Don't turn every content group into a shadowed card; follow the established rules and tonal divisions.",
+      "Don't hide navigation meaning in an icon or placeholder, or remove article contents when the desktop rail disappears.",
+      "Don't make entrance animation a prerequisite for seeing content or ignore reduced-motion preference."
+    ]
+  }
+}

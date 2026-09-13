@@ -1,0 +1,239 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Профили и шаблоны · STEALTHNET</title><meta name="description" content="В версии 0.1.0 доступны мастер создания, импорт полного JSON, библиотека собственных шаблонов, подготовка параметров, предварительный просмотр последствий, отдельная тестовая "/><meta name="theme-color" content="#fafbf9"/><link rel="canonical" href="https://stealthnet.software/ru/docs/profiles.html"/><link rel="alternate" hreflang="en" href="https://stealthnet.software/docs/profiles.html"/><link rel="icon" href="/assets/favicon.svg"/><meta property="og:type" content="website"/><meta property="og:title" content="Профили и шаблоны · STEALTHNET"/><meta property="og:description" content="В версии 0.1.0 доступны мастер создания, импорт полного JSON, библиотека собственных шаблонов, подготовка параметров, предварительный просмотр последствий, отдельная тестовая "/><meta property="og:url" content="https://stealthnet.software/ru/docs/profiles.html"/><meta property="og:image" content="https://stealthnet.software/assets/media/panel-nodes-ru.png"/><link rel="preload" href="/assets/fonts/onest.ttf" as="font" type="font/ttf" crossorigin/><link rel="stylesheet" href="/assets/site.css?v=20260914"/><script defer src="/assets/site.js?v=20260914"></script></head><body class="docs-page" data-lang="ru"><a class="skip" href="#main">Перейти к содержимому</a><header class="site-header"><div class="header-inner"><a class="brand" href="/ru/" aria-label="STEALTHNET"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#000"/><rect x=".75" y=".75" width="98.5" height="98.5" rx="21.4" fill="none" stroke="#67766c" stroke-width="1.5"/><g color="#fff" transform="translate(50 50) scale(.76) translate(-50.35 -59.85)"><path fill="currentColor" d="M50.6 26.1c14.9 0 25 8.4 25.6 21.2H60.5c-.4-4.6-4-7.4-9.6-7.4-5.3 0-8.6 2.2-8.6 5.6 0 2.9 2.3 4.5 7.5 5.6l10.4 2.2c11.6 2.5 17.4 8.4 17.4 18.3 0 13.3-10.6 22-27 22-16.4 0-27-8.3-27.5-21.6h15.9c.5 4.8 4.5 7.7 10.7 7.7 5.7 0 9.3-2.3 9.3-5.9 0-2.9-2.2-4.6-7.4-5.7l-10.3-2.2C29.4 63.2 23.6 57 23.6 47.5c0-13 10.3-21.4 27-21.4Z"/></g></svg><span>STEALTHNET</span></a><nav aria-label="Основная навигация"><a class="nav-link " href="/ru/">Проект</a><a class="nav-link active" href="/ru/docs/index.html">Документация</a><a class="nav-link github-link" href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 20c-5 1-5-3-7-3m14 5v-4c0-1-.4-2-1-2.5 4-.5 6-2 6-6.5 0-1.5-.5-2.5-1.5-3.5.4-1 .3-2-.2-3-2 0-3 1-3.5 1.5a12 12 0 0 0-7.6 0C7.7 3.5 6.7 2.5 4.7 2.5c-.5 1-.6 2-.2 3C3.5 6.5 3 7.5 3 9c0 4.5 2 6 6 6.5-.6.5-1 1.5-1 2.5v4"/></svg> GitHub</a></nav><div class="header-actions"><button class="search-trigger" data-search aria-label="Поиск по документации"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span>Поиск по документации</span><kbd>⌘ K</kbd></button><a class="language" href="/docs/profiles.html" hreflang="en" lang="en" aria-label="Read this page in English">EN</a></div></div></header><div class="docs-layout"><aside class="doc-sidebar"><div class="sidebar-heading">Документация<a href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE/releases/latest">v0.2.0</a></div><a class="sidebar-overview" href="/ru/docs/index.html" ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16M3 3h5a4 4 0 0 1 4 2 4 4 0 0 1 4-2h5v16h-5a4 4 0 0 0-4 2 4 4 0 0 0-4-2H3Z"/></svg>Обзор</a><nav aria-label="Навигация по документации"><details class="nav-group" ><summary>Начало работы<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/installation.html" >Установка панели</a><a href="/ru/docs/sections/getting-started.html" >Первый запуск</a><a href="/ru/docs/sections/home.html" >Главная панели</a></div></details><details class="nav-group" ><summary>Серверы и сеть<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/node-installation.html" >Установка ноды</a><a href="/ru/docs/sections/nodes.html" >Управление серверами</a><a href="/ru/docs/sections/hosts.html" >Хосты</a><a href="/ru/docs/sections/squads-int.html" >Внутренние сквады</a><a href="/ru/docs/sections/squads-ext.html" >Внешние сквады</a><a href="/ru/docs/sections/nodes-metrics.html" >Состояние серверов</a><a href="/ru/docs/sections/nodes-stats.html" >История трафика</a><a href="/ru/docs/sections/node-plugins.html" >Фильтры и защита</a></div></details><details class="nav-group" open><summary>Профили и конфиги<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/profiles.html" aria-current=page>Профили и шаблоны</a><a href="/ru/docs/sections/profiles.html" >Инбаунды и профили</a><a href="/ru/docs/sections/config.html" >Редактор Xray</a><a href="/ru/docs/selfsteal.html" >Сайт Selfsteal</a></div></details><details class="nav-group" ><summary>Подписки<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/subscription-installation.html" >Установка сервиса</a><a href="/ru/docs/sections/sub-settings.html" >Настройки подписки</a><a href="/ru/docs/sections/subpage.html" >Страница подключения</a><a href="/ru/docs/sections/templates.html" >DNS и маршрутизация</a><a href="/ru/docs/sections/response-rules.html" >Форматы ответа</a><a href="/ru/docs/sections/happ-routing.html" >Маршрутизация Happ</a></div></details><details class="nav-group" ><summary>Клиенты и Mini App<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/cabinet-installation.html" >Установка кабинета</a><a href="/ru/docs/sections/cabinet.html" >Кабинет и Mini App</a><a href="/ru/docs/branding.html" >Брендинг и языки</a><a href="/ru/docs/sections/users.html" >Карточки клиентов</a><a href="/ru/docs/sections/support.html" >Поддержка клиентов</a><a href="/ru/docs/addons.html" >Докупка устройств и трафика</a></div></details><details class="nav-group" ><summary>Telegram<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/sections/bot.html" >Настройка бота</a><a href="/ru/docs/sections/broadcasts.html" >Рассылки</a><a href="/ru/docs/team-notifications.html" >Уведомления команды</a></div></details><details class="nav-group" ><summary>Тарифы и оплаты<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/sections/tariffs.html" >Тарифы</a><a href="/ru/docs/payment-gateways.html" >Платёжные интеграции</a><a href="/ru/docs/sections/providers.html" >Настройка оплат</a><a href="/ru/docs/sections/payments.html" >Оплаты и возвраты</a><a href="/ru/docs/sections/promos.html" >Промокоды</a><a href="/ru/docs/sections/partners.html" >Реферальная программа</a><a href="/ru/docs/sections/infra-billing.html" >Расходы на серверы</a></div></details><details class="nav-group" ><summary>Команда и управление<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/sections/team.html" >Владелец и сотрудники</a><a href="/ru/docs/sections/admin-profile.html" >Профиль администратора</a><a href="/ru/docs/sections/settings.html" >Настройки панели</a><a href="/ru/docs/sections/audit.html" >Журнал действий</a></div></details><details class="nav-group" ><summary>Обновления и диагностика<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/backup-restore.html" >Резервные копии</a><a href="/ru/docs/troubleshooting.html" >Решение проблем</a><a href="/ru/docs/sections/hwid-inspector.html" >Устройства клиентов</a><a href="/ru/docs/sections/srh-inspector.html" >Запросы подписок</a><a href="/ru/docs/sections/sessions.html" >Сессии трафика</a><a href="/ru/docs/sections/torrent-reports.html" >События блокировки</a><a href="/ru/docs/sections/http-stats.html" >Статистика доменов</a></div></details><details class="nav-group" ><summary>Разработка<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/releases.html" >Сборки и релизы</a><a href="/ru/docs/development.html" >Архитектура и разработка</a></div></details></nav><a class="sidebar-community" href="https://t.me/stealthnet_admin_panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 18-7-4 18-6-5-4 3v-7m4 4 6-8-10 4-4-2Z"/></svg>Сообщество<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7m0-7L10 14M10 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-6"/></svg></a></aside><main class="doc-main" id="main"><details class="mobile-navigation"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>Содержание<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><aside class="doc-sidebar"><div class="sidebar-heading">Документация<a href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE/releases/latest">v0.2.0</a></div><a class="sidebar-overview" href="/ru/docs/index.html" ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16M3 3h5a4 4 0 0 1 4 2 4 4 0 0 1 4-2h5v16h-5a4 4 0 0 0-4 2 4 4 0 0 0-4-2H3Z"/></svg>Обзор</a><nav aria-label="Навигация по документации"><details class="nav-group" ><summary>Начало работы<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/installation.html" >Установка панели</a><a href="/ru/docs/sections/getting-started.html" >Первый запуск</a><a href="/ru/docs/sections/home.html" >Главная панели</a></div></details><details class="nav-group" ><summary>Серверы и сеть<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/node-installation.html" >Установка ноды</a><a href="/ru/docs/sections/nodes.html" >Управление серверами</a><a href="/ru/docs/sections/hosts.html" >Хосты</a><a href="/ru/docs/sections/squads-int.html" >Внутренние сквады</a><a href="/ru/docs/sections/squads-ext.html" >Внешние сквады</a><a href="/ru/docs/sections/nodes-metrics.html" >Состояние серверов</a><a href="/ru/docs/sections/nodes-stats.html" >История трафика</a><a href="/ru/docs/sections/node-plugins.html" >Фильтры и защита</a></div></details><details class="nav-group" open><summary>Профили и конфиги<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/profiles.html" aria-current=page>Профили и шаблоны</a><a href="/ru/docs/sections/profiles.html" >Инбаунды и профили</a><a href="/ru/docs/sections/config.html" >Редактор Xray</a><a href="/ru/docs/selfsteal.html" >Сайт Selfsteal</a></div></details><details class="nav-group" ><summary>Подписки<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/subscription-installation.html" >Установка сервиса</a><a href="/ru/docs/sections/sub-settings.html" >Настройки подписки</a><a href="/ru/docs/sections/subpage.html" >Страница подключения</a><a href="/ru/docs/sections/templates.html" >DNS и маршрутизация</a><a href="/ru/docs/sections/response-rules.html" >Форматы ответа</a><a href="/ru/docs/sections/happ-routing.html" >Маршрутизация Happ</a></div></details><details class="nav-group" ><summary>Клиенты и Mini App<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/cabinet-installation.html" >Установка кабинета</a><a href="/ru/docs/sections/cabinet.html" >Кабинет и Mini App</a><a href="/ru/docs/branding.html" >Брендинг и языки</a><a href="/ru/docs/sections/users.html" >Карточки клиентов</a><a href="/ru/docs/sections/support.html" >Поддержка клиентов</a><a href="/ru/docs/addons.html" >Докупка устройств и трафика</a></div></details><details class="nav-group" ><summary>Telegram<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/sections/bot.html" >Настройка бота</a><a href="/ru/docs/sections/broadcasts.html" >Рассылки</a><a href="/ru/docs/team-notifications.html" >Уведомления команды</a></div></details><details class="nav-group" ><summary>Тарифы и оплаты<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/sections/tariffs.html" >Тарифы</a><a href="/ru/docs/payment-gateways.html" >Платёжные интеграции</a><a href="/ru/docs/sections/providers.html" >Настройка оплат</a><a href="/ru/docs/sections/payments.html" >Оплаты и возвраты</a><a href="/ru/docs/sections/promos.html" >Промокоды</a><a href="/ru/docs/sections/partners.html" >Реферальная программа</a><a href="/ru/docs/sections/infra-billing.html" >Расходы на серверы</a></div></details><details class="nav-group" ><summary>Команда и управление<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/sections/team.html" >Владелец и сотрудники</a><a href="/ru/docs/sections/admin-profile.html" >Профиль администратора</a><a href="/ru/docs/sections/settings.html" >Настройки панели</a><a href="/ru/docs/sections/audit.html" >Журнал действий</a></div></details><details class="nav-group" ><summary>Обновления и диагностика<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/backup-restore.html" >Резервные копии</a><a href="/ru/docs/troubleshooting.html" >Решение проблем</a><a href="/ru/docs/sections/hwid-inspector.html" >Устройства клиентов</a><a href="/ru/docs/sections/srh-inspector.html" >Запросы подписок</a><a href="/ru/docs/sections/sessions.html" >Сессии трафика</a><a href="/ru/docs/sections/torrent-reports.html" >События блокировки</a><a href="/ru/docs/sections/http-stats.html" >Статистика доменов</a></div></details><details class="nav-group" ><summary>Разработка<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div><a href="/ru/docs/releases.html" >Сборки и релизы</a><a href="/ru/docs/development.html" >Архитектура и разработка</a></div></details></nav><a class="sidebar-community" href="https://t.me/stealthnet_admin_panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 18-7-4 18-6-5-4 3v-7m4 4 6-8-10 4-4-2Z"/></svg>Сообщество<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7m0-7L10 14M10 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-6"/></svg></a></aside></details><nav class="breadcrumbs" aria-label="Путь к статье"><a href="/ru/docs/index.html">Документация</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg><a href="/ru/docs/category/config.html">Профили и конфиги</a></nav><article class="prose"><h1>Профили и шаблоны</h1><details class="article-contents"><summary>На этой странице<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div class="toc">
+<ul>
+<li><a href="#_1">Что с чем связано</a></li>
+<li><a href="#_2">Создать профиль</a><ul>
+<li><a href="#reality">Как выбрать сайт для REALITY</a></li>
+</ul>
+</li>
+<li><a href="#vless-reality">Импорт VLESS / Reality</a></li>
+<li><a href="#_3">Другие сценарии</a></li>
+<li><a href="#_4">Библиотека и экспорт</a><ul>
+<li><a href="#github">GitHub</a></li>
+</ul>
+</li>
+<li><a href="#_5">Изменить рабочий профиль</a></li>
+<li><a href="#_6">Проверить на отдельной ноде</a></li>
+<li><a href="#_7">История и восстановление</a></li>
+<li><a href="#-">Если что-то не работает</a></li>
+</ul>
+</div>
+</details><p>В версии <strong>0.1.0</strong> доступны мастер создания, импорт полного JSON, библиотека собственных шаблонов, подготовка параметров, предварительный просмотр последствий, отдельная тестовая нода и история конфигураций.</p>
+<h2 id="_1">Что с чем связано</h2>
+<pre><code class="language-mermaid">flowchart LR
+  T[Шаблон] --&gt;|создать независимую копию| P[Профиль Xray]
+  P --&gt; I[Инбаунды]
+  P --&gt; N[Ноды]
+  I --&gt; H[Хосты в подписке]
+  I --&gt; S[Внутренние сквады]
+  S --&gt; C[Клиенты]
+</code></pre>
+<p><strong>Профиль</strong> хранит серверную конфигурацию. <strong>Инбаунд</strong> — именованный вход с протоколом и портом. <strong>Нода</strong> запускает профиль; активные на ней инбаунды определяют доступ. <strong>Хост</strong> описывает адрес, который попадёт в клиентскую подписку. <strong>Внутренний сквад</strong> назначает доступ клиентам. Шаблоны клиентских подписок и внешние сквады настраивают выдаваемый клиенту документ; они не заменяют серверный профиль.</p>
+<h2 id="_2">Создать профиль</h2>
+<p>Откройте <strong>Инфраструктура → Профили → Новый профиль</strong>. Выберите один из трёх способов:</p>
+<table>
+<thead>
+<tr>
+<th>Способ</th>
+<th>Когда использовать</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Готовый сценарий</td>
+<td>Найти конфигурацию по протоколу, транспорту или назначению</td>
+</tr>
+<tr>
+<td>Импорт JSON</td>
+<td>Вставить свой документ, загрузить файл или получить шаблон из GitHub</td>
+</tr>
+<tr>
+<td>Пустой профиль</td>
+<td>Самостоятельно составить несколько входов, маршрутизацию или цепочку серверов</td>
+</tr>
+</tbody>
+</table>
+<p>В сценариях есть поиск и группы: прямое подключение, прокси/CDN, несколько входов, связь серверов, собственные шаблоны. Ничего не выбрано скрыто. Пустой профиль не открывает клиентских портов; для работы панели при сохранении добавляется служебная часть статистики.</p>
+<ol>
+<li>Укажите понятное название, например <code>EU · Reality</code>.</li>
+<li>Выберите сценарий или импортируйте JSON до 512 КиБ. При импорте всего документа неизвестные поля сохраняются.</li>
+<li>Во вкладке <strong>Параметры</strong> заполните обычные поля. Для REALITY это <strong>Сайт для маскировки</strong> и <strong>Порт подключения</strong>. В поле сайта можно ввести домен или HTTPS-адрес без пути страницы. Панель добавит порт назначения 443 и заполнит имя сайта для подключения. Если нужен другой порт назначения, укажите его после домена.</li>
+<li>Нажмите <strong>Проверить</strong>. Недостающие ключи REALITY и Shadowsocks 2022 создаются автоматически; существующие ключи сохраняются. Ошибка показывает название поля и позволяет перейти к нему.</li>
+<li>При необходимости откройте <strong>Расширенные настройки</strong>: там находятся внутренние имена подключений, адреса приёма соединений, ключи и отдельные имена сайта (SNI). Списки вводятся по одному значению на строку или через запятую; прежний формат массива JSON тоже принимается. Заданные вручную имена сайта и списки из нескольких имён сохраняются при изменении сайта маскировки.</li>
+<li>Для произвольной конфигурации доступна вкладка <strong>JSON</strong>. Переключение между ней и формой сохраняет неизвестные поля и неизменённые значения. Точные пути полей вынесены в <strong>Расширенные настройки → Где находятся поля в JSON</strong>.</li>
+<li>После успешной проверки нажмите <strong>Создать профиль</strong>. Сертификаты, настройки прокси и данные следующего сервера при использовании этих сценариев нужно подготовить самостоятельно.</li>
+</ol>
+<h3 id="reality">Как выбрать сайт для REALITY</h3>
+<p><strong>Сайт для маскировки</strong> — публичный HTTPS-сайт, к которому ваш VPN-сервер может подключиться. Покупать свой домен и выпускать сертификат для REALITY не нужно. Выберите сайт с поддержкой TLS 1.3 и HTTP/2; проверьте его доступность с самой ноды. <code>example.com</code> в подсказке показывает формат ввода и не является автоматически выбранным или проверенным назначением.</p>
+<p>Из выбранного домена мастер формирует два связанных параметра: адрес сайта с портом (<code>target</code>) и имя сайта для соединения (<code>serverNames</code>, SNI). Если в импортированном профиле используется прежнее название <code>dest</code>, оно сохраняется. Собственные SNI-имена должны подходить к сертификату выбранного сайта. Для необычных адресов назначения, например локального сокета, используйте полный JSON.</p>
+<p><strong>Порт подключения</strong> — порт вашего VPN-сервера, к которому будут обращаться клиенты. Обычно это 443, но он должен быть свободен. Это отдельная настройка от порта сайта маскировки.</p>
+<p>Проверка конфигурации не выполняет сетевой тест выбранного сайта и не доказывает работоспособность VPN. После назначения профиля ноде проверьте подключение в клиентском приложении. Подробные требования к назначению и именам сайта описаны в <a href="https://xtls.github.io/config/transports/reality.html">документации REALITY</a>.</p>
+<p>Выбор другого сценария после редактирования требует подтверждения замены текущего черновика. Импорт сам по себе ничего не применяет к нодам.</p>
+<h2 id="vless-reality">Импорт VLESS / Reality</h2>
+<p>В примерах из других панелей часто встречаются <code>#REPLACE_WITH_…</code>, <code>YOUR_…</code> или <code>{{parameter}}</code>. Они распознаются как незаполненные значения. Профиль с такими значениями не проходит проверку.</p>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Что указать</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tag</code></td>
+<td>Уникальное имя входа; по нему сохраняются связи</td>
+</tr>
+<tr>
+<td><code>port</code>, <code>listen</code></td>
+<td>Свободный порт и адрес прослушивания сервера</td>
+</tr>
+<tr>
+<td><code>realitySettings.target</code> или <code>dest</code></td>
+<td>Реальный выбранный вами адрес назначения с портом</td>
+</tr>
+<tr>
+<td><code>serverNames</code></td>
+<td>Массив имён, подходящих для выбранного назначения</td>
+</tr>
+<tr>
+<td><code>privateKey</code></td>
+<td>Ваш ключ или результат генератора панели</td>
+</tr>
+<tr>
+<td><code>shortIds</code></td>
+<td>Массив идентификаторов; генератор заполняет отсутствующее значение</td>
+</tr>
+<tr>
+<td><code>settings.clients</code></td>
+<td>Оставьте пустым: клиентов подставляет агент из панели</td>
+</tr>
+</tbody>
+</table>
+<p>Приватный ключ остаётся на серверной стороне. Публичный ключ выводится из него и используется в параметрах хоста. Не подставляйте публичный ключ вместо приватного. Доступность target проверяйте с самой ноды. Успешная проверка JSON не означает, что внешний адрес доступен или что приложение клиента поддерживает выбранный транспорт.</p>
+<p>После создания: назначьте профиль ноде → активируйте нужные инбаунды → создайте хост с реальным адресом ноды → включите инбаунд во внутренний сквад → назначьте сквад тестовому клиенту → обновите его подписку и проверьте подключение.</p>
+<h2 id="_3">Другие сценарии</h2>
+<table>
+<thead>
+<tr>
+<th>Сценарий</th>
+<th>Что подготовить и проверить</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VLESS/Trojan с TLS</td>
+<td>Домен, DNS, сертификат и ключ по существующим путям на каждой ноде</td>
+</tr>
+<tr>
+<td>WebSocket / XHTTP за прокси</td>
+<td>Точное совпадение порта, пути, Host и настроек TLS на прокси и в хосте</td>
+</tr>
+<tr>
+<td>Shadowsocks 2022</td>
+<td>Метод, порт; генератор учитывает длину ключа AES-128/AES-256</td>
+</tr>
+<tr>
+<td>Несколько инбаундов</td>
+<td>Разные теги, отсутствие конфликтов слушающих адресов и портов, отдельные хосты и доступы</td>
+</tr>
+<tr>
+<td>Связь серверов</td>
+<td>Адрес второй ноды, её порт, UUID/пароль и транспорт; эти значения автоматически не создаются</td>
+</tr>
+<tr>
+<td>Произвольный JSON</td>
+<td>Сохранение документа поддерживается; совместимость протокола с клиентами, учётом и форматом подписки проверяется отдельно</td>
+</tr>
+</tbody>
+</table>
+<p>Для управляемого многопользовательского Shadowsocks используйте <strong>2022</strong>. Старый пример с <code>chacha20-ietf-poly1305</code> нельзя считать готовым тарифным профилем этой панели. <code>raw</code> и <code>tcp</code> распознаются как обозначения TCP-транспорта. Возможности конкретных новых транспортов зависят от установленной версии Xray и приложения клиента.</p>
+<p>Для сложной маршрутизации редактируйте <code>outbounds</code> и <code>routing</code> в полном JSON. Каждый используемый <code>outboundTag</code> должен ссылаться на существующий выход; теги должны быть уникальны. Данные внешнего сервера в outbound отличаются от списка клиентов вашего inbound: первые задаёте вы, второй обновляет панель.</p>
+<h2 id="_4">Библиотека и экспорт</h2>
+<p>В редакторе или мастере нажмите <strong>Сохранить шаблон</strong>. Откроется предварительный JSON: ключи, адреса и другие операторские строки заменены параметрами; входящие списки клиентов удалены. Структура исходящих учётных данных сохраняется с параметрами. Проверьте предпросмотр, название, автора и оба описания перед сохранением.</p>
+<p>Библиотека хранится в PostgreSQL и входит в резервную копию базы. Изменение шаблона увеличивает его версию, но не меняет уже созданные профили. При конфликте параллельного редактирования откройте актуальную версию заново. Удаление шаблона также не удаляет профили.</p>
+<p><strong>Скачать шаблон</strong> получает параметризованный документ. <strong>Полный экспорт конфига</strong> — отдельное действие с подтверждением: файл содержит настоящие серверные секреты. Перед публичным распространением шаблона просмотрите также собственные названия тегов и числовые поля: они сохраняются как часть структуры.</p>
+<h3 id="github">GitHub</h3>
+<p>Нужна ссылка <code>https://raw.githubusercontent.com/OWNER/REPO/COMMIT/path.json</code>, где <code>COMMIT</code> — полный идентификатор из 40 шестнадцатеричных символов. Откройте нужный файл на конкретном commit и скопируйте его Raw-ссылку. Ссылка на <code>main</code>, обычную HTML-страницу GitHub или сторонний домен не принимается.</p>
+<p>Импорт показывает SHA256 полученных данных, сохраняет источник и commit при создании шаблона. Ограничения: 512 КиБ, HTTPS, фиксированный сервер GitHub, без перенаправлений и выполнения команд. Файл и вставка JSON доступны без GitHub.</p>
+<h2 id="_5">Изменить рабочий профиль</h2>
+<ol>
+<li>Откройте <strong>Конфиг Xray</strong> и внесите изменения. Можно открыть <strong>Параметры / импорт</strong> и вернуть результат в редактор.</li>
+<li>Проверьте конфигурацию. Панель отдельно показывает, проверена ли только структура или также установленный на панели Xray.</li>
+<li>Нажмите <strong>Сохранить</strong>. До применения появятся затронутые ноды, хосты, сквады и пути изменённых полей. Значения ключей в списке отличий не показываются.</li>
+<li>Удаление или переименование используемого инбаунда требует подтверждения: его хосты будут выключены и отвязаны, связи сквадов удалены. Смена порта или ключей может потребовать обновления подписки у клиента.</li>
+<li>Примените изменения либо сначала используйте <strong>Тестовая нода</strong>. Если другой администратор уже изменил профиль, устаревшее сохранение будет отклонено.</li>
+</ol>
+<h2 id="_6">Проверить на отдельной ноде</h2>
+<p>Нужна нода <strong>на связи без назначенного профиля</strong>. Рабочую ноду с действующим профилем выбрать нельзя.</p>
+<ol>
+<li>В редакторе рабочего профиля нажмите <strong>Тестовая нода</strong> и выберите свободную ноду.</li>
+<li>Система создаст отдельный тестовый профиль и назначит его только этой ноде. Рабочая конфигурация и её связи сохраняются.</li>
+<li>Дождитесь статуса <strong>Применено</strong>. Проверяется ответ агента с нужным идентификатором профиля, версией и работающим движком. При ошибке отображается причина.</li>
+<li>Откройте тестовый профиль. Для проверки клиентом создайте отдельный хост и сквад с его инбаундом, назначьте его тестовому клиенту. Наличие порта в рабочем JSON само по себе не выдаёт клиенту доступ.</li>
+<li>Проверьте подключение VPN-приложением. Затем вернитесь к исходному профилю и откройте тест: <strong>Проверить и применить к рабочему профилю</strong> ещё раз показывает последствия перед сохранением.</li>
+<li>Нажмите <strong>Завершить тест</strong>. Нода освобождается и получает служебную конфигурацию без клиентских входов. Тестовый профиль остаётся для просмотра; после завершения его можно удалить.</li>
+</ol>
+<p>Агент проверяет конфигурацию своим Xray до замены файла. При отказе проверки старая конфигурация остаётся. Если новый процесс не запускается после замены, агент восстанавливает предыдущую конфигурацию и повторно запускает её. Ошибка отображается в панели; новая версия не подтверждается как применённая.</p>
+<h2 id="_7">История и восстановление</h2>
+<p><strong>История</strong> показывает до 30 последних сохранённых версий. <strong>Загрузить в редактор</strong> меняет только черновик. Проверьте его, просмотрите последствия и примените как новую версию. История содержит конфигурации с секретами и доступна через авторизованную панель.</p>
+<p>Восстановление JSON не восстанавливает автоматически удалённые связи хостов, сквадов и нод. Если инбаунд ранее удаляли, назначьте их заново и проверьте подписку. Для восстановления всей системы вместе со связями используйте <a href="/ru/docs/backup-restore.html">резервную копию базы</a>.</p>
+<h2 id="-">Если что-то не работает</h2>
+<table>
+<thead>
+<tr>
+<th>Симптом</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>«Проверена только структура»</td>
+<td>Проверьте наличие Xray на панели; окончательно проверяйте на тестовой ноде</td>
+</tr>
+<tr>
+<td>Порт занят дважды</td>
+<td>Сравните listen, port и транспорт всех входов; на ноде проверьте также другие процессы</td>
+</tr>
+<tr>
+<td>Сертификат не найден</td>
+<td>Исправьте путь и права на самой ноде</td>
+</tr>
+<tr>
+<td>Агент на связи, но профиль не применён</td>
+<td>Откройте статус применения и журнал <code>journalctl -u sn-node -n 80 --no-pager</code></td>
+</tr>
+<tr>
+<td>Профиль применён, локации нет</td>
+<td>Проверьте цепочку нода → инбаунд → хост → сквад → клиент</td>
+</tr>
+<tr>
+<td>После изменения ключа нет соединения</td>
+<td>Обновите подписку в VPN-приложении и проверьте параметры хоста</td>
+</tr>
+<tr>
+<td>Шаблон изменён другим администратором</td>
+<td>Откройте библиотеку заново и повторите правку актуальной версии</td>
+</tr>
+</tbody>
+</table>
+<p><a href="/ru/docs/node-installation.html">Установка нод</a> · <a href="/ru/docs/sections/hosts.html">Хосты</a> · <a href="/ru/docs/sections/squads-int.html">Внутренние сквады</a> · <a href="/ru/docs/subscription-installation.html">Страница подписки</a></p>
+<p>В новых версиях Xray исходящий Freedom по умолчанию ограничивает обращения клиентов к частным и зарезервированным IP. Для намеренного доступа к внутреннему сервису задайте узкое правило по IP, сети и порту, сверившись с <a href="https://xtls.github.io/en/config/outbounds/freedom.html#finalruleobject">официальной документацией Freedom</a>.</p>
+<p><a href="/ru/docs/selfsteal.html">Selfsteal: свой сайт на ноде</a></p><div class="article-meta"><a href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE/blob/main/docs/ru/profiles.md"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7m0-7L10 14M10 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-6"/></svg>Изменить на GitHub</a><span>Релиз 0.2.0</span></div><nav class="article-pagination"><a href="/ru/docs/sections/node-plugins.html"><small>Назад</small><strong>Фильтры и защита<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong></a><a href="/ru/docs/sections/profiles.html"><small>Далее</small><strong>Инбаунды и профили<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></strong></a></nav></article></main><aside class="doc-toc"><strong>На этой странице</strong><div class="toc">
+<ul>
+<li><a href="#_1">Что с чем связано</a></li>
+<li><a href="#_2">Создать профиль</a><ul>
+<li><a href="#reality">Как выбрать сайт для REALITY</a></li>
+</ul>
+</li>
+<li><a href="#vless-reality">Импорт VLESS / Reality</a></li>
+<li><a href="#_3">Другие сценарии</a></li>
+<li><a href="#_4">Библиотека и экспорт</a><ul>
+<li><a href="#github">GitHub</a></li>
+</ul>
+</li>
+<li><a href="#_5">Изменить рабочий профиль</a></li>
+<li><a href="#_6">Проверить на отдельной ноде</a></li>
+<li><a href="#_7">История и восстановление</a></li>
+<li><a href="#-">Если что-то не работает</a></li>
+</ul>
+</div>
+<a class="toc-top" href="#main">Наверх</a></aside></div><footer class="site-footer"><div class="footer-brand"><a class="brand" href="/ru/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#000"/><rect x=".75" y=".75" width="98.5" height="98.5" rx="21.4" fill="none" stroke="#67766c" stroke-width="1.5"/><g color="#fff" transform="translate(50 50) scale(.76) translate(-50.35 -59.85)"><path fill="currentColor" d="M50.6 26.1c14.9 0 25 8.4 25.6 21.2H60.5c-.4-4.6-4-7.4-9.6-7.4-5.3 0-8.6 2.2-8.6 5.6 0 2.9 2.3 4.5 7.5 5.6l10.4 2.2c11.6 2.5 17.4 8.4 17.4 18.3 0 13.3-10.6 22-27 22-16.4 0-27-8.3-27.5-21.6h15.9c.5 4.8 4.5 7.7 10.7 7.7 5.7 0 9.3-2.3 9.3-5.9 0-2.9-2.2-4.6-7.4-5.7l-10.3-2.2C29.4 63.2 23.6 57 23.6 47.5c0-13 10.3-21.4 27-21.4Z"/></g></svg><span>STEALTHNET</span></a><p>Инфраструктура ваша. Управление — в одной панели.</p></div><div class="footer-links"><a href="/ru/docs/index.html">Документация</a><a href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE">GitHub</a><a href="https://t.me/stealthnet_admin_panel">Сообщество</a><a href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE/blob/main/LICENSE">AGPL-3.0</a></div><p class="footer-meta">© 2026 STEALTHNET · <a href="https://github.com/STEALTHNET-APP/STEALTHNET-SOFTWARE/releases/latest">Релиз 0.2.0</a></p></footer><dialog class="search-dialog" id="search-dialog" aria-labelledby="search-title"><div class="dialog-top"><h2 id="search-title">Поиск по документации</h2><button class="icon-button" data-close aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div><label class="search-field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span class="sr-only">Поиск по документации</span><input type="search" autocomplete="off" id="search-input" placeholder="Вопрос, настройка или команда…" /></label><p class="search-status" id="search-status" role="status"></p><div id="search-results"></div><div class="search-bottom">Содержание<a href="/ru/docs/index.html">Все категории<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a></div></dialog><dialog class="image-dialog" id="image-dialog" aria-label="Открыть скриншот"><button class="icon-button" data-close aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button><p></p></dialog><div class="toast" id="toast" role="status"></div><script type="application/json" id="ui-strings">{"home": "Проект", "docs": "Документация", "install": "Установить STEALTHNET", "community": "Сообщество", "search": "Поиск по документации", "placeholder": "Вопрос, настройка или команда…", "close": "Закрыть", "contents": "Содержание", "onpage": "На этой странице", "prev": "Назад", "next": "Далее", "edit": "Изменить на GitHub", "copied": "Скопировано", "copy": "Копировать", "failed": "Не удалось скопировать. Выделите и скопируйте текст вручную.", "empty": "Ничего не найдено. Попробуйте «установка», «нода» или «подписка».", "loading": "Ищем…", "searcherror": "Поиск не загрузился. Откройте категорию ниже или попробуйте снова.", "browse": "Открыть документацию", "all": "Все категории", "release": "Релиз", "source": "Открытый код · AGPL-3.0", "skip": "Перейти к содержимому", "openimage": "Открыть скриншот", "demo": "Настоящие интерфейсы с демонстрационными данными.", "guide": "Открыть инструкцию", "navigatetitle": "Навигация по документации", "support": "Поддержать проект", "wallet": "Скопировать адрес TRC20", "read": "Читать инструкцию", "overview": "Обзор", "article": "Статья", "up": "Наверх"}</script></body></html>
