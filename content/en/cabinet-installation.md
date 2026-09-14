@@ -24,12 +24,49 @@ The installer adds a separate Caddy site through `/etc/caddy/customer-sites/cabi
 
 Use Debian/Ubuntu, systemd, amd64/arm64 and outbound HTTPS to the panel. Do not copy the database password. The service binds to `127.0.0.1:8090`; publish its HTTPS domain through a reverse proxy.
 
-## Environment and maintenance
+## Updates
 
-Secrets are in `/etc/sn-cabinet/env`, permissions 600. The systemd service is `sn-cabinet`. Setup installs this update command:
+When updating a release-based installation to v0.2.6 or later, a standard customer portal installed on the same server for this panel is updated with it:
 
 ```bash
-/usr/local/sbin/update-cabinet
+cd /opt/stealthnet-software && make update
+```
+
+No separate portal command is needed in this setup. The updater preserves the key and settings, checks service readiness, and restores the previous binaries on failure. A disabled and stopped service is not started automatically. Running the command again also updates a stale portal binary when the panel is already current.
+
+### Commands on every server
+
+Every server uses the same directory and commands. Update the panel first, then run updates on separate portal and subscription servers; they download builds from their own panel. A command manages only components on the server where it runs.
+
+```bash
+cd /opt/stealthnet-software
+```
+
+| Command | Action |
+|---|---|
+| `make update` | Update installed components |
+| `make start` | Start services |
+| `make stop` | Stop services |
+| `make restart` | Restart services |
+| `make status` | Show status |
+
+Caddy, PostgreSQL and boot-time enablement are unchanged. On the panel server, commands manage the panel, its local subscription service, configured bot and installed portal. On a separate server they manage the portal, subscription service, or both. A bot without a token is not started.
+
+New installers create these commands automatically. If a separate service predates v0.2.6 and has no directory with a Makefile yet, add the commands once as root (keys and settings are preserved):
+
+```bash
+apt-get update && apt-get install -y curl ca-certificates python3 make
+curl --proto '=https' --tlsv1.2 -fsSL https://raw.githubusercontent.com/STEALTHNET-APP/STEALTHNET-SOFTWARE/v0.2.6/web/service-manager.py -o /root/stealthnet-service-manager.py
+python3 /root/stealthnet-service-manager.py install-entrypoints
+```
+
+Then use `cd /opt/stealthnet-software && make update`. Older update commands remain available. Existing Docker installations should use their Compose file.
+
+## Environment and maintenance
+
+Secrets are in `/etc/sn-cabinet/env`, permissions 600. The systemd service is `sn-cabinet`. Check its status:
+
+```bash
 systemctl status sn-cabinet --no-pager
 journalctl -u sn-cabinet -n 80 --no-pager
 curl -fsS http://127.0.0.1:8090/ready
